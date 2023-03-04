@@ -11,7 +11,7 @@ function App() {
       <AppRoutes />
       <Footer />
     </div>
-  );
+  )
 }
 
 export default App;
