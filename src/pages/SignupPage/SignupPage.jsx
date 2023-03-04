@@ -10,7 +10,7 @@ function SignupPage() {
 
                 <Col md={{ offset: 3, span: 6 }}>
 
-                    <h1>Registro</h1>
+                    <h1>Signup</h1>
 
                     <hr />
 
