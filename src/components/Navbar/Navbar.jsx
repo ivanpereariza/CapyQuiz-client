@@ -1,17 +1,20 @@
 
 import { useContext } from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
+import '../NavBar/NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
-
+import logo from '../../assets/img/CapyQuiz.png'
 const NavBar = () => {
 
     const { user, logout } = useContext(AuthContext)
 
 
     return (
-        <Navbar bg='dark' variant='dark' expand="md" className='mb-4'>
-            <Navbar.Brand href="#home">Quiz App</Navbar.Brand>
+        <Navbar bg='dark' variant='dark' expand="md" className='mb-4 navbar'>
+            <Link to='/'>
+                <img src={logo} alt="logo" />
+            </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
