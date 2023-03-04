@@ -1,32 +1,47 @@
-import React from 'react'
-import { Container, Nav, NavDropdown } from 'react-bootstrap'
 
-const Navbar = () => {
+import { useContext } from 'react'
+import { Nav, Navbar } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../contexts/auth.context'
+
+const NavBar = () => {
+
+    const { user, logout } = useContext(AuthContext)
+
+
     return (
-        <Navbar bg="danger" expand="lg">
-            <Container>
-                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
+        <Navbar bg='dark' variant='dark' expand="md" className='mb-4'>
+            <Navbar.Brand href="#home">Quiz App</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="me-auto">
+                    <Link to="/">
+                        <Nav.Link as="span">Home</Nav.Link>
+                    </Link>
+                    {
+                        user
+                            ?
+                            <>
+                                <Link to="/">
+                                    <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
+                                </Link>
+                            </>
+                            :
+                            <>
+                                <Link to="/login">
+                                    <Nav.Link as="span">Log In</Nav.Link>
+                                </Link>
+                                <Link to="/signup">
+                                    <Nav.Link as="span">Sign Up</Nav.Link>
+                                </Link>
+                            </>
+                    }
+
+                </Nav>
+            </Navbar.Collapse>
+
         </Navbar>
     )
 }
 
-export default Navbar
+export default NavBar
