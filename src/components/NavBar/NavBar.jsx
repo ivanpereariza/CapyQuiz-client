@@ -27,6 +27,9 @@ const NavBar = () => {
                                 <Link to="/">
                                     <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
                                 </Link>
+                                <Link to="/quizzes/create">
+                                    <Nav.Link as="span" >Create Quiz</Nav.Link>
+                                </Link>
                             </>
                             :
                             <>
