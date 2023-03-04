@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
+import SignupForm from '../../components/SignupForm/SignupForm'
 
 
 function SignupPage() {
@@ -12,6 +13,8 @@ function SignupPage() {
                     <h1>Registro</h1>
 
                     <hr />
+
+                    <SignupForm />
 
                 </Col>
             </Row>
