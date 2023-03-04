@@ -1,10 +1,10 @@
 
 import { useContext } from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
-import '../NavBar/NavBar.css'
+import './NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
-import logo from '../../assets/img/CapyQuiz.png'
+import logo from '../../assets/img/CapyQuiz.png';
 const NavBar = () => {
 
     const { user, logout } = useContext(AuthContext)
@@ -21,6 +21,7 @@ const NavBar = () => {
                     <Link to="/">
                         <Nav.Link as="span">Home</Nav.Link>
                     </Link>
+
                     {
                         user
                             ?
