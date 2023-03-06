@@ -1,13 +1,14 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import authService from "../../services/auth.services"
-import cloudinaryService from "../../services/cloudinary.services"
+import { ThemeContext } from "../../contexts/theme.context"
 
 
 const SignupForm = () => {
 
     const navigate = useNavigate()
+    const { themeValue } = useContext(ThemeContext)
 
     const [signupData, setSignupData] = useState({
         username: '',
@@ -51,17 +52,17 @@ const SignupForm = () => {
 
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
+                <Form.Control className={`${themeValue} secondary`} type="text" value={signupData.username} onChange={handleInputChange} name="username" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" value={signupData.email} onChange={handleInputChange} name="email" />
+                <Form.Control className={`${themeValue} secondary`} type="email" value={signupData.email} onChange={handleInputChange} name="email" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
+                <Form.Control className={`${themeValue} secondary`} type="password" value={signupData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="avatar">
@@ -71,7 +72,8 @@ const SignupForm = () => {
 
 
             <div className="d-grid">
-                <Button variant="dark" type="submit">Signup</Button>
+                <Button type="submit" variant="outline-light mt-4">Signup</Button>
+
             </div>
 
         </Form>)

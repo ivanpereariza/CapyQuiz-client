@@ -2,3 +2,55 @@ a {
   text-decoration: none;
   color: inherit
 }
+
+.light.primary {
+  background-color: #fff;
+  color: black;
+  min-height: 100vh;
+}
+
+.light.secondary {
+  background-color: #F6F6F6;
+  color: black;
+}
+
+.light.navbar {
+  background-color: #EFEEEE;
+  color: black;
+}
+
+.light.modal {
+  background-color: #D5D5D5;
+  color: black;
+}
+
+.light.card {
+  background-color: #F6F6F6;
+  color: black;
+}
+
+.dark.primary {
+  background-color: #191919;
+  color: white;
+  min-height: 100vh;
+}
+
+.dark.secondary {
+  background-color: #373737;
+  color: white;
+}
+
+.dark.navbar {
+  background-color: #222;
+  color: white;
+}
+
+.dark.modal {
+  background-color: #272727;
+  color: white;
+}
+
+.dark.card {
+  background-color: #373737;
+  color: white;
+}

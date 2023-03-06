@@ -3,10 +3,12 @@ import { Button, Form, Row } from "react-bootstrap"
 import quizzesService from "../../services/quizzes.services"
 import CreateQuestionsQuizForm from "../CreateQuestionsQuizForm/CreateQuestionsQuizForm"
 import { AuthContext } from './../../contexts/auth.context'
+import { ThemeContext } from "../../contexts/theme.context"
 
-const CreateQuizForm = () => {
+const CreateQuizForm = ({ fireFinalActions }) => {
 
     const { user } = useContext(AuthContext)
+    const { themeValue } = useContext(ThemeContext)
 
 
 
@@ -60,7 +62,9 @@ const CreateQuizForm = () => {
 
         quizzesService
             .createNewQuiz({ ...generalData, questionsArr })
-            .then(res => console.log(res))
+            .then(() => {
+                fireFinalActions()
+            })
             .catch(err => console.log(err))
     }
 
@@ -70,28 +74,32 @@ const CreateQuizForm = () => {
         <Form className="mb-5" onSubmit={handleSubmit} >
             <Form.Group className="mb-3" controlId="title" >
                 <Form.Label>Title:</Form.Label>
-                <Form.Control type="text" name="title" value={generalData.title} onChange={handleGeneralChange} required />
+                <Form.Control className={`${themeValue} secondary`} type="text" name="title" value={generalData.title} onChange={handleGeneralChange} required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="theme" >
                 <Form.Label>Theme:</Form.Label>
-                <Form.Control type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
+                <Form.Control className={`${themeValue} secondary`} type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="description">
                 <Form.Label>Description:</Form.Label>
-                <Form.Control type="text" name="description" value={generalData.description} onChange={handleGeneralChange} required />
+                <Form.Control className={`${themeValue} secondary`} type="text" name="description" value={generalData.description} onChange={handleGeneralChange} required />
             </Form.Group>
 
-            <Button variant="dark" type="button" onClick={handleAddQuestion}>Add question</Button>
+
 
             {
                 questionsArr.map((question, index) => {
                     return <CreateQuestionsQuizForm key={index} index={index} question={question} handleQuestionChange={handleQuestionChange} handleAnswerOptionChange={handleAnswerOptionChange} handleRemoveQuestion={handleRemoveQuestion} />
                 })
             }
-
-            <Button variant="dark" type="submit">Create Quiz</Button>
+            <div className="d-flex justify-content-center">
+                <Button variant="warning" type="button" className="text-center rounded-circle text-light" onClick={handleAddQuestion}>✚</Button>
+            </div>
+            <div className="d-grid ">
+                <Button variant="success" type="submit" className="mx-4 mt-5">Create Quiz</Button>
+            </div>
 
         </Form>
     )
