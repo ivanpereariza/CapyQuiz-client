@@ -4,14 +4,16 @@ import '../NavBar/NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import logo from '../../assets/img/CapyQuiz.png'
+import { ThemeContext } from '../../contexts/theme.context'
 
 function NavBar() {
 
     const { user, logout } = useContext(AuthContext)
-    console.log(user)
+    const { themeValue, switchTheme } = useContext(ThemeContext)
+    const themeText = themeValue === 'light' ? '☼ Light Mode' : ' ☾ Dark Mode'
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
+        <Navbar collapseOnSelect expand="lg" variant={themeValue} className={`${themeValue} navbar`} >
             <Navbar.Brand >
                 <Link to='/'>
                     <img className='navBrand' src={logo} alt="logo" />
@@ -38,6 +40,9 @@ function NavBar() {
                         user
                             ?
                             <>
+                                <Link className='mx-3'>
+                                    <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                                </Link>
                                 <Link to="/">
                                     <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
                                 </Link>

@@ -3,18 +3,20 @@ import './App.css'
 import Footer from './components/Footer/Footer'
 import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
-
+import { useContext } from 'react'
+import { ThemeContext } from './contexts/theme.context'
 
 function App() {
 
+  const { themeValue } = useContext(ThemeContext)
 
 
   return (
-    <div className="App">
+    <div className={`${themeValue} primary`}>
       <NavBar />
       <AppRoutes />
       <Footer />
-    </div>
+    </div >
   )
 }
 

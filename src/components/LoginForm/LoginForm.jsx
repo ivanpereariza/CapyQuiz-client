@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import { useNavigate } from 'react-router-dom'
 import authService from "../../services/auth.services"
+import { ThemeContext } from "../../contexts/theme.context"
 
 const LoginForm = () => {
 
@@ -14,6 +15,7 @@ const LoginForm = () => {
     })
 
     const { authenticateUser, user } = useContext(AuthContext)
+    const { themeValue } = useContext(ThemeContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -39,16 +41,16 @@ const LoginForm = () => {
 
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
+                <Form.Control className={`${themeValue} secondary`} type="email" value={loginData.email} onChange={handleInputChange} name="email" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
+                <Form.Control className={`${themeValue} secondary`} type="password" value={loginData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
             <div className="d-grid">
-                <Button variant="dark" type="submit">Login</Button>
+                <Button type="submit" variant="outline-light mt-4">Login</Button>
             </div>
 
         </Form>)
