@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import QuizCard from '../../components/QuizCard/QuizCard'
 import QuizList from '../../components/QuizList/QuizList'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import quizzesService from '../../services/quizzes.services'
@@ -26,7 +25,7 @@ const QuizListPage = () => {
     }
 
     const handleSearchBar = e => {
-        const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value) || elm.theme.toLowerCase().includes(e.target.value))
+        const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value.toLowerCase()) || elm.theme.toLowerCase().includes(e.target.value))
         setQuizzes(filteredQuizzes)
     }
 
