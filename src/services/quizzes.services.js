@@ -7,9 +7,14 @@ class QuizzesServices {
         })
     }
 
+    getAllQuizzes() {
+        return this.api.get('/')
+    }
+
     createNewQuiz(quizData) {
         return this.api.post('/saveQuiz', quizData)
     }
+
 }
 
 const quizzesService = new QuizzesServices()
