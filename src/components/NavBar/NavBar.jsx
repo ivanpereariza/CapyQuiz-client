@@ -4,18 +4,21 @@ import '../NavBar/NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import logo from '../../assets/img/CapyQuiz.png'
-const NavBar = () => {
+
+function NavBar() {
 
     const { user, logout } = useContext(AuthContext)
-
+    console.log(user)
 
     return (
-        <Navbar bg='dark' variant='dark' expand="md" className='mb-4 navbar'>
-            <Link to='/'>
-                <img src={logo} alt="logo" />
-            </Link>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
+            <Navbar.Brand >
+                <Link to='/'>
+                    <img className='navBrand' src={logo} alt="logo" />
+                </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
                     <Link to="/">
                         <Nav.Link as="span">Home</Nav.Link>
@@ -23,13 +26,26 @@ const NavBar = () => {
                     {
                         user
                             ?
+                            <Link to="/quizzes/create">
+                                <Nav.Link as="span" >Create Quiz</Nav.Link>
+                            </Link>
+                            :
+                            null
+                    }
+                </Nav>
+                <Nav>
+                    {
+                        user
+                            ?
                             <>
                                 <Link to="/">
                                     <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
                                 </Link>
-                                <Link to="/quizzes/create">
-                                    <Nav.Link as="span" >Create Quiz</Nav.Link>
+                                <Link to={`/profile/${user?._id}`}>
+                                    <img className='navAvatar' src={user?.avatar} alt="profile" />
                                 </Link>
+
+
                             </>
                             :
                             <>
@@ -41,11 +57,10 @@ const NavBar = () => {
                                 </Link>
                             </>
                     }
-
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-    )
+    );
 }
 
-export default NavBar
+export default NavBar;

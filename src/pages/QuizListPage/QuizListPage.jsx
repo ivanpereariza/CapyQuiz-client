@@ -25,7 +25,8 @@ const QuizListPage = () => {
     }
 
     const handleSearchBar = e => {
-        const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value.toLowerCase()) || elm.theme.toLowerCase().includes(e.target.value))
+        const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value.toLowerCase())
+            || elm.theme.toLowerCase().includes(e.target.value.toLowerCase()))
         setQuizzes(filteredQuizzes)
     }
 

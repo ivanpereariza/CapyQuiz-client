@@ -2,7 +2,6 @@ import './ProfileCard.css'
 
 const ProfileCard = ({ user }) => {
 
-    console.log(user)
     const { data } = user
     const { avatar, role, points, username } = data
 

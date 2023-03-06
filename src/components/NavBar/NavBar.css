@@ -1,4 +1,12 @@
-.navbar img {
+.navBrand {
     width: 75px;
     margin: 0 20px;
+}
+
+.navAvatar {
+    margin: 0 25px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
 }
