@@ -8,7 +8,7 @@ const QuizList = ({ quizzes }) => {
             {
                 quizzes.map(quiz => {
                     return (
-                        <Col md={{ span: 3 }} key={quiz._id}>
+                        <Col md={{ span: 4 }} key={quiz._id}>
                             <QuizCard quiz={quiz} />
                         </Col>
                     )

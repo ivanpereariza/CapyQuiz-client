@@ -16,7 +16,7 @@ const QuizCard = ({ quiz }) => {
         <Link to={`/`}>
             <Card className='my-3'>
                 <Card.Body>
-                    <Card.Text> <h2> {title}</h2></Card.Text>
+                    <Card.Title> {title}</Card.Title>
                     <Card.Text>Theme: {theme}</Card.Text>
                     <Card.Text>Description: {description}</Card.Text>
                     <Card.Text>Estimated Time: {estimatedTime} {time}</Card.Text>
