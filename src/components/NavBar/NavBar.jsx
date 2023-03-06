@@ -36,13 +36,13 @@ function NavBar() {
                     }
                 </Nav>
                 <Nav>
+                    <Link className='mx-3'>
+                        <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                    </Link>
                     {
                         user
                             ?
                             <>
-                                <Link className='mx-3'>
-                                    <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
-                                </Link>
                                 <Link to="/">
                                     <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
                                 </Link>
