@@ -1,3 +1,4 @@
+import { Card, Container, Row } from 'react-bootstrap'
 import './ProfileCard.css'
 
 const ProfileCard = ({ user }) => {
@@ -5,15 +6,23 @@ const ProfileCard = ({ user }) => {
     const { data } = user
     const { avatar, role, points, username } = data
 
-
-
     return (
-        <div>
-            <img className='AvatarImg' src={avatar} alt={username} />
-            <p>{username} profile</p>
-            <p>Points: {points}</p>
-            <p>Role: {role}</p>
-        </div>
+        <Container>
+            <Row className='justify-content-center'>
+                <Card className='ProfileCard'>
+                    <Card.Img variant="top" className='AvatarImg' src={avatar} alt={username} />
+                    <Card.Body>
+                        <Card.Title>{username}</Card.Title>
+                        <Card.Text>
+                            Points: {points}
+                        </Card.Text>
+                        <Card.Text>
+                            Role: {role}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Row>
+        </Container>
     )
 }
 
