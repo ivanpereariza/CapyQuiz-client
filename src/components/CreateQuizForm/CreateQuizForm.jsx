@@ -56,6 +56,8 @@ const CreateQuizForm = () => {
     const handleSubmit = e => {
         e.preventDefault()
 
+        questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
+
         quizzesService
             .createNewQuiz({ ...generalData, questionsArr })
             .then(res => console.log(res))

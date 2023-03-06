@@ -6,14 +6,13 @@ import authService from "../../services/auth.services"
 
 const SignupForm = () => {
 
+    const navigate = useNavigate()
 
     const [signupData, setSignupData] = useState({
         username: '',
         email: '',
         password: ''
     })
-
-    const navigate = useNavigate()
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -26,7 +25,7 @@ const SignupForm = () => {
 
         authService
             .signup(signupData)
-            .then(() => navigate('/'))
+            .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }
 
