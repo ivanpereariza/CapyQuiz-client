@@ -8,7 +8,7 @@ class QuizzesServices {
     }
 
     getAllQuizzes() {
-        return this.api.get('/')
+        return this.api.get('/getAllQuizzes')
     }
 
     createNewQuiz(quizData) {
