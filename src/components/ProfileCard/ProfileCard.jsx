@@ -8,7 +8,7 @@ const ProfileCard = ({ user }) => {
 
     return (
         <Container>
-            <Row className='justify-content-center'>
+            <Row className='mt-3 justify-content-center'>
                 <Card className='ProfileCard'>
                     <Card.Img variant="top" className='AvatarImg' src={avatar} alt={username} />
                     <Card.Body>

@@ -8,7 +8,6 @@ import logo from '../../assets/img/CapyQuiz.png'
 function NavBar() {
 
     const { user, logout } = useContext(AuthContext)
-    console.log(user)
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
