@@ -31,12 +31,12 @@ const ProfileCard = ({ userProfile }) => {
                         <Card.Text>
                             Points: {points}
                         </Card.Text>
-                        <Card.Text className='mb-4'>
-                            Role: {role}
-                        </Card.Text>
                         {
                             user?.role === 'ADMIN' ?
                                 <>
+                                    <Card.Text className='mb-4'>
+                                        Role: {role}
+                                    </Card.Text>
                                     <Link to={`/profile/edit/${_id}`} >
                                         <Button className='mx-4' type="submit" variant='warning' >Edit User</Button>
                                     </Link>

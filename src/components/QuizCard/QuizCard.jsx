@@ -4,18 +4,15 @@ import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
+import getEstimatedTime from '../../utils/getEstimatedTime'
 
 const QuizCard = ({ quiz, openModalDetails }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const { title, theme, description, questionsArr, owner, quizImg, _id } = quiz
 
-    let time = 'mins'
-    let estimatedTime = (30 * questionsArr.length) / 60
-    if (estimatedTime < 1) {
-        estimatedTime *= 60
-        time = 'secs'
-    }
+    const time = getEstimatedTime(questionsArr)
+
 
     return (
         <Link onClick={() => openModalDetails(_id)}>
@@ -23,12 +20,12 @@ const QuizCard = ({ quiz, openModalDetails }) => {
                 <Card.Body>
                     <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className='mb-4'> {title}</Card.Title>
-                    <Card.Text>Theme: {theme}</Card.Text>
-                    <Card.Text>Description: {description}</Card.Text>
-                    <Card.Text>Estimated Time: {estimatedTime} {time}</Card.Text>
+                    <Card.Text><b>Theme:</b> {theme}</Card.Text>
+                    <Card.Text><b>Description:</b> {description}</Card.Text>
+                    <Card.Text><b>Estimated Time:</b> {time}</Card.Text>
                     {
                         owner ?
-                            <Card.Text>Author: {owner?.username} <img className='ownerAvatar' src={`${owner?.avatar}`} alt={owner.username} /></Card.Text>
+                            <Card.Text><b>Author:</b> {owner?.username} <img className='ownerAvatar' src={`${owner?.avatar}`} alt={owner.username} /></Card.Text>
                             :
                             undefined
                     }
