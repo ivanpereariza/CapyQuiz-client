@@ -3,7 +3,7 @@ import CreateQuizForm from "../../components/CreateQuizForm/CreateQuizForm"
 
 const CreateQuizPage = () => {
     return (
-        <Container>
+        <Container className="mt-4">
 
             <Row>
 

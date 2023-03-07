@@ -14,6 +14,10 @@ class UsersServices {
     editUserById(id, userData) {
         return this.api.put(`/edit/${id}`, userData)
     }
+
+    deleteUserById(id) {
+        return this.api.delete(`/delete/${id}`)
+    }
 }
 
 const usersService = new UsersServices()
