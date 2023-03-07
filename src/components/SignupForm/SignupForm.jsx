@@ -9,6 +9,8 @@ const SignupForm = () => {
 
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
+    const theme = themeValue === 'light' ? 'dark' : 'light'
+
 
     const [signupData, setSignupData] = useState({
         username: '',
@@ -67,16 +69,17 @@ const SignupForm = () => {
 
             <Form.Group className="mb-3" controlId="avatar">
                 <Form.Label>Avatar:</Form.Label>
-                <Form.Control type="file" name="avatar" />
+                <Form.Control className={`${themeValue} secondary`} type="file" name="avatar" />
             </Form.Group>
 
 
             <div className="d-grid">
-                <Button type="submit" variant="outline-light mt-4">Signup</Button>
+                <Button type="submit" variant={`outline-${theme} mt-4`}>Sign Up</Button>
 
             </div>
 
-        </Form>)
+        </Form>
+    )
 }
 
 export default SignupForm

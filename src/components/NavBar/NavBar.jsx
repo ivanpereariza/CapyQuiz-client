@@ -46,22 +46,22 @@ function NavBar() {
                                         <img className='navAvatar' src={user?.avatar} alt="profile" />
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
-                                        <Dropdown.Item >
+                                        <Dropdown.Item as={'span'}>
                                             <Link to={`/profile/${user?._id}`}>
                                                 <Nav.Link as="span" >My Profile</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
-                                        <Dropdown.Item >
+                                        <Dropdown.Item as={'span'}>
                                             <Link to={`/profile/edit/${user?._id}`}>
                                                 <Nav.Link as="span" >Edit Profile</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
-                                        <Dropdown.Item >
+                                        <Dropdown.Item as={'span'}>
                                             <Link >
                                                 <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
-                                        <Dropdown.Item >
+                                        <Dropdown.Item as={'span'}>
                                             <Link to="/">
                                                 <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
                                             </Link>

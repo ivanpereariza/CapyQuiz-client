@@ -16,6 +16,8 @@ const LoginForm = () => {
 
     const { authenticateUser, user } = useContext(AuthContext)
     const { themeValue } = useContext(ThemeContext)
+    const theme = themeValue === 'light' ? 'dark' : 'light'
+
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -50,7 +52,7 @@ const LoginForm = () => {
             </Form.Group>
 
             <div className="d-grid">
-                <Button type="submit" variant="outline-light mt-4">Login</Button>
+                <Button type="submit" variant={`outline-${theme} mt-4`}>Log In</Button>
             </div>
 
         </Form>)
