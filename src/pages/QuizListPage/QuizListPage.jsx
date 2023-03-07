@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Modal, Row } from 'react-bootstrap'
 import CreateQuizForm from '../../components/CreateQuizForm/CreateQuizForm'
+import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
 import NewQuizzButton from '../../components/NewQuizzButton/NewQuizzButton'
+import QuizDetailsModal from '../../components/QuizDetailsModal/QuizDetailsModal'
 import QuizList from '../../components/QuizList/QuizList'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import quizzesService from '../../services/quizzes.services'
-import { useContext } from "react"
-import { ThemeContext } from "../../contexts/theme.context"
+
 
 const QuizListPage = () => {
 
     const [quizzes, setQuizzes] = useState([])
     const [quizzesBackUp, setQuizzesBackUp] = useState([])
     const [showModal, setShowModal] = useState(false)
-
-    const { themeValue } = useContext(ThemeContext)
-
-    const bg = themeValue === 'dark' ? '#272727' : '#D5D5D5'
-    const color = themeValue === 'dark' ? 'white' : 'black'
+    const [showModalDetails, setShowModalDetails] = useState(false)
 
     useEffect(() => {
         loadQuizzes()
@@ -47,8 +44,9 @@ const QuizListPage = () => {
 
     return (
         <>
-            <Container>
+            <Container className='mt-4'>
                 <h1>Check the quizzes created by the community!</h1>
+                <hr />
                 <Row>
                     <Col md={{ span: 4 }}>
                         <SearchBar handleSearchBar={handleSearchBar} />
@@ -57,28 +55,13 @@ const QuizListPage = () => {
                         <NewQuizzButton setShowModal={setShowModal} />
                     </Col>
                 </Row>
-                <QuizList quizzes={quizzes} />
+                <QuizList quizzes={quizzes} setShowModalDetails={setShowModalDetails} />
             </Container>
 
+            <QuizDetailsModal showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
 
-            <Modal
-                size="lg"
-                scrollable={true}
-                show={showModal}
-                onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton closeVariant={color} style={{
-                    backgroundColor: bg,
-                    color: color,
-                }}>
-                    <Modal.Title>New Quiz</Modal.Title>
-                </Modal.Header>
-                <Modal.Body style={{
-                    backgroundColor: bg,
-                    color: color
-                }}>
-                    <CreateQuizForm fireFinalActions={fireFinalActions} />
-                </Modal.Body>
-            </Modal>
+            <NewQuizModal fireFinalActions={fireFinalActions} setShowModal={setShowModal} showModal={showModal} />
+
         </>
     )
 }
