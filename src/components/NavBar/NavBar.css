@@ -4,9 +4,24 @@
 }
 
 .navAvatar {
-    margin: 0 25px;
-    width: 40px;
-    height: 40px;
+    margin: 0 px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 50%;
+    border: solid 1px black;
+}
+
+.dropdown-toggle::before {
+    display: none !important;
+}
+
+.dropdown-menu-dark {
+    --bs-dropdown-link-active-bg: #777777;
+    --bs-dropdown-link-hover-bg: #686868;
+}
+
+.dropdown-menu-light {
+    --bs-dropdown-link-active-bg: #bbbbbb;
+    --bs-dropdown-link-hover-bg: #d1d1d1;
 }
