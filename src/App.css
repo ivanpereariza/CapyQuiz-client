@@ -3,6 +3,10 @@ a {
   color: inherit
 }
 
+.pointerCursor {
+  cursor: pointer;
+}
+
 .light.primary {
   background-color: #fff;
   color: black;

@@ -44,10 +44,10 @@ function NavBar() {
                         user
                             ?
                             <>
-                                <div>
+                                <div >
                                     <Dropdown className='mx-5' drop={'start'}>
                                         <Dropdown.Toggle as='span' align='end' variant="secondary">
-                                            <img className='navAvatar' src={user?.avatar} alt="profile" />
+                                            <img className='navAvatar pointerCursor' src={user?.avatar} alt="profile" />
                                         </Dropdown.Toggle>
                                         <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
                                             <Dropdown.Item as={'span'}>
