@@ -44,7 +44,7 @@ function NavBar() {
                         user
                             ?
                             <>
-                                <Link>
+                                <div>
                                     <Dropdown className='mx-5' drop={'start'}>
                                         <Dropdown.Toggle as='span' align='end' variant="secondary">
                                             <img className='navAvatar' src={user?.avatar} alt="profile" />
@@ -72,7 +72,7 @@ function NavBar() {
                                             </Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                </Link>
+                                </div>
 
                             </>
                             :

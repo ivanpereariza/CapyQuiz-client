@@ -31,6 +31,10 @@ class QuizzesServices {
         return this.api.get(`/quizById/${id}`)
     }
 
+    getQuizByOwner(id) {
+        return this.api.get(`/quizByOwner/${id}`)
+    }
+
 }
 
 const quizzesService = new QuizzesServices()
