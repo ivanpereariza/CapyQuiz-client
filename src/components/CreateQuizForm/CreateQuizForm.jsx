@@ -95,10 +95,10 @@ const CreateQuizForm = ({ fireFinalActions }) => {
                 })
             }
             <div className="d-flex justify-content-center">
-                <Button variant="warning" type="button" className="text-center rounded-circle text-light" onClick={handleAddQuestion}>✚</Button>
+                <Button variant="warning" type="button" className="text-center rounded-circle text-light my-3" onClick={handleAddQuestion}>✚</Button>
             </div>
             <div className="d-grid ">
-                <Button variant="success" type="submit" className="mx-4 mt-5">Create Quiz</Button>
+                <Button variant="success" type="submit" className="mx-4 mt-3">Create Quiz</Button>
             </div>
 
         </Form>

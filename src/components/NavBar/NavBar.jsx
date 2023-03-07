@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Dropdown, Nav, Navbar } from 'react-bootstrap'
 import '../NavBar/NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
@@ -10,7 +10,7 @@ function NavBar() {
 
     const { user, logout } = useContext(AuthContext)
     const { themeValue, switchTheme } = useContext(ThemeContext)
-    const themeText = themeValue === 'light' ? '☼ Light Mode' : ' ☾ Dark Mode'
+    const themeText = themeValue === 'light' ? '☾ Dark Mode' : '☼ Light Mode'
 
     return (
         <Navbar collapseOnSelect expand="lg" variant={themeValue} className={`${themeValue} navbar`} >
@@ -36,24 +36,52 @@ function NavBar() {
                     }
                 </Nav>
                 <Nav>
-                    <Link className='mx-3'>
-                        <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
-                    </Link>
+
                     {
                         user
                             ?
                             <>
-                                <Link to="/">
-                                    <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
-                                </Link>
-                                <Link to={`/profile/${user?._id}`}>
-                                    <img className='navAvatar' src={user?.avatar} alt="profile" />
-                                </Link>
+                                <Dropdown className='mx-5' drop={'start'}>
+                                    <Dropdown.Toggle as='span' align='end' variant="secondary">
+                                        <img className='navAvatar' src={user?.avatar} alt="profile" />
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
+                                        <Dropdown.Item >
+                                            <Link to={`/profile/${user?._id}`}>
+                                                <Nav.Link as="span" >My Profile</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item >
+                                            <Link to={`/profile/edit/${user?._id}`}>
+                                                <Nav.Link as="span" >Edit Profile</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item >
+                                            <Link >
+                                                <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item >
+                                            <Link to="/">
+                                                <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+
+
+
+
+
+
 
 
                             </>
                             :
                             <>
+                                <Link >
+                                    <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                                </Link>
                                 <Link to="/login">
                                     <Nav.Link as="span">Log In</Nav.Link>
                                 </Link>

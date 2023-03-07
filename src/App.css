@@ -9,30 +9,15 @@ a {
   min-height: 100vh;
 }
 
-.light.secondary {
-  background-color: #F6F6F6;
-  color: black;
-}
-
-.light.navbar {
-  background-color: #EFEEEE;
-  color: black;
-}
-
-.light.modal {
-  background-color: #D5D5D5;
-  color: black;
-}
-
-.light.card {
-  background-color: #F6F6F6;
-  color: black;
-}
-
 .dark.primary {
   background-color: #191919;
   color: white;
   min-height: 100vh;
+}
+
+.light.secondary {
+  background-color: #F6F6F6;
+  color: black;
 }
 
 .dark.secondary {
@@ -40,9 +25,19 @@ a {
   color: white;
 }
 
+.light.navbar {
+  background-color: #EFEEEE;
+  color: black;
+}
+
 .dark.navbar {
   background-color: #222;
   color: white;
+}
+
+.light.modal {
+  background-color: #D5D5D5;
+  color: black;
 }
 
 .dark.modal {
@@ -50,7 +45,22 @@ a {
   color: white;
 }
 
+.light.card {
+  background-color: #F6F6F6;
+  color: black;
+}
+
 .dark.card {
+  background-color: #373737;
+  color: white;
+}
+
+.light {
+  background-color: #F6F6F6;
+  color: black;
+}
+
+.dark {
   background-color: #373737;
   color: white;
 }
