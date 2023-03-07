@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 
-const QuizCard = ({ quiz, setShowModalDetails }) => {
+const QuizCard = ({ quiz }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const { title, theme, description, questionsArr, owner, quizImg } = quiz
@@ -18,14 +18,14 @@ const QuizCard = ({ quiz, setShowModalDetails }) => {
 
     return (
         <Link to={`/`}>
-            <Card onClick={setShowModalDetails(true)} className={`${themeValue} card my-3`}>
+            <Card className={`${themeValue} card my-3`}>
                 <Card.Body>
                     <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className='mb-4'> {title}</Card.Title>
                     <Card.Text>Theme: {theme}</Card.Text>
                     <Card.Text>Description: {description}</Card.Text>
                     <Card.Text>Estimated Time: {estimatedTime} {time}</Card.Text>
-                    <Card.Text>Author: {owner?.username} <img className='ownerAvatar' src={`${owner?.avatar}`} alt="owner avatar" /></Card.Text>
+                    <Card.Text>Author: {owner.username} <img className='ownerAvatar' src={`${owner.avatar}`} alt="owner avatar" /></Card.Text>
                 </Card.Body>
             </Card>
         </Link>

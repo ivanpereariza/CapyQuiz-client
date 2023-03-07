@@ -9,6 +9,7 @@ const QuizDetailsModal = ({ setShowModalDetails, showModalDetails }) => {
     const bg = themeValue === 'dark' ? '#272727' : '#D5D5D5'
     const color = themeValue === 'dark' ? 'white' : 'black'
 
+    console.log(showModalDetails)
     return (
         <Modal
             size="lg"
