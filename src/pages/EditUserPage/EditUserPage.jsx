@@ -26,7 +26,7 @@ const EditUserPage = () => {
                             <Col md={{ offset: 3, span: 6 }} >
                                 <h1>{`Edit ${user.data.username}`}</h1>
                                 <hr />
-                                <EditUserCard user={user} />
+                                <EditUserCard userProfile={user} />
                             </Col>
                         </Row>
                     </Container>

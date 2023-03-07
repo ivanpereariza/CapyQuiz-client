@@ -12,7 +12,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         getUser(id, setUser)
-    }, [])
+    }, [id])
 
 
     return (
