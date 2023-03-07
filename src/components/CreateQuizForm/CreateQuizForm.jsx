@@ -1,27 +1,18 @@
-import { useContext, useEffect, useState } from "react"
-import { Button, Form, Row } from "react-bootstrap"
+import { useContext, useState } from "react"
+import { Button, Form } from "react-bootstrap"
 import quizzesService from "../../services/quizzes.services"
 import CreateQuestionsQuizForm from "../CreateQuestionsQuizForm/CreateQuestionsQuizForm"
-import { AuthContext } from './../../contexts/auth.context'
 import { ThemeContext } from "../../contexts/theme.context"
 
 const CreateQuizForm = ({ fireFinalActions }) => {
 
-    const { user } = useContext(AuthContext)
     const { themeValue } = useContext(ThemeContext)
-
-
 
     const [generalData, setGeneralData] = useState({
         title: '',
         theme: '',
         description: '',
-        owner: undefined
     })
-
-    useEffect(() => {
-        setGeneralData({ ...generalData, owner: user?._id })
-    }, [user])
 
     const [questionsArr, setQuestionsArr] = useState([{
         question: '',

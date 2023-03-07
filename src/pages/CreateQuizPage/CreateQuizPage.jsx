@@ -1,7 +1,15 @@
 import { Col, Container, Row } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import CreateQuizForm from "../../components/CreateQuizForm/CreateQuizForm"
 
 const CreateQuizPage = () => {
+
+    const navigate = useNavigate()
+
+    const fireFinalActions = () => {
+        navigate('/quizzes')
+    }
+
     return (
         <Container className="my-4">
 
@@ -13,7 +21,7 @@ const CreateQuizPage = () => {
 
                     <hr />
 
-                    <CreateQuizForm />
+                    <CreateQuizForm fireFinalActions={fireFinalActions} />
                 </Col>
             </Row>
 

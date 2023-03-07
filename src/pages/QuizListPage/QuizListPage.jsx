@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Modal, Row } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
 import NewQuizzButton from '../../components/NewQuizzButton/NewQuizzButton'
 import QuizDetailsModal from '../../components/QuizDetailsModal/QuizDetailsModal'
