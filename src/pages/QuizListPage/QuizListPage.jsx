@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Modal, Row } from 'react-bootstrap'
-import CreateQuizForm from '../../components/CreateQuizForm/CreateQuizForm'
 import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
 import NewQuizzButton from '../../components/NewQuizzButton/NewQuizzButton'
 import QuizDetailsModal from '../../components/QuizDetailsModal/QuizDetailsModal'
@@ -15,6 +14,8 @@ const QuizListPage = () => {
     const [quizzesBackUp, setQuizzesBackUp] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [showModalDetails, setShowModalDetails] = useState(false)
+    const [selectedQuiz, setSelectedQuiz] = useState('')
+
 
     useEffect(() => {
         loadQuizzes()
@@ -42,6 +43,11 @@ const QuizListPage = () => {
         loadQuizzes()
     }
 
+    const openModalDetails = (id) => {
+        setShowModalDetails(true)
+        setSelectedQuiz(id)
+    }
+
     return (
         <>
             <Container className='mt-4'>
@@ -55,10 +61,10 @@ const QuizListPage = () => {
                         <NewQuizzButton setShowModal={setShowModal} />
                     </Col>
                 </Row>
-                <QuizList quizzes={quizzes} setShowModalDetails={setShowModalDetails} />
+                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} />
             </Container>
 
-            <QuizDetailsModal showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
+            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
 
             <NewQuizModal fireFinalActions={fireFinalActions} setShowModal={setShowModal} showModal={showModal} />
 

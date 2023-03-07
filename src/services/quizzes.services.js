@@ -15,6 +15,10 @@ class QuizzesServices {
         return this.api.post('/saveQuiz', quizData)
     }
 
+    getQuizById(id) {
+        return this.api.get(`/quizById/${id}`)
+    }
+
 }
 
 const quizzesService = new QuizzesServices()
