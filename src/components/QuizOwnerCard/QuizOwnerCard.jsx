@@ -25,6 +25,9 @@ const QuizOwnerCard = ({ quiz }) => {
                 <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mb-5' >
                     <Button type="submit" variant={`outline-${themeColor} mt-4`}>Start Game!</Button>
                 </Link>
+                <Link to={`/quizzes/edit/${quiz._id}`} className='d-grid mb-5' >
+                    <Button type="submit" variant={`outline-${themeColor} mt-4`}>Edit Quiz</Button>
+                </Link>
             </Card.Body>
         </Card>
     )
