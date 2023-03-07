@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Container, Modal, Row } from 'react-bootstrap'
+import React, { useContext, useEffect, useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
 import NewQuizzButton from '../../components/NewQuizzButton/NewQuizzButton'
 import QuizDetailsModal from '../../components/QuizDetailsModal/QuizDetailsModal'
 import QuizList from '../../components/QuizList/QuizList'
 import SearchBar from '../../components/SearchBar/SearchBar'
+import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
+
+
 
 
 const QuizListPage = () => {
 
-    const [quizzes, setQuizzes] = useState([])
-    const [quizzesBackUp, setQuizzesBackUp] = useState([])
+    const [quizzes, setQuizzes] = useState('')
+    const [quizzesBackUp, setQuizzesBackUp] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [showModalDetails, setShowModalDetails] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState('')
 
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
         loadQuizzes()
@@ -50,16 +54,21 @@ const QuizListPage = () => {
 
     return (
         <>
-            <Container className='my-4'>
+            <Container className='mt-4'>
                 <h1>Check the quizzes created by the community!</h1>
                 <hr />
                 <Row>
                     <Col md={{ span: 4 }}>
                         <SearchBar handleSearchBar={handleSearchBar} />
                     </Col>
-                    <Col className='d-flex' md={{ span: 4 }} >
-                        <NewQuizzButton setShowModal={setShowModal} />
-                    </Col>
+                    {
+                        user ?
+                            <Col className='d-flex' md={{ span: 4 }} >
+                                <NewQuizzButton setShowModal={setShowModal} />
+                            </Col>
+                            :
+                            undefined
+                    }
                 </Row>
                 <QuizList quizzes={quizzes} openModalDetails={openModalDetails} />
             </Container>

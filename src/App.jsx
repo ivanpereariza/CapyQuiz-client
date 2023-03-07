@@ -12,11 +12,13 @@ function App() {
 
 
   return (
-    <div className={`${themeValue} primary`}>
-      <NavBar />
-      <AppRoutes />
+    <>
+      <div className={`${themeValue} primary`}>
+        <NavBar />
+        <AppRoutes />
+      </div >
       <Footer />
-    </div >
+    </>
   )
 }
 

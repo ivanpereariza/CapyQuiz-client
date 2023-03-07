@@ -21,7 +21,7 @@ const EditUserPage = () => {
         <>
             {
                 user ?
-                    <Container className="my-4">
+                    <Container className="mt-4">
                         <Row>
                             <Col md={{ offset: 3, span: 6 }} >
                                 <h1>{`Edit ${user.data.username}`}</h1>

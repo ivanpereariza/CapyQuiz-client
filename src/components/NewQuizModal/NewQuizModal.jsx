@@ -7,6 +7,7 @@ const NewQuizModal = ({ fireFinalActions, setShowModal, showModal }) => {
 
     const { themeValue } = useContext(ThemeContext)
 
+    const headerbg = themeValue === 'dark' ? '#3a3a3a' : '#bebebe'
     const bg = themeValue === 'dark' ? '#272727' : '#D5D5D5'
     const color = themeValue === 'dark' ? 'white' : 'black'
 
@@ -17,8 +18,9 @@ const NewQuizModal = ({ fireFinalActions, setShowModal, showModal }) => {
             show={showModal}
             onHide={() => setShowModal(false)}>
             <Modal.Header closeButton closeVariant={color} style={{
-                backgroundColor: bg,
+                backgroundColor: headerbg,
                 color: color,
+                borderBlockColor: color
             }}>
                 <Modal.Title>New Quiz</Modal.Title>
             </Modal.Header>
