@@ -5,10 +5,15 @@
 | URL            | Description       | Protected |
 | -------------- | ----------------- | --------- |
 | `/`            | Index page        |           |
-| `/profile/:id` | User profile page | ✅       |
 | `/signup`      | Signup page       |           |
 | `/login`       | Login page        |           |
 | `/ranking`     | Ranking page      |           |
+
+## User
+| URL                 | Description       | Protected |
+| ------------------- | ----------------- | --------- |
+| `/profile/:id`      | User profile page | ✅       |
+| `/profile/edit/:id` | Edit user profile | ✅       |
 
 
 ## Quizzes

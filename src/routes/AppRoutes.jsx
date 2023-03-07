@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import CreateQuizPage from "../pages/CreateQuizPage/CreateQuizPage"
+import EditUserPage from "../pages/EditUserPage/EditUserPage"
 import HomePage from "../pages/HomePage/HomePage"
 import LoginPage from "../pages/LoginPage/LoginPage"
 import ProfilePage from "../pages/ProfilePage/ProfilePage"
@@ -16,6 +17,7 @@ const AppRoutes = () => {
             <Route path="/quizzes" element={<QuizListPage />}></Route>
             <Route path="/quizzes/create" element={<CreateQuizPage />}></Route>
             <Route path="/profile/:id" element={<ProfilePage />}></Route>
+            <Route path="/profile/edit/:id" element={<EditUserPage />}></Route>
         </Routes>
     )
 }

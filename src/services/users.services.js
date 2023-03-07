@@ -10,6 +10,10 @@ class UsersServices {
     getUserById(id) {
         return this.api.get(`/userById/${id}`)
     }
+
+    editUserById(id, userData) {
+        return this.api.put(`/edit/${id}`, userData)
+    }
 }
 
 const usersService = new UsersServices()
