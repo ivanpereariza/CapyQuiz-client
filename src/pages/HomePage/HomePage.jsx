@@ -10,11 +10,10 @@ const HomePage = () => {
     const theme = themeValue === 'light' ? 'dark' : 'light'
 
     return (
-        <Container className={`mt-5 ${themeValue} primary`}>
+        <Container className={`mt-4 ${themeValue} primary`}>
             <h1>Welcome to CapyQuiz :3</h1>
             <Link to="/quizzes" >
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Go Quizzes!</Button>
-
             </Link>
         </Container>
     )

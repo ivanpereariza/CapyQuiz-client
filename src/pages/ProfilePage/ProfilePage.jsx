@@ -16,7 +16,7 @@ const ProfilePage = () => {
 
 
     return (
-        user ? <ProfileCard user={user} /> : <SpinnerLoader />
+        user ? <ProfileCard userProfile={user} className="mt-4" /> : <SpinnerLoader />
     )
 }
 

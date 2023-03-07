@@ -1,10 +1,9 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import SignupForm from '../../components/SignupForm/SignupForm'
 
-
 function SignupPage() {
     return (
-        <Container>
+        <Container className="mt-4">
 
             <Row>
 

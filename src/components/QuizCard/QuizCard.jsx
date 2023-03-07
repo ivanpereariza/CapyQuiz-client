@@ -25,7 +25,7 @@ const QuizCard = ({ quiz }) => {
                     <Card.Text>Theme: {theme}</Card.Text>
                     <Card.Text>Description: {description}</Card.Text>
                     <Card.Text>Estimated Time: {estimatedTime} {time}</Card.Text>
-                    <Card.Text>Author: {owner.username} <img className='ownerAvatar' src={`${owner.avatar}`} alt="owner avatar" /></Card.Text>
+                    <Card.Text>Author: {owner?.username} <img className='ownerAvatar' src={`${owner?.avatar}`} alt="owner avatar" /></Card.Text>
                 </Card.Body>
             </Card>
         </Link>
