@@ -19,7 +19,7 @@ const QuizCard = ({ quiz, openModalDetails }) => {
 
     return (
         <Link onClick={() => openModalDetails(_id)}>
-            <Card className={`${themeValue} card my-3`}>
+            <Card className={`${themeValue} card my-3`} style={{ height: '35rem' }}>
                 <Card.Body>
                     <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className='mb-4'> {title}</Card.Title>
