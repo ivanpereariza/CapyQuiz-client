@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Button, Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import usersService from "../../services/users.services"
@@ -14,6 +14,16 @@ const EditUserCard = ({ userProfile }) => {
     const { user } = useContext(AuthContext)
 
     const { username, email, avatar, _id, role } = userProfile.data
+
+    useEffect(() => {
+        setEditUser({
+            username,
+            email,
+            avatar,
+            role
+        })
+    }, [userProfile])
+
     const [editUser, setEditUser] = useState({
         username,
         email,

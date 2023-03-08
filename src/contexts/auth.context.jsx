@@ -20,7 +20,7 @@ function AuthProviderWrapper(props) {
                     setIsLoading(false)
                 })
                 .catch(err => logout())
-        }
+        } else logout()
     }
 
     const logout = () => {
@@ -29,12 +29,7 @@ function AuthProviderWrapper(props) {
         setIsLoading(false)
     }
 
-    const checkLocalStorage = () => {
-        if (!localStorage.getItem('authToken')) setIsLoading(false)
-    }
-
     useEffect(() => {
-        checkLocalStorage()
         authenticateUser()
     }, [])
 
