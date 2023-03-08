@@ -9,6 +9,7 @@ import quizzesService from '../../services/quizzes.services'
 import QuizList from '../QuizList/QuizList'
 import QuizDetails from '../QuizDetails/QuizDetails'
 import QuizOwnerCard from '../QuizOwnerCard/QuizOwnerCard'
+
 const ProfileCard = ({ userProfile }) => {
 
     const navigate = useNavigate()

@@ -1,9 +1,9 @@
 import usersService from "../services/users.services"
 
-const getUser = (id, setUser) => {
+const getUser = (id, setUserProfile) => {
     usersService
         .getUserById(id)
-        .then(user => setUser(user))
+        .then(user => setUserProfile(user))
         .catch(err => console.log(err))
 }
 

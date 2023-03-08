@@ -8,7 +8,6 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage"
 import QuizListPage from "../pages/QuizListPage/QuizListPage"
 import SignupPage from "../pages/SignupPage/SignupPage"
 import PrivateEditQuiz from "./PrivateEditQuiz"
-import PrivateOwnerOrAdminRoutes from "./PrivateOwnerOrAdmin"
 import PrivateUserRoutes from "./PrivateUserRoutes"
 
 
@@ -23,9 +22,6 @@ const AppRoutes = () => {
             <Route element={<PrivateUserRoutes />}>
                 <Route path="/profile/:id" element={<ProfilePage />}></Route>
                 <Route path="/quizzes/create" element={<CreateQuizPage />}></Route>
-            </Route>
-
-            <Route element={<PrivateOwnerOrAdminRoutes />}>
                 <Route path="/profile/edit/:id" element={<EditUserPage />}></Route>
             </Route>
 

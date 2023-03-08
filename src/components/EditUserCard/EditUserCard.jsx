@@ -7,6 +7,7 @@ import { AuthContext } from "../../contexts/auth.context"
 
 
 const EditUserCard = ({ userProfile }) => {
+
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'

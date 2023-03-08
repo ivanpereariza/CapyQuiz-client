@@ -8,15 +8,15 @@ const ProfilePage = () => {
 
     const { id } = useParams()
 
-    const [user, setUser] = useState()
+    const [userProfile, setUserProfile] = useState()
 
     useEffect(() => {
-        getUser(id, setUser)
+        getUser(id, setUserProfile)
     }, [id])
 
 
     return (
-        user ? <ProfileCard userProfile={user} className="mt-4" /> : <SpinnerLoader />
+        userProfile ? <ProfileCard userProfile={userProfile} className="mt-4" /> : <SpinnerLoader />
     )
 }
 
