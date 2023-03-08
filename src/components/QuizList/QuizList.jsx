@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import QuizCard from '../QuizCard/QuizCard'
 import SpinnerLoader from '../SpinnerLoader/SpinnerLoader'
 
-const QuizList = ({ quizzes, openModalDetails }) => {
+const QuizList = ({ quizzes, openModalDetails, user, fireFinalActions }) => {
     return (
         <Row>
             {
@@ -11,7 +11,7 @@ const QuizList = ({ quizzes, openModalDetails }) => {
                     quizzes.map(quiz => {
                         return (
                             <Col md={{ span: 4 }} key={quiz._id}>
-                                <QuizCard openModalDetails={openModalDetails} quiz={quiz} />
+                                <QuizCard openModalDetails={openModalDetails} quiz={quiz} user={user} fireFinalActions={fireFinalActions} />
                             </Col>
                         )
                     })

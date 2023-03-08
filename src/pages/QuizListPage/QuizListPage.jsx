@@ -70,7 +70,7 @@ const QuizListPage = () => {
                             undefined
                     }
                 </Row>
-                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} />
+                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} user={user} fireFinalActions={fireFinalActions} />
             </Container>
 
             <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
