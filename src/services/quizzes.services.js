@@ -34,6 +34,12 @@ class QuizzesServices {
     getQuizByOwner(id) {
         return this.api.get(`/quizByOwner/${id}`)
     }
+    editQuizById(id, quizData) {
+        return this.api.put(`/edit/${id}`, quizData)
+    }
+    deleteQuizById(id) {
+        return this.api.delete(`/delete/${id}`)
+    }
 
 }
 

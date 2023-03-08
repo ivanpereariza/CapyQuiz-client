@@ -1,11 +1,14 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import quizzesService from "../../services/quizzes.services"
 import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
 import { ThemeContext } from "../../contexts/theme.context"
+import { useNavigate, useParams } from "react-router-dom"
 
-const CreateQuizForm = ({ fireFinalActions }) => {
+const EditQuizForm = ({ fireFinalActions }) => {
 
+    const { id } = useParams()
+    const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
 
     const [generalData, setGeneralData] = useState({
@@ -19,6 +22,26 @@ const CreateQuizForm = ({ fireFinalActions }) => {
         correctAnswer: '',
         answersOptions: ['', '', '']
     },])
+
+    useEffect(() => {
+        getQuiz()
+
+    }, [])
+
+    const getQuiz = () => {
+        quizzesService
+            .getQuizById(id)
+            .then(({ data }) => {
+                setGeneralData({
+                    title: data.title,
+                    theme: data.theme,
+                    description: data.description
+                })
+                setQuestionsArr(data.questionsArr)
+                console.log(questionsArr)
+            })
+            .catch(err => console.log(err))
+    }
 
     const handleGeneralChange = e => {
         const { name, value } = e.target
@@ -52,9 +75,9 @@ const CreateQuizForm = ({ fireFinalActions }) => {
         questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
 
         quizzesService
-            .createNewQuiz({ ...generalData, questionsArr })
+            .editQuizById(id, { ...generalData, questionsArr })
             .then(() => {
-                fireFinalActions()
+                navigate('/quizzes')
             })
             .catch(err => console.log(err))
     }
@@ -81,7 +104,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
 
 
             {
-                questionsArr.map((question, index) => {
+                questionsArr?.map((question, index) => {
                     return <QuestionsQuizForm key={index} index={index} question={question} handleQuestionChange={handleQuestionChange} handleAnswerOptionChange={handleAnswerOptionChange} handleRemoveQuestion={handleRemoveQuestion} />
                 })
             }
@@ -89,11 +112,11 @@ const CreateQuizForm = ({ fireFinalActions }) => {
                 <Button variant="warning" type="button" className="text-center rounded-circle text-light my-3" onClick={handleAddQuestion}>✚</Button>
             </div>
             <div className="d-grid ">
-                <Button variant="success" type="submit" className="mx-4 mt-3">Create Quiz</Button>
+                <Button variant="success" type="submit" className="mx-4 mt-3">Save Changes</Button>
             </div>
 
         </Form>
     )
 }
 
-export default CreateQuizForm
+export default EditQuizForm
