@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
 
-const QuizOwnerCard = ({ quiz }) => {
+const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
@@ -21,14 +21,14 @@ const QuizOwnerCard = ({ quiz }) => {
         quizzesService
             .deleteQuizById(_id)
             .then(() => {
-
+                getUserQuizzes()
                 navigate(`/profile/${user._id}`)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        <Card className={`${themeValue} card my-3`} style={{ height: '35rem' }}>
+        <Card className={`${themeValue} card my-3`} style={{ minHeight: '35rem' }}>
             <Card.Body>
                 <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
                 <Card.Title className='mb-3'> {title}</Card.Title>

@@ -29,7 +29,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
 
     return (
 
-        <Card className={`${themeValue} card my-3`} style={{ height: '35rem' }}>
+        <Card className={`${themeValue} card my-3`} style={{ minHeight: '35rem' }}>
             <Card.Body>
                 <Link onClick={() => openModalDetails(_id)}>
                     <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
@@ -62,7 +62,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
                         undefined
                 }
             </Card.Body>
-        </Card>
+        </Card >
 
     )
 }

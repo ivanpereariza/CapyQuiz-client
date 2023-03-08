@@ -1,4 +1,3 @@
-
 const getEstimatedTime = (questionsArr) => {
     if (questionsArr) {
 
