@@ -30,6 +30,12 @@ class UsersServices {
     deleteUserById(id) {
         return this.api.delete(`/delete/${id}`)
     }
+    addQuizToUserById(id, quizzes) {
+        return this.api.put(`/addQuiz/${id}`, { quizzes })
+    }
+    addPointsToUser(id, points) {
+        return this.api.put(`/editPoints/${id}`, { points })
+    }
 }
 
 const usersService = new UsersServices()

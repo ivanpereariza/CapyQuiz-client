@@ -40,7 +40,9 @@ class QuizzesServices {
     deleteQuizById(id) {
         return this.api.delete(`/delete/${id}`)
     }
-
+    addPointsToArr(id, points) {
+        return this.api.put(`/addPoints/${id}`, { points })
+    }
 }
 
 const quizzesService = new QuizzesServices()

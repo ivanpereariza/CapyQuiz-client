@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react"
 import { Button } from "react-bootstrap"
-import { Navigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import usersService from "../../services/users.services"
 
-const ShowQuestion = ({ questionsArr, id }) => {
+const ShowQuestion = ({ questionsArr, id, user, owner }) => {
 
     const [i, setI] = useState(0)
     const [segs, setSegs] = useState(0)
     const [points, setPoints] = useState(0)
     const [totalPoints, setTotalPoints] = useState(0)
+    const [currentUser, setCurrentUser] = useState(false)
     const [currentQuestion, setCurrentQuestion] = useState(questionsArr[i])
+
+    const navigate = useNavigate()
 
     const changeIndex = () => {
         setI(previousState => previousState + 1)
@@ -21,6 +25,7 @@ const ShowQuestion = ({ questionsArr, id }) => {
     }
 
     useEffect(() => {
+        getUser()
         setInterval(() => {
             counter()
         }, 100)
@@ -41,7 +46,19 @@ const ShowQuestion = ({ questionsArr, id }) => {
             setSegs(0)
             setPoints(0)
         }
+        if (i === (questionsArr.length - 1) && segs > 22) {
+            saveQuizOnUser()
+            savePointOwner()
+            navigate(`/quizzes/results/${id}`)
+        }
     }, [segs])
+
+    const getUser = () => {
+        usersService
+            .getUserById(user._id)
+            .then(({ data }) => setCurrentUser(data))
+            .catch(err => console.log(err))
+    }
 
     const handleAnswer = e => {
 
@@ -49,22 +66,42 @@ const ShowQuestion = ({ questionsArr, id }) => {
 
         if (value === currentQuestion.correctAnswer) {
             setPoints(Math.floor((18 - segs) * 10))
-            //hay que ir sumando los puntos al usuario
             setSegs(18)
         } else {
             setPoints(0)
             setSegs(18)
         }
+    }
 
+    const saveQuizOnUser = () => {
+        let played = false
+        currentUser.quizzes.forEach(elm => {
+            if (elm.quiz === id) return played = true
+            return
+        })
+        if (!played) {
+            usersService
+                .addQuizToUserById(currentUser._id, { quiz: id, points: totalPoints })
+                .then(() => {
+                    return usersService.addPointsToUser(currentUser._id, totalPoints)
+                })
+                .then()
+                .catch(err => console.log(err))
+        }
+    }
+
+    const savePointOwner = () => {
+        usersService
+            .addPointsToUser(owner._id, 200)
+            .then()
+            .catch(err => console.log(err))
     }
 
     return (
 
 
         <div>
-            {i === (questionsArr.length - 1) && segs > 22 ?
-                <Navigate to={`/quizzes/results/${id}`} />
-                :
+            {
                 segs >= 0 && segs < 3 ?
                     <p>{currentQuestion.question} </p>
                     :

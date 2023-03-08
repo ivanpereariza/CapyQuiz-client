@@ -4,12 +4,12 @@ import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
 
 const PlayQuiz = ({ quiz, user }) => {
 
-    const { questionsArr, _id } = quiz
+    const { questionsArr, _id, owner } = quiz
 
 
     return (
         <>
-            <ShowQuestion questionsArr={questionsArr} id={_id} />
+            <ShowQuestion questionsArr={questionsArr} id={_id} user={user} owner={owner} />
         </>
     )
 }
