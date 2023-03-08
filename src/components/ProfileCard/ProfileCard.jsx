@@ -23,7 +23,7 @@ const ProfileCard = ({ userProfile }) => {
     useEffect(() => {
         getUserQuizzes(_id)
 
-    }, [userProfile])
+    }, [quizzes])
 
     const getUserQuizzes = (_id) => {
         quizzesService

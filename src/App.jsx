@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import './theme.css'
 import Footer from './components/Footer/Footer'
 import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'

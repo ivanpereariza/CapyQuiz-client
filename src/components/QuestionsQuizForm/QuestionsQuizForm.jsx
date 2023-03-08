@@ -2,11 +2,12 @@ import { Button, Col, Form, Row } from "react-bootstrap"
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 
-const CreateQuestionsQuizForm = ({ index, handleQuestionChange, handleAnswerOptionChange, question, handleRemoveQuestion }) => {
+const QuestionsQuizForm = ({ index, handleQuestionChange, handleAnswerOptionChange, question, handleRemoveQuestion }) => {
     const { themeValue } = useContext(ThemeContext)
 
     return (
         <>
+            <hr className="mt-4" />
             <h3>Question {index + 1}    <Button variant="danger" type="button" className=" mx-3 rounded-circle text-light" onClick={() => handleRemoveQuestion(index)}>Ｘ</Button></h3>
             <Form.Group className="mb-3" controlId={`question-${index}`} >
                 <Form.Control className={`${themeValue} secondary`} placeholder="Question" type="text" name="question" value={question.question} onChange={(event) => handleQuestionChange(event, index)} required />
@@ -34,4 +35,4 @@ const CreateQuestionsQuizForm = ({ index, handleQuestionChange, handleAnswerOpti
     )
 }
 
-export default CreateQuestionsQuizForm
+export default QuestionsQuizForm

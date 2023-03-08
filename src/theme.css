@@ -1,0 +1,62 @@
+.light.primary {
+    background-color: #fff;
+    color: black;
+    min-height: 96.4vh;
+}
+
+.dark.primary {
+    background-color: #191919;
+    color: white;
+    min-height: 96.4vh;
+}
+
+.light.secondary {
+    background-color: #F6F6F6;
+    color: black;
+}
+
+.dark.secondary {
+    background-color: #373737;
+    color: white;
+}
+
+.light.navbar {
+    background-color: #EFEEEE;
+    color: black;
+    border-bottom: solid 1px black;
+}
+
+.dark.navbar {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.light.modal {
+    background-color: #D5D5D5;
+    color: black;
+}
+
+.dark.modal {
+    background-color: #272727;
+    color: white;
+}
+
+.light.card {
+    background-color: #F6F6F6;
+    color: black;
+}
+
+.dark.card {
+    background-color: #373737;
+    color: white;
+}
+
+.light {
+    background-color: #F6F6F6;
+    color: black;
+}
+
+.dark {
+    background-color: #373737;
+    color: white;
+}
