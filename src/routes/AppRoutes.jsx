@@ -4,8 +4,10 @@ import EditQuizPage from "../pages/EditQuizPage/EditQuizPage"
 import EditUserPage from "../pages/EditUserPage/EditUserPage"
 import HomePage from "../pages/HomePage/HomePage"
 import LoginPage from "../pages/LoginPage/LoginPage"
+import PlayQuizPage from "../pages/PlayQuizPage/PlayQuizPage"
 import ProfilePage from "../pages/ProfilePage/ProfilePage"
 import QuizListPage from "../pages/QuizListPage/QuizListPage"
+import QuizResultPage from "../pages/QuizResultPage/QuizResultPage"
 import SignupPage from "../pages/SignupPage/SignupPage"
 import PrivateUserRoutes from "./PrivateUserRoutes"
 
@@ -23,6 +25,8 @@ const AppRoutes = () => {
                 <Route path="/quizzes/create" element={<CreateQuizPage />}></Route>
                 <Route path="/profile/edit/:id" element={<EditUserPage />}></Route>
                 <Route path="/quizzes/edit/:id" element={<EditQuizPage />}></Route>
+                <Route path="/quizzes/play/:id" element={<PlayQuizPage />}></Route>
+                <Route path="/quizzes/results/:id" element={<QuizResultPage />}></Route>
             </Route>
 
             <Route path="*" element={<p>404</p>}></Route>
