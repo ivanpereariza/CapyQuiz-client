@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import getUser from './../../utils/getUser'
 import ProfileCard from "../../components/ProfileCard/ProfileCard"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
+import usersService from "../../services/users.services"
 
 const ProfilePage = () => {
 
@@ -11,7 +11,10 @@ const ProfilePage = () => {
     const [userProfile, setUserProfile] = useState()
 
     useEffect(() => {
-        getUser(id, setUserProfile)
+        usersService
+            .getUserById(id)
+            .then(user => setUserProfile(user))
+            .catch(err => console.log(err))
     }, [id])
 
 

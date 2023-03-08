@@ -6,8 +6,6 @@ import { AuthContext } from '../../contexts/auth.context'
 import { Link, useNavigate } from 'react-router-dom'
 import usersService from '../../services/users.services'
 import quizzesService from '../../services/quizzes.services'
-import QuizList from '../QuizList/QuizList'
-import QuizDetails from '../QuizDetails/QuizDetails'
 import QuizOwnerCard from '../QuizOwnerCard/QuizOwnerCard'
 
 const ProfileCard = ({ userProfile }) => {
@@ -22,17 +20,15 @@ const ProfileCard = ({ userProfile }) => {
     const [quizzes, setQuizzes] = useState([])
 
     useEffect(() => {
-        getUserQuizzes(_id)
+        getUserQuizzes()
+    }, [])
 
-    }, [quizzes])
-
-    const getUserQuizzes = (_id) => {
+    const getUserQuizzes = () => {
         quizzesService
             .getQuizByOwner(_id)
             .then(({ data }) => setQuizzes(data))
             .catch(err => console.log(err))
     }
-
 
     const deleteUser = (_id) => {
         usersService
@@ -76,7 +72,7 @@ const ProfileCard = ({ userProfile }) => {
                     quizzes?.map(quiz => {
                         return (
                             <Col md={{ span: 4 }} key={quiz._id}>
-                                <QuizOwnerCard quiz={quiz} />
+                                <QuizOwnerCard quiz={quiz} getUserQuizzes={getUserQuizzes} />
                             </Col>
                         )
                     })

@@ -4,7 +4,8 @@ import { Navigate, useParams } from "react-router-dom"
 import EditUserCard from "../../components/EditUserCard/EditUserCard"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
-import getUser from "../../utils/getUser"
+import usersService from "../../services/users.services"
+
 
 const EditUserPage = () => {
 
@@ -16,7 +17,10 @@ const EditUserPage = () => {
 
 
     useEffect(() => {
-        getUser(id, setUserProfile)
+        usersService
+            .getUserById(id)
+            .then(user => setUserProfile(user))
+            .catch(err => console.log(err))
     }, [id])
 
 
