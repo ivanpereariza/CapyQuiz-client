@@ -13,7 +13,7 @@ const EditUserCard = ({ userProfile }) => {
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
-    const { user } = useContext(AuthContext)
+    const { user, authenticateUser } = useContext(AuthContext)
 
     const { username, email, avatar, _id, role } = userProfile.data
 
