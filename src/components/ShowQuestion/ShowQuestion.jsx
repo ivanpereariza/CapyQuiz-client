@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
-import { Button } from "react-bootstrap"
+import { Button, Container, Row } from "react-bootstrap"
 import { Navigate, useNavigate } from "react-router-dom"
+import quizzesService from "../../services/quizzes.services"
 import usersService from "../../services/users.services"
+import AnswerCard from "../AnswerCard/AnswerCard"
 
 const ShowQuestion = ({ questionsArr, id, user, owner }) => {
 
@@ -41,15 +43,15 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
     }, [i])
 
     useEffect(() => {
-        if (segs > 23) {
+        if (segs > 21) {
             changeIndex()
             setSegs(0)
             setPoints(0)
         }
-        if (i === (questionsArr.length - 1) && segs > 22) {
+        if (i === (questionsArr.length - 1) && segs > 20) {
             saveQuizOnUser()
             savePointOwner()
-            navigate(`/quizzes/results/${id}`)
+
         }
     }, [segs])
 
@@ -62,7 +64,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
 
     const handleAnswer = e => {
 
-        const { value } = e.target
+        const value = e.target.innerText
 
         if (value === currentQuestion.correctAnswer) {
             setPoints(Math.floor((18 - segs) * 10))
@@ -82,10 +84,8 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
         if (!played) {
             usersService
                 .addQuizToUserById(currentUser._id, { quiz: id, points: totalPoints })
-                .then(() => {
-                    return usersService.addPointsToUser(currentUser._id, totalPoints)
-                })
-                .then()
+                .then(() => quizzesService.addPointsToArr(id, totalPoints))
+                .then(() => usersService.addPointsToUser(currentUser._id, totalPoints))
                 .catch(err => console.log(err))
         }
     }
@@ -93,7 +93,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
     const savePointOwner = () => {
         usersService
             .addPointsToUser(owner._id, 200)
-            .then()
+            .then(() => navigate(`/quizzes/results/${id}`))
             .catch(err => console.log(err))
     }
 
@@ -103,15 +103,19 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
         <div>
             {
                 segs >= 0 && segs < 3 ?
-                    <p>{currentQuestion.question} </p>
+                    <h1 className="text-center my-4">{currentQuestion.question} </h1>
                     :
                     segs >= 3 && segs < 18 ?
                         <>
-                            <p >{currentQuestion.question} </p>
-                            <Button onClick={handleAnswer} value={currentQuestion.answersOptions[0]}>{currentQuestion.answersOptions[0]}</Button>
-                            <Button onClick={handleAnswer} value={currentQuestion.answersOptions[1]}>{currentQuestion.answersOptions[1]}</Button>
-                            <Button onClick={handleAnswer} value={currentQuestion.answersOptions[2]}>{currentQuestion.answersOptions[2]}</Button>
-                            <Button onClick={handleAnswer} value={currentQuestion.answersOptions[3]}>{currentQuestion.answersOptions[3]}</Button>
+                            <h1 className="text-center my-5">{currentQuestion.question}</h1>
+                            <Row>
+                                {
+                                    currentQuestion.answersOptions.map((answer, i) => {
+                                        return <AnswerCard answer={answer} handleAnswer={handleAnswer} key={i} index={i} />
+                                    })
+                                }
+                            </Row>
+
                         </>
                         :
                         points ?

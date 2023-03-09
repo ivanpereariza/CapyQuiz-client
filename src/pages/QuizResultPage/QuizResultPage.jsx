@@ -11,7 +11,7 @@ const QuizResultPage = () => {
 
     const { user } = useContext(AuthContext)
 
-    const [quiz, setQuiz] = useState({})
+    const [quiz, setQuiz] = useState('')
     const [currentUser, setCurrentUser] = useState(false)
 
 
