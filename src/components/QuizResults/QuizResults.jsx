@@ -25,7 +25,7 @@ const QuizResults = ({ quiz, user }) => {
     const getAverage = () => {
         let totalPoints
         if (quiz.points.length > 1) totalPoints = quiz.points.reduce((acc, curr) => acc + curr)
-        if (quiz.points.length === 1) totalPoints = quiz.points[0]
+        if (quiz.points.length === 1) return totalPoints = quiz.points[0]
 
         return totalPoints / quiz.points.length
     }
@@ -36,7 +36,7 @@ const QuizResults = ({ quiz, user }) => {
                 points.points || points.points === 0 ?
                     <>
                         <p>Your punctuation: {points.points}</p>
-                        <p>The average punctuation:{average}</p>
+                        <p>The average punctuation:{Math.floor(average)}</p>
                     </>
                     :
                     <SpinnerLoader />

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import { Card, Row } from "react-bootstrap"
+import { Card, Col, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import quizzesService from "../../services/quizzes.services"
 import usersService from "../../services/users.services"
 import AnswerCard from "../AnswerCard/AnswerCard"
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
-import shuffleArray from "../../utils/shuffleArray"
 
 const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
 
@@ -129,13 +128,28 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
                         </Card>
                         :
                         points ?
-                            <p>You win {points} points</p>
+                            <Row >
+                                <Col md={{ span: 4, offset: 4 }} className='d-flex align-items-center justify-content-center' style={{ height: '50vh' }}>
+                                    <Card className={`${themeValue} card my-3 `}>
+                                        <Card.Body >
+                                            <Card.Title className="text-center">You win <b>{points}</b> points!</Card.Title>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
                             :
-                            <p>Incorrect answer! the correct answer was {currentQuestion.correctAnswer}</p>
-
+                            <Row>
+                                <Col md={{ span: 8, offset: 2 }} className='d-flex align-items-center justify-content-center' style={{ height: '50vh' }}>
+                                    <Card className={`${themeValue} card my-3`}>
+                                        <Card.Body >
+                                            <Card.Title className="text-center">Incorrect answer! the correct answer was <b>{currentQuestion.correctAnswer}</b></Card.Title>
+                                        </Card.Body>
+                                    </Card >
+                                </Col>
+                            </Row>
             }
 
-        </div>
+        </div >
 
     )
 

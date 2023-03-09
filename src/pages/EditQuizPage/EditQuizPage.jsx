@@ -29,7 +29,6 @@ const EditQuizPage = () => {
             })
             .catch(err => console.log(err))
     }
-    console.log(id)
 
     if (isLoading || isLoadingQuiz) {
         return <SpinnerLoader />
