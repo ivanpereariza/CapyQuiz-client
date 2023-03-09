@@ -12,7 +12,7 @@ const QuizDetailsModal = ({ setShowModalDetails, showModalDetails, selectedQuiz 
 
     const headerbg = themeValue === 'dark' ? '#3a3a3a' : '#bebebe'
     const bg = themeValue === 'dark' ? '#272727' : '#D5D5D5'
-    const color = themeValue === 'dark' ? 'white' : 'black'
+    const color = themeValue === 'dark' ? 'white' : undefined
 
 
     useEffect(() => {

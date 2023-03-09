@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
-import { Button, Container, Row } from "react-bootstrap"
-import { Navigate, useNavigate } from "react-router-dom"
+import { Card, Row } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import quizzesService from "../../services/quizzes.services"
 import usersService from "../../services/users.services"
 import AnswerCard from "../AnswerCard/AnswerCard"
+import { useContext } from "react"
+import { ThemeContext } from "../../contexts/theme.context"
+import shuffleArray from "../../utils/shuffleArray"
 
-const ShowQuestion = ({ questionsArr, id, user, owner }) => {
+const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
 
     const [i, setI] = useState(0)
     const [segs, setSegs] = useState(0)
@@ -13,6 +16,8 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
     const [totalPoints, setTotalPoints] = useState(0)
     const [currentUser, setCurrentUser] = useState(false)
     const [currentQuestion, setCurrentQuestion] = useState(questionsArr[i])
+
+    const { themeValue } = useContext(ThemeContext)
 
     const navigate = useNavigate()
 
@@ -43,6 +48,9 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
     }, [i])
 
     useEffect(() => {
+
+        showTimer(segs)
+
         if (segs > 21) {
             changeIndex()
             setSegs(0)
@@ -106,23 +114,24 @@ const ShowQuestion = ({ questionsArr, id, user, owner }) => {
                     <h1 className="text-center my-4">{currentQuestion.question} </h1>
                     :
                     segs >= 3 && segs < 18 ?
-                        <>
-                            <h1 className="text-center my-5">{currentQuestion.question}</h1>
-                            <Row>
-                                {
-                                    currentQuestion.answersOptions.map((answer, i) => {
-                                        return <AnswerCard answer={answer} handleAnswer={handleAnswer} key={i} index={i} />
-                                    })
-                                }
-                            </Row>
-
-                        </>
+                        <Card className={`${themeValue} card my-3`}>
+                            <Card.Body >
+                                <h1 className="text-center my-3">{currentQuestion.question}</h1>
+                                <hr />
+                                <Row>
+                                    {
+                                        currentQuestion.answersOptions.map((answer, i) => {
+                                            return <AnswerCard answer={answer} handleAnswer={handleAnswer} key={i} index={i} />
+                                        })
+                                    }
+                                </Row>
+                            </Card.Body>
+                        </Card>
                         :
                         points ?
                             <p>You win {points} points</p>
                             :
                             <p>Incorrect answer! the correct answer was {currentQuestion.correctAnswer}</p>
-
 
             }
 
