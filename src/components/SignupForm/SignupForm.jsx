@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import authService from "../../services/auth.services"
 import { ThemeContext } from "../../contexts/theme.context"
 import uploadServices from "../../services/upload.services"
+import FormError from "../FormError/FormError"
 
 
 const SignupForm = () => {
@@ -11,6 +12,8 @@ const SignupForm = () => {
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
+
+    const [errors, setErrors] = useState([])
 
     const [signupData, setSignupData] = useState({
         username: '',
@@ -36,7 +39,7 @@ const SignupForm = () => {
             .uploadImage(formData)
             .then(({ data }) => authService.signup({ ...signupData, avatar: data.cloudinary_url }))
             .then(() => navigate('/login'))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -45,17 +48,17 @@ const SignupForm = () => {
 
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="text" value={signupData.username} onChange={handleInputChange} name="username" />
+                <Form.Control className={`${themeValue} secondary`} type="text" value={signupData.username} onChange={handleInputChange} name="username" required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="email" value={signupData.email} onChange={handleInputChange} name="email" />
+                <Form.Control className={`${themeValue} secondary`} type="email" value={signupData.email} onChange={handleInputChange} name="email" required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Password:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="password" value={signupData.password} onChange={handleInputChange} name="password" />
+                <Form.Control className={`${themeValue} secondary`} type="password" value={signupData.password} onChange={handleInputChange} name="password" required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">
@@ -63,6 +66,7 @@ const SignupForm = () => {
                 <Form.Control className={`${themeValue} secondary`} type="file" name="imageData" />
             </Form.Group>
 
+            {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
 
             <div className="d-grid">
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Sign Up</Button>

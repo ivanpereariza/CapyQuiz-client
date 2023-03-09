@@ -5,12 +5,15 @@ import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
 import { ThemeContext } from "../../contexts/theme.context"
 import { useNavigate, useParams } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
+import FormError from "../FormError/FormError"
 
 const EditQuizForm = ({ fireFinalActions }) => {
 
     const { id } = useParams()
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
+
+    const [errors, setErrors] = useState([])
 
     const [generalData, setGeneralData] = useState({
         title: '',
@@ -73,16 +76,19 @@ const EditQuizForm = ({ fireFinalActions }) => {
     const handleSubmit = e => {
         e.preventDefault()
 
-        questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
+        if (questionsArr.length >= 5) {
+            questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
 
-        const formData = new FormData()
-        formData.append('imageData', e.target.imageData.files[0])
+            const formData = new FormData()
+            formData.append('imageData', e.target.imageData.files[0])
 
-        uploadServices
-            .uploadImage(formData)
-            .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, questionsArr, quizImg: data.cloudinary_url }))
-            .then(() => navigate('/quizzes'))
-            .catch(err => console.log(err))
+            uploadServices
+                .uploadImage(formData)
+                .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, questionsArr, quizImg: data.cloudinary_url }))
+                .then(() => navigate('/quizzes'))
+                .catch(err => setErrors(err.response.data.errorMessages))
+        } else setErrors(['Should have at least 5 questions'])
+
     }
 
 
@@ -117,6 +123,9 @@ const EditQuizForm = ({ fireFinalActions }) => {
             <div className="d-flex justify-content-center">
                 <Button variant="warning" type="button" className="text-center rounded-circle text-light my-3" onClick={handleAddQuestion}>✚</Button>
             </div>
+
+            {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
+
             <div className="d-grid ">
                 <Button variant="success" type="submit" className="mx-4 mt-3">Save Changes</Button>
             </div>

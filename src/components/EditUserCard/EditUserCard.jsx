@@ -6,6 +6,7 @@ import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from "../../contexts/auth.context"
 import uploadServices from "../../services/upload.services"
 import authService from "../../services/auth.services"
+import FormError from "../FormError/FormError"
 
 
 const EditUserCard = ({ userProfile }) => {
@@ -25,6 +26,8 @@ const EditUserCard = ({ userProfile }) => {
             role
         })
     }, [userProfile])
+
+    const [errors, setErrors] = useState([])
 
     const [editUser, setEditUser] = useState({
         username,
@@ -49,7 +52,7 @@ const EditUserCard = ({ userProfile }) => {
             .uploadImage(formData)
             .then(({ data }) => usersService.editUserById(_id, { ...editUser, avatar: data.cloudinary_url }))
             .then(() => navigate(`/profile/${_id}`))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
 
     }
 
@@ -58,12 +61,12 @@ const EditUserCard = ({ userProfile }) => {
 
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="text" value={editUser.username} onChange={handleInputChange} name="username" />
+                <Form.Control className={`${themeValue} secondary`} type="text" value={editUser.username} onChange={handleInputChange} name="username" required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="email" value={editUser.email} onChange={handleInputChange} name="email" />
+                <Form.Control className={`${themeValue} secondary`} type="email" value={editUser.email} onChange={handleInputChange} name="email" required />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">
@@ -84,6 +87,9 @@ const EditUserCard = ({ userProfile }) => {
                     :
                     undefined
             }
+
+            {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
+
 
             < div className="d-grid" >
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Edit profile</Button>

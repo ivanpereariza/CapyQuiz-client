@@ -4,10 +4,13 @@ import quizzesService from "../../services/quizzes.services"
 import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
 import { ThemeContext } from "../../contexts/theme.context"
 import uploadServices from "../../services/upload.services"
+import FormError from "../FormError/FormError"
 
 const CreateQuizForm = ({ fireFinalActions }) => {
 
     const { themeValue } = useContext(ThemeContext)
+
+    const [errors, setErrors] = useState([])
 
     const [generalData, setGeneralData] = useState({
         title: '',
@@ -60,7 +63,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
             .uploadImage(formData)
             .then(({ data }) => quizzesService.createNewQuiz({ ...generalData, questionsArr, quizImg: data.cloudinary_url }))
             .then(() => fireFinalActions())
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -97,6 +100,13 @@ const CreateQuizForm = ({ fireFinalActions }) => {
             <div className="d-flex justify-content-center">
                 <Button variant="warning" type="button" className="text-center rounded-circle text-light my-3" onClick={handleAddQuestion}>✚</Button>
             </div>
+
+
+            {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
+
+
+
+
             <div className="d-grid ">
                 <Button variant="success" type="submit" className="mx-4 mt-3">Create Quiz</Button>
             </div>
