@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import QuizResults from "../../components/QuizResults/QuizResults"
+import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
 import quizzesService from "../../services/quizzes.services"
 import usersService from "../../services/users.services"
@@ -40,7 +41,7 @@ const QuizResultPage = () => {
                 currentUser && quiz ?
                     <QuizResults quiz={quiz} user={currentUser} />
                     :
-                    <p></p>
+                    <SpinnerLoader />
             }
 
         </>
