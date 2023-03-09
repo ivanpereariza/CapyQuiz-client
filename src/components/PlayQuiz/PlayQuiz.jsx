@@ -8,9 +8,9 @@ const PlayQuiz = ({ quiz, user }) => {
 
 
     return (
-        <>
-            <ShowQuestion questionsArr={questionsArr} id={_id} user={user} owner={owner} />
-        </>
+
+        <ShowQuestion questionsArr={questionsArr} id={_id} user={user} owner={owner} />
+
     )
 }
 

@@ -31,7 +31,7 @@ const PlayQuizPage = () => {
     }
 
     return (
-        <Container>
+        <Container className="mt-4">
             <Row>
 
                 <Col md={{ offset: 1, span: 10 }}>
