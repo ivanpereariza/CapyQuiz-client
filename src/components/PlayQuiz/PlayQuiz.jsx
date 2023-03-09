@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react"
-import shuffleArray from "../../utils/shuffleArray"
+import { useState } from "react"
 import ShowQuestion from "../ShowQuestion/ShowQuestion"
 
 const PlayQuiz = ({ quiz, user }) => {

@@ -28,7 +28,6 @@ const PlayQuizPage = () => {
     const shuffleAnswers = () => {
         quiz?.questionsArr?.map(question => {
             shuffleArray(question.answersOptions)
-            console.log(question.answersOptions)
         })
     }
 

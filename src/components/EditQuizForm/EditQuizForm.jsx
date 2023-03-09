@@ -39,7 +39,7 @@ const EditQuizForm = ({ fireFinalActions }) => {
                     description: data.description
                 })
                 setQuestionsArr(data.questionsArr)
-                console.log(questionsArr)
+
             })
             .catch(err => console.log(err))
     }
