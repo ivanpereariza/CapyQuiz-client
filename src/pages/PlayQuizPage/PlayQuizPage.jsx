@@ -5,6 +5,7 @@ import PlayQuiz from "../../components/PlayQuiz/PlayQuiz"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
 import quizzesService from "../../services/quizzes.services"
+import shuffleArray from "../../utils/shuffleArray"
 
 const PlayQuizPage = () => {
 
@@ -19,6 +20,19 @@ const PlayQuizPage = () => {
         getQuizById()
     }, [])
 
+    useEffect(() => {
+        shuffleAnswers()
+    }, [quiz])
+
+
+    const shuffleAnswers = () => {
+        quiz?.questionsArr?.map(question => {
+            shuffleArray(question.answersOptions)
+            console.log(question.answersOptions)
+        })
+    }
+
+
     const getQuizById = () => {
         quizzesService
             .getQuizById(id)
@@ -32,25 +46,15 @@ const PlayQuizPage = () => {
 
     return (
         <Container className="mt-4">
-            <Row>
 
-                <Col md={{ offset: 1, span: 10 }}>
-                    {
-                        quizLoader ?
-                            <SpinnerLoader />
-                            :
-                            <>
+            {
+                quizLoader ?
+                    <SpinnerLoader />
+                    :
 
-                                <h1>Play Quiz {quiz.title}</h1>
+                    <PlayQuiz quiz={quiz} user={user} />
 
-                                <hr />
-
-                                <PlayQuiz quiz={quiz} user={user} />
-                            </>
-                    }
-                </Col>
-            </Row>
-
+            }
 
         </Container>
     )
