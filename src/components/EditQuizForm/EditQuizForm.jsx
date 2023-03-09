@@ -4,6 +4,7 @@ import quizzesService from "../../services/quizzes.services"
 import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
 import { ThemeContext } from "../../contexts/theme.context"
 import { useNavigate, useParams } from "react-router-dom"
+import uploadServices from "../../services/upload.services"
 
 const EditQuizForm = ({ fireFinalActions }) => {
 
@@ -74,11 +75,13 @@ const EditQuizForm = ({ fireFinalActions }) => {
 
         questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
 
-        quizzesService
-            .editQuizById(id, { ...generalData, questionsArr })
-            .then(() => {
-                navigate('/quizzes')
-            })
+        const formData = new FormData()
+        formData.append('imageData', e.target.imageData.files[0])
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, questionsArr, quizImg: data.cloudinary_url }))
+            .then(() => navigate('/quizzes'))
             .catch(err => console.log(err))
     }
 
@@ -91,6 +94,11 @@ const EditQuizForm = ({ fireFinalActions }) => {
                 <Form.Control className={`${themeValue} secondary`} type="text" name="title" value={generalData.title} onChange={handleGeneralChange} required />
             </Form.Group>
 
+            <Form.Group className="mb-3" controlId="imageData">
+                <Form.Label>Quiz image:</Form.Label>
+                <Form.Control className={`${themeValue} secondary`} type="file" name="imageData" />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="theme" >
                 <Form.Label>Theme:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
@@ -100,8 +108,6 @@ const EditQuizForm = ({ fireFinalActions }) => {
                 <Form.Label>Description:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="description" value={generalData.description} onChange={handleGeneralChange} required />
             </Form.Group>
-
-
 
             {
                 questionsArr?.map((question, index) => {

@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap"
 import quizzesService from "../../services/quizzes.services"
 import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
 import { ThemeContext } from "../../contexts/theme.context"
+import uploadServices from "../../services/upload.services"
 
 const CreateQuizForm = ({ fireFinalActions }) => {
 
@@ -12,6 +13,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
         title: '',
         theme: '',
         description: '',
+        avatar: '',
     })
 
     const [questionsArr, setQuestionsArr] = useState([{
@@ -51,11 +53,13 @@ const CreateQuizForm = ({ fireFinalActions }) => {
 
         questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
 
-        quizzesService
-            .createNewQuiz({ ...generalData, questionsArr })
-            .then(() => {
-                fireFinalActions()
-            })
+        const formData = new FormData()
+        formData.append('imageData', e.target.imageData.files[0])
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => quizzesService.createNewQuiz({ ...generalData, questionsArr, quizImg: data.cloudinary_url }))
+            .then(() => fireFinalActions())
             .catch(err => console.log(err))
     }
 
@@ -66,6 +70,11 @@ const CreateQuizForm = ({ fireFinalActions }) => {
             <Form.Group className="mb-3" controlId="title" >
                 <Form.Label>Title:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="title" value={generalData.title} onChange={handleGeneralChange} required />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="imageData">
+                <Form.Label>Quiz image:</Form.Label>
+                <Form.Control className={`${themeValue} secondary`} type="file" name="imageData" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="theme" >

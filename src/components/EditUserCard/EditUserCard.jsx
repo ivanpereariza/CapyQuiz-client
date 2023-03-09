@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 import usersService from "../../services/users.services"
 import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from "../../contexts/auth.context"
+import uploadServices from "../../services/upload.services"
+import authService from "../../services/auth.services"
 
 
 const EditUserCard = ({ userProfile }) => {
@@ -40,10 +42,15 @@ const EditUserCard = ({ userProfile }) => {
 
         e.preventDefault()
 
-        usersService
-            .editUserById(_id, editUser)
+        const formData = new FormData()
+        formData.append('imageData', e.target.imageData.files[0])
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => usersService.editUserById(_id, { ...editUser, avatar: data.cloudinary_url }))
             .then(() => navigate(`/profile/${_id}`))
             .catch(err => console.log(err))
+
     }
 
     return (
@@ -59,9 +66,9 @@ const EditUserCard = ({ userProfile }) => {
                 <Form.Control className={`${themeValue} secondary`} type="email" value={editUser.email} onChange={handleInputChange} name="email" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="avatar">
+            <Form.Group className="mb-3" controlId="imageData">
                 <Form.Label>Avatar:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="file" name="avatar" />
+                <Form.Control className={`${themeValue} secondary`} type="file" name="imageData" />
             </Form.Group>
             {
                 user.role === 'ADMIN' ?

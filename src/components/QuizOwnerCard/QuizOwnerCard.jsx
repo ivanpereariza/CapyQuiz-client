@@ -1,4 +1,5 @@
 import React from 'react'
+import './QuizOwnerCard.css'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
@@ -30,7 +31,7 @@ const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
     return (
         <Card className={`${themeValue} card my-3`} style={{ minHeight: '35rem' }}>
             <Card.Body>
-                <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
+                <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
                 <Card.Title className='mb-3'> {title}</Card.Title>
                 <Card.Text><b>Theme:</b> {theme}</Card.Text>
                 <Card.Text><b>Description:</b> {description}</Card.Text>

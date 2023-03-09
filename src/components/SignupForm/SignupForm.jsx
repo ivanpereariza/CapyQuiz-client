@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import { useNavigate } from 'react-router-dom'
 import authService from "../../services/auth.services"
 import { ThemeContext } from "../../contexts/theme.context"
+import uploadServices from "../../services/upload.services"
 
 
 const SignupForm = () => {
@@ -10,7 +11,6 @@ const SignupForm = () => {
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
-
 
     const [signupData, setSignupData] = useState({
         username: '',
@@ -24,30 +24,21 @@ const SignupForm = () => {
         setSignupData({ ...signupData, [name]: value })
     }
 
-    // const submitImage = e => {
-    //     const data = new FormData()
-    //     data.append("file", signupData.avatar)
-
-    //     cloudinaryService
-    //         .uploadFile(e.avatar)
-    //         .then(res => console.log(res))
-    //         .catch(err => console.log(err))
-    // }
-
-    // const handleImgChange = e => {
-    //     const { files, name } = e.target
-    //     submitImage({ ...signupData, [name]: files[0] })
-    // }
 
     const handleFormSubmit = e => {
 
         e.preventDefault()
 
-        authService
-            .signup(signupData)
+        const formData = new FormData()
+        formData.append('imageData', e.target.imageData.files[0])
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => authService.signup({ ...signupData, avatar: data.cloudinary_url }))
             .then(() => navigate('/login'))
             .catch(err => console.log(err))
     }
+
 
     return (
         <Form onSubmit={handleFormSubmit}>
@@ -67,9 +58,9 @@ const SignupForm = () => {
                 <Form.Control className={`${themeValue} secondary`} type="password" value={signupData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="avatar">
+            <Form.Group className="mb-3" controlId="imageData">
                 <Form.Label>Avatar:</Form.Label>
-                <Form.Control className={`${themeValue} secondary`} type="file" name="avatar" />
+                <Form.Control className={`${themeValue} secondary`} type="file" name="imageData" />
             </Form.Group>
 
 

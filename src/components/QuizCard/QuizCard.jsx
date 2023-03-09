@@ -32,7 +32,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
         <Card className={`${themeValue} card my-3`} style={{ minHeight: '35rem' }}>
             <Card.Body>
                 <Link onClick={() => openModalDetails(_id)}>
-                    <Card.Img className='mb-3' variant='top' src={quizImg} alt="Quiz Img" />
+                    <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className={`text-${themeColor} mb-4`} > {title}</Card.Title>
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Description:</b> {description}</Card.Text>
