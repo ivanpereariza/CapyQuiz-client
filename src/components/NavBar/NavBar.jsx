@@ -47,41 +47,40 @@ function NavBar() {
                             null
                     }
                 </Nav>
-                <Nav>
+                <Nav >
 
                     {
                         user
                             ?
                             <>
-                                <div >
-                                    <Dropdown className='mx-5' drop={'start'}>
-                                        <Dropdown.Toggle as='span' align='end' variant="secondary">
-                                            <img className='navAvatar pointerCursor' src={profileImage} alt="profile" />
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
-                                            <Dropdown.Item as={'span'}>
-                                                <Link to={`/profile/${user?._id}`}>
-                                                    <Nav.Link as="span" >My Profile</Nav.Link>
-                                                </Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item as={'span'}>
-                                                <Link to={`/profile/edit/${user?._id}`}>
-                                                    <Nav.Link as="span" >Edit Profile</Nav.Link>
-                                                </Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item as={'span'}>
-                                                <Link >
-                                                    <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
-                                                </Link>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item as={'span'}>
-                                                <Link to="/">
-                                                    <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
-                                                </Link>
-                                            </Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
+
+                                <Dropdown className='mx-5' drop={'start'}>
+                                    <Dropdown.Toggle as='span' align='end' variant="secondary">
+                                        <img className='navAvatar pointerCursor' src={profileImage} alt="profile" />
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
+                                        <Dropdown.Item as={'span'}>
+                                            <Link to={`/profile/${user?._id}`}>
+                                                <Nav.Link as="span" >My Profile</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item as={'span'}>
+                                            <Link to={`/profile/edit/${user?._id}`}>
+                                                <Nav.Link as="span" >Edit Profile</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item as={'span'}>
+                                            <Link >
+                                                <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                        <Dropdown.Item as={'span'}>
+                                            <Link to="/">
+                                                <Nav.Link as="span" onClick={logout}>Log Out</Nav.Link>
+                                            </Link>
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
 
                             </>
                             :
@@ -92,7 +91,7 @@ function NavBar() {
                                 <Link to="/login">
                                     <Nav.Link as="span">Log In</Nav.Link>
                                 </Link>
-                                <Link to="/signup">
+                                <Link to="/signup" className='me-5'>
                                     <Nav.Link as="span">Sign Up</Nav.Link>
                                 </Link>
                             </>

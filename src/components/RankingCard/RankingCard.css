@@ -1,7 +1,5 @@
 .RankingCard img {
-    margin: 0 px;
-    width: 40px;
-    height: 40px;
+    margin: 0px;
     object-fit: cover;
     border-radius: 50%;
 }
