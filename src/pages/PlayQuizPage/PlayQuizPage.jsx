@@ -16,32 +16,33 @@ const PlayQuizPage = () => {
     const [quiz, setQuiz] = useState([])
     const [quizLoader, setQuizLoader] = useState(true)
 
+
     useEffect(() => {
         getQuizById()
     }, [])
 
-    useEffect(() => {
-        shuffleAnswers()
-    }, [quiz])
 
 
-    const shuffleAnswers = () => {
-        quiz?.questionsArr?.map(question => {
-            shuffleArray(question.answersOptions)
+
+    const shuffleAnswers = (data) => {
+        setQuiz({
+            ...data, questionsArr: data?.questionsArr?.map(question => {
+                return question = { ...question, allAnswers: shuffleArray([...question.answersOptions, question.correctAnswer]) }
+            })
         })
     }
-
 
     const getQuizById = () => {
         quizzesService
             .getQuizById(id)
             .then(({ data }) => {
-                setQuiz(data)
+                shuffleAnswers(data)
                 setQuizLoader(false)
             })
             .catch(err => console.log(err))
 
     }
+
 
     return (
         <Container className="mt-4">

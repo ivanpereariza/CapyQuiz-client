@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
+import BarChart from "../BarChart/BarChart"
+import { Container } from "react-bootstrap"
 
 const QuizResults = ({ quiz, user }) => {
 
@@ -34,10 +36,12 @@ const QuizResults = ({ quiz, user }) => {
         <>
             {
                 points.points || points.points === 0 ?
-                    <>
+                    <Container>
+                        <BarChart points={points} average={average} />
                         <p>Your punctuation: {points.points}</p>
                         <p>The average punctuation:{Math.floor(average)}</p>
-                    </>
+
+                    </Container>
                     :
                     <SpinnerLoader />
             }
