@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
 import BarChart from "../BarChart/BarChart"
-import { Container } from "react-bootstrap"
+import { Card, Col, Container, Row } from "react-bootstrap"
+import { ThemeContext } from "../../contexts/theme.context"
+import PointsTable from "../PointsTable/PointsTable"
+
 
 const QuizResults = ({ quiz, user }) => {
+
+    const { themeValue } = useContext(ThemeContext)
 
     const { id } = useParams()
 
@@ -36,11 +41,19 @@ const QuizResults = ({ quiz, user }) => {
         <>
             {
                 points.points || points.points === 0 ?
-                    <Container>
-                        <BarChart points={points} average={average} />
-                        <p>Your punctuation: {points.points}</p>
-                        <p>The average punctuation:{Math.floor(average)}</p>
-
+                    <Container className="my-5">
+                        <Card >
+                            <Card.Body className={`${themeValue} card`}>
+                                <Row >
+                                    <Col>
+                                        <BarChart className='justify-content-center' points={points} average={average} />
+                                    </Col>
+                                    <Col>
+                                        <PointsTable points={quiz.points} />
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
                     </Container>
                     :
                     <SpinnerLoader />

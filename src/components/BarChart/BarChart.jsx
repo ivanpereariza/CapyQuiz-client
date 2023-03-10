@@ -13,11 +13,11 @@ const BarChart = ({ points, average }) => {
     ];
 
     const settings = {
-        margin: { top: 50, right: 50, bottom: 50, left: 50 },
-        xScale: { type: 'band' },
+        colors: ['#FFC300'],
+        margin: { top: 50, right: 50, bottom: 50 },
+        xScale: { type: 'band', padding: 0.5 },
         yScale: { type: 'linear', min: 0, max: 'auto', stacked: false, reverse: false },
         axisBottom: { tickSize: 5, tickPadding: 5, tickRotation: 0, legend: '', legendPosition: 'middle', legendOffset: 32 },
-        axisLeft: { tickSize: 5, tickPadding: 5, tickRotation: 0, legend: '', legendPosition: 'middle', legendOffset: -40 },
         labelTextColor: { from: 'color', modifiers: [['darker', 1.6]] },
         legends: [
             {
@@ -46,8 +46,8 @@ const BarChart = ({ points, average }) => {
     };
 
     return (
-        <div style={{ width: '500px', height: '300px' }}>
-            <ResponsiveBar data={data} keys={['value']} indexBy="id" {...settings} />
+        <div style={{ width: 'auto', height: '35rem' }}>
+            <ResponsiveBar data={data} keys={['value']} indexBy="id" {...settings} enableGridY={false} />
         </div>
     );
 };
