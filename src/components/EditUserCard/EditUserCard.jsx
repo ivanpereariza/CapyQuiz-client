@@ -16,7 +16,6 @@ const EditUserCard = ({ userProfile }) => {
     const theme = themeValue === 'light' ? 'dark' : 'light'
     const { user, authenticateUser } = useContext(AuthContext)
 
-    console.log(user)
 
     const { username, email, avatar, _id, role } = userProfile.data
 
