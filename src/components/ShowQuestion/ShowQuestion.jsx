@@ -27,7 +27,6 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
 
     const counter = () => {
         setSegs(previousState => previousState + 0.1)
-
     }
 
     useEffect(() => {
@@ -119,7 +118,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
                                 <hr />
                                 <Row>
                                     {
-                                        currentQuestion.answersOptions.map((answer, i) => {
+                                        currentQuestion.allAnswers.map((answer, i) => {
                                             return <AnswerCard answer={answer} handleAnswer={handleAnswer} key={i} index={i} />
                                         })
                                     }

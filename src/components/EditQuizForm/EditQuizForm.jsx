@@ -81,8 +81,6 @@ const EditQuizForm = ({ fireFinalActions }) => {
 
         if (questionsArr.length >= 5) {
 
-            questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
-
             const formData = new FormData()
             formData.append('imageData', e.target.imageData.files[0])
 

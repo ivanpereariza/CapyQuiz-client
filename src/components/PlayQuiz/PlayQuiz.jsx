@@ -6,7 +6,6 @@ const PlayQuiz = ({ quiz, user }) => {
     const { questionsArr, _id, owner } = quiz
     const [timer, setTimer] = useState(0)
     const [barTimer, setBarTimer] = useState(100)
-    let Array
 
 
     const showTimer = segs => {
