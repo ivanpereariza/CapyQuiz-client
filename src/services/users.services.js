@@ -36,6 +36,9 @@ class UsersServices {
     addPointsToUser(id, points) {
         return this.api.put(`/editPoints/${id}`, { points })
     }
+    getUsersByPoints() {
+        return this.api.get('/getUsersByPoints')
+    }
 }
 
 const usersService = new UsersServices()

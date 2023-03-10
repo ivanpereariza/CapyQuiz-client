@@ -16,6 +16,8 @@ const EditUserCard = ({ userProfile }) => {
     const theme = themeValue === 'light' ? 'dark' : 'light'
     const { user, authenticateUser } = useContext(AuthContext)
 
+    console.log(user)
+
     const { username, email, avatar, _id, role } = userProfile.data
 
     useEffect(() => {
@@ -52,8 +54,11 @@ const EditUserCard = ({ userProfile }) => {
             .uploadImage(formData)
             .then(({ data }) => usersService.editUserById(_id, { ...editUser, avatar: data.cloudinary_url }))
             .then(({ data }) => {
-                localStorage.setItem('authToken', data.authToken)
-                authenticateUser()
+                if (user.role !== "ADMIN" || user._id === _id) {
+                    localStorage.setItem('authToken', data.authToken)
+                    authenticateUser()
+                    navigate(`/profile/${_id}`)
+                }
                 navigate(`/profile/${_id}`)
             })
             .catch(err => setErrors(err.response.data.errorMessages))
