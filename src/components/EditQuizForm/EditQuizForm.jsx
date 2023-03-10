@@ -6,12 +6,15 @@ import { ThemeContext } from "../../contexts/theme.context"
 import { useNavigate, useParams } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
+import { MessageContext } from "../../contexts/message.context"
 
 const EditQuizForm = ({ fireFinalActions }) => {
 
     const { id } = useParams()
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
+    const { emitMessage } = useContext(MessageContext)
+
 
     const [errors, setErrors] = useState([])
 
@@ -42,7 +45,7 @@ const EditQuizForm = ({ fireFinalActions }) => {
                     description: data.description
                 })
                 setQuestionsArr(data.questionsArr)
-
+                console.log(questionsArr)
             })
             .catch(err => console.log(err))
     }
@@ -77,6 +80,7 @@ const EditQuizForm = ({ fireFinalActions }) => {
         e.preventDefault()
 
         if (questionsArr.length >= 5) {
+
             questionsArr.map(elm => elm.answersOptions.push(elm.correctAnswer))
 
             const formData = new FormData()
@@ -85,7 +89,10 @@ const EditQuizForm = ({ fireFinalActions }) => {
             uploadServices
                 .uploadImage(formData)
                 .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, questionsArr, quizImg: data.cloudinary_url }))
-                .then(() => navigate('/quizzes'))
+                .then(() => {
+                    emitMessage('Quiz edited!')
+                    navigate('/quizzes')
+                })
                 .catch(err => setErrors(err.response.data.errorMessages))
         } else setErrors(['Should have at least 5 questions'])
 

@@ -1,10 +1,11 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import { useNavigate } from 'react-router-dom'
 import authService from "../../services/auth.services"
 import { ThemeContext } from "../../contexts/theme.context"
 import FormError from "../FormError/FormError"
+import { MessageContext } from "../../contexts/message.context"
 
 const LoginForm = () => {
 
@@ -18,6 +19,7 @@ const LoginForm = () => {
     })
 
     const { authenticateUser, user } = useContext(AuthContext)
+    const { emitMessage } = useContext(MessageContext)
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
 
@@ -34,6 +36,7 @@ const LoginForm = () => {
         authService
             .login(loginData)
             .then(({ data }) => {
+                emitMessage('Welcome to CapyQuiz!🎉')
                 localStorage.setItem('authToken', data.authToken)
                 authenticateUser()
                 navigate('/')
@@ -54,7 +57,7 @@ const LoginForm = () => {
                 <Form.Control className={`${themeValue} secondary`} type="password" value={loginData.password} onChange={handleInputChange} name="password" required />
             </Form.Group>
 
-            {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
+            {errors?.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
 
             <div className="d-grid">
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Log In</Button>

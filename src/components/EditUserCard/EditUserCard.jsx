@@ -51,7 +51,11 @@ const EditUserCard = ({ userProfile }) => {
         uploadServices
             .uploadImage(formData)
             .then(({ data }) => usersService.editUserById(_id, { ...editUser, avatar: data.cloudinary_url }))
-            .then(() => navigate(`/profile/${_id}`))
+            .then(({ data }) => {
+                localStorage.setItem('authToken', data.authToken)
+                authenticateUser()
+                navigate(`/profile/${_id}`)
+            })
             .catch(err => setErrors(err.response.data.errorMessages))
 
     }

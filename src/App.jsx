@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
 import { useContext } from 'react'
 import { ThemeContext } from './contexts/theme.context'
+import PopupMessage from './components/PopupMessage/PopupMessage'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <AppRoutes />
       </div >
       <Footer />
+      <PopupMessage />
     </>
   )
 }
