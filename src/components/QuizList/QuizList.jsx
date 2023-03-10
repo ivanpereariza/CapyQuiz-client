@@ -10,7 +10,7 @@ const QuizList = ({ quizzes, openModalDetails, user, fireFinalActions }) => {
                 quizzes.length ?
                     quizzes.map(quiz => {
                         return (
-                            <Col md={{ span: 4 }} key={quiz._id}>
+                            <Col md={{ span: 6 }} key={quiz._id} lg={{ span: 6 }} xl={{ span: 4 }}>
                                 <QuizCard openModalDetails={openModalDetails} quiz={quiz} user={user} fireFinalActions={fireFinalActions} />
                             </Col>
                         )
