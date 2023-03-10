@@ -34,6 +34,9 @@ function NavBar() {
                     <Link to="/quizzes">
                         <Nav.Link as="span">Quizzes</Nav.Link>
                     </Link>
+                    <Link to="/ranking">
+                        <Nav.Link as="span">Ranking</Nav.Link>
+                    </Link>
                     {
                         user
                             ?
