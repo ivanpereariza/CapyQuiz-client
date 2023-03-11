@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import Ranking from "../../components/Ranking/Ranking"
 import { AuthContext } from "../../contexts/auth.context"
@@ -9,6 +9,16 @@ const RankingPage = () => {
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
     const { user } = useContext(AuthContext)
+
+    const [inRanking, setInRanking] = useState(false)
+
+    const checkIfRanking = (ranking) => {
+        ranking.map(elm => {
+            if (elm.points && user?._id === elm._id) {
+                setInRanking(true)
+            }
+        })
+    }
     return (
         <Container className="mt-4">
             <Row className="mb-4">
@@ -18,14 +28,16 @@ const RankingPage = () => {
                             <h1>CapyQuiz Ranking</h1>
                         </Col>
                         <Col md={{ span: 3 }} >
-                            <Button variant={`outline-${theme}`} href={`#${user?._id}`}>Check your position!</Button>
+                            {
+                                inRanking && <Button variant={`outline-${theme}`} href={`#${user?._id}`}>Check your position!</Button>
+                            }
                         </Col>
                     </Row>
                     <hr />
 
                 </Col>
             </Row>
-            <Ranking />
+            <Ranking checkIfRanking={checkIfRanking} />
         </Container>
     )
 }

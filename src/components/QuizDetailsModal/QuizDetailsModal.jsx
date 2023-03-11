@@ -4,7 +4,7 @@ import { ThemeContext } from "../../contexts/theme.context"
 import quizzesService from "../../services/quizzes.services"
 import QuizDetails from "../QuizDetails/QuizDetails"
 
-const QuizDetailsModal = ({ setShowModalDetails, showModalDetails, selectedQuiz }) => {
+const QuizDetailsModal = ({ setShowModalDetails, showModalDetails, selectedQuiz, user }) => {
 
     const [quiz, setQuiz] = useState(undefined)
 
@@ -47,7 +47,7 @@ const QuizDetailsModal = ({ setShowModalDetails, showModalDetails, selectedQuiz 
                         backgroundColor: bg,
                         color: color
                     }}>
-                        <QuizDetails quiz={quiz} />
+                        <QuizDetails quiz={quiz} user={user} />
                     </Modal.Body>
                 </Modal>
 

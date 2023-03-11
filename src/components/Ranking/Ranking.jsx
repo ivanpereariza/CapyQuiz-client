@@ -4,7 +4,7 @@ import usersService from "../../services/users.services"
 import RankingCard from "../RankingCard/RankingCard"
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
 
-const Ranking = () => {
+const Ranking = ({ checkIfRanking }) => {
 
     const [ranking, setRanking] = useState()
 
@@ -15,7 +15,10 @@ const Ranking = () => {
     const getRankingUsers = () => {
         usersService
             .getUsersByPoints()
-            .then(({ data }) => setRanking(data))
+            .then(({ data }) => {
+                setRanking(data)
+                checkIfRanking(data)
+            })
             .catch(err => console.log(err))
     }
 
