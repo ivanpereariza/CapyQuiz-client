@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import SpinnerLoader from '../SpinnerLoader/SpinnerLoader'
@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import getEstimatedTime from '../../utils/getEstimatedTime'
 
-const QuizDetails = ({ quiz }) => {
+const QuizDetails = ({ quiz, user }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
@@ -20,7 +20,7 @@ const QuizDetails = ({ quiz }) => {
                 quiz ?
                     <div className='justify-content-center'>
                         <img className='QuizDetailsImg d-block mx-auto' src={quiz.quizImg} alt="quiz Image" />
-                        <h3 className='mb-4'> {quiz.title}</h3>
+                        <h3 className='my-4'> {quiz.title}</h3>
                         <p><b>Theme:</b> {quiz.theme}</p>
                         <p><b>Description:</b> {quiz.description}</p>
                         <p><b>Questions:</b> {quiz.questionsArr.length}</p>
@@ -36,6 +36,7 @@ const QuizDetails = ({ quiz }) => {
                                 :
                                 undefined
                         }
+
                         <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mb-5' >
                             <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
                         </Link>

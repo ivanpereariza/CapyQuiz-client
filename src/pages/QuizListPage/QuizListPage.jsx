@@ -26,6 +26,7 @@ const QuizListPage = () => {
 
     }, [])
 
+
     const loadQuizzes = () => {
         quizzesService
             .getAllQuizzes()
@@ -73,7 +74,7 @@ const QuizListPage = () => {
                 <QuizList quizzes={quizzes} openModalDetails={openModalDetails} user={user} fireFinalActions={fireFinalActions} />
             </Container>
 
-            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
+            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} user={user} />
 
             <NewQuizModal fireFinalActions={fireFinalActions} setShowModal={setShowModal} showModal={showModal} />
 

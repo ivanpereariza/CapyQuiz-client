@@ -51,6 +51,17 @@
     color: white;
 }
 
+.light.card.played {
+    background-color: #d9ffda;
+    color: black;
+}
+
+.dark.card.played {
+    background-color: #293e2a;
+
+    color: white;
+}
+
 .light {
     background-color: #F6F6F6;
     color: black;
