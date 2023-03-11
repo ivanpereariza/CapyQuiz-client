@@ -102,6 +102,9 @@ const EditQuizForm = ({ fireFinalActions }) => {
             <Form.Group className="mb-3" controlId="title" >
                 <Form.Label>Title:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="title" value={generalData.title} onChange={handleGeneralChange} required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    The title should be 5-80 characters long.
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">
@@ -112,11 +115,17 @@ const EditQuizForm = ({ fireFinalActions }) => {
             <Form.Group className="mb-3" controlId="theme" >
                 <Form.Label>Theme:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    The theme should be 20 characters long as maximun.
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="description">
                 <Form.Label>Description:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="description" value={generalData.description} onChange={handleGeneralChange} required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    The description should be 200 characters long as maximun.
+                </Form.Text>
             </Form.Group>
 
             {

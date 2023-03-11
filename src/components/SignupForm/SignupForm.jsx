@@ -60,11 +60,17 @@ const SignupForm = () => {
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="email" value={signupData.email} onChange={handleInputChange} name="email" required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    Should be a correct email.
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="password">
                 <Form.Label>Password:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="password" value={signupData.password} onChange={handleInputChange} name="password" required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    Your password should be 2-25 characters long.
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">

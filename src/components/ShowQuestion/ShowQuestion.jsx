@@ -129,7 +129,10 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
             <audio id="audio-player" src={currentTrack} controls={false} autoPlay={isPlaying} loop={false} />
             {
                 segs >= 0 && segs < 3 ?
-                    <h1 className="text-center my-4">{currentQuestion.question} </h1>
+                    <>
+                        <h1 className="text-center my-4">{currentQuestion.question} </h1>
+                        <h2 className="text-center my-4">Question {i + 1} of {questionsArr.length}</h2>
+                    </>
                     :
                     segs >= 3 && segs < 18 ?
                         <Card className={`${themeValue} card my-3`}>

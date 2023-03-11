@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react"
+import { Container } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import QuizResults from "../../components/QuizResults/QuizResults"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
@@ -36,7 +37,7 @@ const QuizResultPage = () => {
     }
 
     return (
-        <>
+        <Container className="mt-4">
             {
                 currentUser && quiz ?
                     <QuizResults quiz={quiz} user={currentUser} />
@@ -44,7 +45,7 @@ const QuizResultPage = () => {
                     <SpinnerLoader />
             }
 
-        </>
+        </Container>
     )
 }
 

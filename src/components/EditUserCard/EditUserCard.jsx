@@ -75,6 +75,9 @@ const EditUserCard = ({ userProfile }) => {
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="email" value={editUser.email} onChange={handleInputChange} name="email" required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    Should be a correct email.
+                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">

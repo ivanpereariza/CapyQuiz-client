@@ -41,10 +41,10 @@ const QuizResults = ({ quiz, user }) => {
         <>
             {
                 points.points || points.points === 0 ?
-                    <Container className="my-5">
+                    <Container >
                         <Card >
-                            <Card.Body className={`${themeValue} card`}>
-                                <Row >
+                            <Card.Body className={`${themeValue} card  `}>
+                                <Row  >
                                     <Col>
                                         <BarChart className='justify-content-center' points={points} average={average} />
                                     </Col>

@@ -1,10 +1,13 @@
-import { ResponsiveBar } from '@nivo/bar';
+import { ResponsiveBar, } from '@nivo/bar';
 
 const BarChart = ({ points, average }) => {
+
+    const averageRounded = Math.round(average)
+
     const data = [
         {
             id: 'Average',
-            value: average,
+            value: averageRounded,
         },
         {
             id: 'Your punctuation',
@@ -13,7 +16,7 @@ const BarChart = ({ points, average }) => {
     ];
 
     const settings = {
-        colors: ['#FFC300'],
+        // colors: ['#FFC300'],
         margin: { top: 50, right: 50, bottom: 50 },
         xScale: { type: 'band', padding: 0.5 },
         yScale: { type: 'linear', min: 0, max: 'auto', stacked: false, reverse: false },
@@ -47,7 +50,7 @@ const BarChart = ({ points, average }) => {
 
     return (
         <div style={{ width: 'auto', height: '35rem' }}>
-            <ResponsiveBar data={data} keys={['value']} indexBy="id" {...settings} enableGridY={false} />
+            <ResponsiveBar colors={['#FFC300', '#FFC911']} data={data} keys={['value']} indexBy="id" {...settings} enableGridY={false} />
         </div>
     );
 };

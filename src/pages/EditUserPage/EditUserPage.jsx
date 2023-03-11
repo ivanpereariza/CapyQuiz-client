@@ -4,6 +4,7 @@ import { Navigate, useParams } from "react-router-dom"
 import EditUserCard from "../../components/EditUserCard/EditUserCard"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
+import { MessageContext } from "../../contexts/message.context"
 import usersService from "../../services/users.services"
 
 
@@ -14,6 +15,7 @@ const EditUserPage = () => {
     const [userProfile, setUserProfile] = useState()
 
     const { user, isLoading } = useContext(AuthContext)
+    const { emitMessage } = useContext(MessageContext)
 
 
     useEffect(() => {
@@ -51,7 +53,10 @@ const EditUserPage = () => {
             </>
         )
 
-    } else return <Navigate to="/" />
+    } else {
+        emitMessage('Forbidden access to this page ⛔')
+        return <Navigate to="/" />
+    }
 
 }
 

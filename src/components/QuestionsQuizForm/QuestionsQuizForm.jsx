@@ -11,6 +11,9 @@ const QuestionsQuizForm = ({ index, handleQuestionChange, handleAnswerOptionChan
             <h3>Question {index + 1}    <Button variant="danger" type="button" className=" mx-3 rounded-circle text-light" onClick={() => handleRemoveQuestion(index)}>Ｘ</Button></h3>
             <Form.Group className="mb-3" controlId={`question-${index}`} >
                 <Form.Control className={`${themeValue} secondary`} placeholder="Question" type="text" name="question" value={question.question} onChange={(event) => handleQuestionChange(event, index)} required />
+                <Form.Text id="passwordHelpBlock" muted>
+                    The question should be 5-150 characters long.
+                </Form.Text>
             </Form.Group>
 
             <Row className="mb-3">
