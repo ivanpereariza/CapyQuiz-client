@@ -8,6 +8,7 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import wrong from './../../assets/audios/wrong.mp3'
 import correct from './../../assets/audios/correct.mp3'
+import { AuthContext } from "../../contexts/auth.context"
 
 
 const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
@@ -24,6 +25,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
     const [currentTrack, setCurrentTrack] = useState('')
 
     const { themeValue } = useContext(ThemeContext)
+    const { authenticateUser } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
@@ -67,7 +69,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
             setPoints(0)
             setClicked(false)
         }
-        if (i === (questionsArr.length - 1) && segs > 20) {
+        if (i === (questionsArr.length - 1) && segs >= 21) {
             saveQuizOnUser()
             savePointOwner()
         }
@@ -107,10 +109,19 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
         if (!played) {
             usersService
                 .addQuizToUserById(currentUser._id, { quiz: id, points: totalPoints })
-                .then(() => quizzesService.addPointsToArr(id, totalPoints))
+                .then(() => {
+                    console.log(totalPoints)
+                    quizzesService.addPointsToArr(id, totalPoints)
+                })
                 .then(() => usersService.addPointsToUser(currentUser._id, totalPoints))
+                .then(() => usersService.resetUserToken(currentUser._id))
+                .then(({ data }) => {
+                    localStorage.setItem('authToken', data.authToken)
+                    authenticateUser()
+                })
                 .catch(err => console.log(err))
         }
+
     }
 
     const savePointOwner = () => {
