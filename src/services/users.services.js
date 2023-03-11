@@ -39,6 +39,10 @@ class UsersServices {
     getUsersByPoints() {
         return this.api.get('/getUsersByPoints')
     }
+
+    resetUserToken(id) {
+        return this.api.get(`/resetToken/${id}`)
+    }
 }
 
 const usersService = new UsersServices()

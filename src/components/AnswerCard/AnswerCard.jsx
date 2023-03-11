@@ -4,10 +4,10 @@ import { Card, Col } from 'react-bootstrap'
 const AnswerCard = ({ answer, handleAnswer, index }) => {
     let color
 
-    if (index === 0) color = 'red'
-    if (index === 1) color = 'blue'
-    if (index === 2) color = 'green'
-    if (index === 3) color = 'yellow'
+    if (index === 0) color = '#b41c1c'
+    if (index === 1) color = '#38269a'
+    if (index === 2) color = '#269a41'
+    if (index === 3) color = '#e0e71e'
 
     return (
         <Col xl={{ span: 6 }} className='justify-content-center'>

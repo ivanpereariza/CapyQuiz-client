@@ -61,7 +61,6 @@ const EditUserCard = ({ userProfile }) => {
                 navigate(`/profile/${_id}`)
             })
             .catch(err => setErrors(err.response.data.errorMessages))
-
     }
 
     return (
