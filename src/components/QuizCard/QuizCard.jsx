@@ -6,16 +6,29 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import getEstimatedTime from '../../utils/getEstimatedTime'
 import quizzesService from '../../services/quizzes.services'
+import { Rating } from '@mui/material'
+import getAverageRating from '../../utils/getAverageRating'
+import { StarOutline } from '@mui/icons-material';
+
 
 const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
+
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
+    const starColor = themeValue === 'light' ? '' : 'white'
 
     const { title, theme, description, questionsArr, owner, quizImg, _id } = quiz
 
     const time = getEstimatedTime(questionsArr)
     const [played, setPlayed] = useState(false)
+    const [rating, setRating] = useState(0)
+    const [ratingLoading, setRatingLoading] = useState(true)
+
+    useEffect(() => {
+        setRating(getAverageRating(quiz))
+        setRatingLoading(false)
+    }, [])
 
     useEffect(() => {
         checkIfPlayed()
@@ -40,7 +53,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
 
     return (
 
-        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ minHeight: '38rem' }}>
+        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ minHeight: '40rem' }}>
             <Card.Body>
                 <Link onClick={() => openModalDetails(_id)}>
                     <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
@@ -48,6 +61,9 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Description:</b> {description}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Estimated Time:</b> {time}</Card.Text>
+                    {
+                        !ratingLoading && <Card.Text><Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></Card.Text>
+                    }
                     <Row>
                         {
                             owner ?

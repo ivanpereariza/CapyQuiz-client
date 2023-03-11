@@ -5,36 +5,60 @@ import BarChart from "../BarChart/BarChart"
 import { Card, Col, Container, Row } from "react-bootstrap"
 import { ThemeContext } from "../../contexts/theme.context"
 import PointsTable from "../PointsTable/PointsTable"
+import { Rating } from "@mui/material"
+import getAverageRating from "../../utils/getAverageRating"
+import getAveragePoints from "../../utils/getAveragePoints"
+import quizzesService from "../../services/quizzes.services"
+import { MessageContext } from "../../contexts/message.context"
+import { StarOutline } from "@mui/icons-material"
 
 
 const QuizResults = ({ quiz, user }) => {
 
     const { themeValue } = useContext(ThemeContext)
+    const { emitMessage } = useContext(MessageContext)
+
+    const starColor = themeValue === 'light' ? '' : 'white'
+
 
     const { id } = useParams()
 
     const [points, setPoints] = useState(false)
     const [average, setAverage] = useState(0)
+    const [rating, setRating] = useState(0)
 
     useEffect(() => {
-
-        setAverage(getAverage())
-
+        setAverage(getAveragePoints(quiz))
+        setRating(getAverageRating(quiz))
     }, [quiz])
 
     useEffect(() => {
-
         const pointsObj = user?.quizzes.filter(elm => elm.quiz === id)
         if (pointsObj[0]) setPoints(pointsObj[0])
-
     }, [user])
 
-    const getAverage = () => {
-        let totalPoints
-        if (quiz.points.length > 1) totalPoints = quiz.points.reduce((acc, curr) => acc + curr)
-        if (quiz.points.length === 1) return totalPoints = quiz.points[0]
+    const handleRatingChange = e => {
+        const { value } = e.target
+        rateQuiz(+value)
+    }
 
-        return totalPoints / quiz.points.length
+    const rateQuiz = (rate) => {
+
+        const existingRating = quiz.rating.find(rating => rating.owner === user._id)
+
+        if (existingRating) {
+            existingRating.rate = rate
+            quizzesService
+                .editQuizById(id, { rating: quiz.rating })
+                .then(({ data }) => emitMessage('Rate updated'))
+                .catch(err => console.log(err))
+        } else {
+            quiz.rating.push({ owner: user._id, rate })
+            quizzesService
+                .editQuizById(id, { rating: quiz.rating })
+                .then(({ data }) => emitMessage('Rate updated'))
+                .catch(err => console.log(err))
+        }
     }
 
     return (
@@ -50,6 +74,8 @@ const QuizResults = ({ quiz, user }) => {
                                     </Col>
                                     <Col>
                                         <PointsTable points={quiz.points} />
+                                        <p>Rating this quiz!!</p>
+                                        <Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating" defaultValue={rating} precision={1} onChange={handleRatingChange} />
                                     </Col>
                                 </Row>
                             </Card.Body>
