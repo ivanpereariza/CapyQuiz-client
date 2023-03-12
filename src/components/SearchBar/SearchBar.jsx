@@ -8,9 +8,10 @@ const SearchBar = ({ handleSearchBar }) => {
     const { themeValue } = useContext(ThemeContext)
     const [currentText, setText] = useState()
 
+
     return (
 
-        <Form className="d-flex my-5">
+        <Form className="d-flex my-5" onSubmit={(event) => event.preventDefault()}>
             <Form.Control
                 className={`${themeValue} secondary me-2`}
                 onChange={handleSearchBar}
