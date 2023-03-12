@@ -1,7 +1,11 @@
 import { ResponsiveBar, } from '@nivo/bar';
-
+import { ThemeProvider } from '@nivo/core';
+import { useContext } from 'react';
+import { ThemeContext } from '../../contexts/theme.context';
 const BarChart = ({ points, average }) => {
 
+    const { themeValue } = useContext(ThemeContext)
+    const color = themeValue === 'dark' ? '#d9ffda' : '#818181'
     const averageRounded = Math.round(average)
 
     const data = [
@@ -15,12 +19,29 @@ const BarChart = ({ points, average }) => {
         },
     ];
 
+    const customTheme = {
+        ...ThemeProvider,
+        tooltip: {
+            basic: {
+                color: 'black',
+            },
+        },
+    };
+
     const settings = {
-        // colors: ['#FFC300'],
         margin: { top: 50, right: 50, bottom: 50 },
         xScale: { type: 'band', padding: 0.5 },
         yScale: { type: 'linear', min: 0, max: 'auto', stacked: false, reverse: false },
-        axisBottom: { tickSize: 5, tickPadding: 5, tickRotation: 0, legend: '', legendPosition: 'middle', legendOffset: 32 },
+        axisBottom: {
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+        },
+        axisLeft: {
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+        },
         labelTextColor: { from: 'color', modifiers: [['darker', 1.6]] },
         legends: [
             {
@@ -46,11 +67,20 @@ const BarChart = ({ points, average }) => {
                 ],
             },
         ],
+        animate: true,
     };
 
     return (
         <div style={{ width: 'auto', height: '35rem' }}>
-            <ResponsiveBar colors={['#FFC300', '#FFC911']} data={data} keys={['value']} indexBy="id" {...settings} enableGridY={false} />
+            <ResponsiveBar
+                colors={color}
+                data={data}
+                keys={['value']}
+                indexBy="id"
+                {...settings}
+                enableGridY={false}
+                theme={customTheme}
+            />
         </div>
     );
 };

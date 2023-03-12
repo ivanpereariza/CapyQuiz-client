@@ -8,7 +8,7 @@ import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
 
-const EditQuizForm = ({ fireFinalActions }) => {
+const EditQuizForm = () => {
 
     const { id } = useParams()
     const navigate = useNavigate()

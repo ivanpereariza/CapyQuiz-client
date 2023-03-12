@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
 import BarChart from "../BarChart/BarChart"
 import { Card, Col, Container, Row } from "react-bootstrap"
@@ -11,6 +11,7 @@ import getAveragePoints from "../../utils/getAveragePoints"
 import quizzesService from "../../services/quizzes.services"
 import { MessageContext } from "../../contexts/message.context"
 import { StarOutline } from "@mui/icons-material"
+import './../QuizResults/QuizResults.css'
 
 
 const QuizResults = ({ quiz, user }) => {
@@ -19,6 +20,7 @@ const QuizResults = ({ quiz, user }) => {
     const { emitMessage } = useContext(MessageContext)
 
     const starColor = themeValue === 'light' ? '' : 'white'
+    const themeColor = themeValue === 'light' ? 'dark' : 'light'
 
 
     const { id } = useParams()
@@ -74,8 +76,17 @@ const QuizResults = ({ quiz, user }) => {
                                     </Col>
                                     <Col>
                                         <PointsTable points={quiz.points} />
-                                        <p>Rating this quiz!!</p>
-                                        <Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating" defaultValue={rating} precision={1} onChange={handleRatingChange} />
+                                        <Row>
+                                            <Col md={{ span: 6 }}>
+                                                <Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating" defaultValue={rating} precision={1} onChange={handleRatingChange} />
+                                            </Col>
+                                            <Col md={{ span: 6 }}>
+                                                <Link to={`/profile/${quiz.owner._id}`}>
+                                                    <p className={`text-${themeColor}`}>{quiz.owner.username} <img className="ownerAvatar" src={quiz.owner.avatar} alt={quiz.owner.username} /></p>
+                                                </Link>
+
+                                            </Col>
+                                        </Row>
                                     </Col>
                                 </Row>
                             </Card.Body>

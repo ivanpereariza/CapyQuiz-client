@@ -142,7 +142,15 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
                 segs >= 0 && segs < 3 ?
                     <>
                         <h1 className="text-center my-4">{currentQuestion.question} </h1>
-                        <h2 className="text-center my-4">Question {i + 1} of {questionsArr.length}</h2>
+                        <Row >
+                            <Col md={{ span: 4, offset: 4 }} className='d-flex align-items-center justify-content-center' style={{ height: '50vh' }}>
+                                <Card className={`${themeValue} card my-3 `}>
+                                    <Card.Body >
+                                        <Card.Title className="text-center">Question {i + 1} of {questionsArr.length}</Card.Title>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
                     </>
                     :
                     segs >= 3 && segs < 18 ?

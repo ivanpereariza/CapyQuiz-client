@@ -40,7 +40,7 @@ const ProfileCard = ({ userProfile }) => {
     return (
         <Container>
             <Row className='justify-content-center'>
-                <Card className={`ProfileCard ${themeValue} card my-5`}>
+                <Card className={`ProfileCard ${themeValue} card my-5 text-center`}>
                     <Card.Img variant="top" className='AvatarImg' src={avatar} alt={username} />
                     <Card.Body>
                         <Card.Title>{username}</Card.Title>
@@ -67,17 +67,25 @@ const ProfileCard = ({ userProfile }) => {
                     </Card.Body>
                 </Card>
             </Row>
-            <Row>
-                {
-                    quizzes?.map(quiz => {
-                        return (
-                            <Col md={{ span: 4 }} key={quiz._id}>
-                                <QuizOwnerCard quiz={quiz} getUserQuizzes={getUserQuizzes} />
-                            </Col>
-                        )
-                    })
-                }
-            </Row>
+            {
+                quizzes.length ?
+                    <Row className='justify-content-center'>
+                        <h2 className='text-center'>Quizzes by {username}</h2>
+                        <hr />
+                        {
+                            quizzes.map(quiz => {
+                                return (
+                                    <Col md={{ span: 4 }} key={quiz._id}>
+                                        <QuizOwnerCard quiz={quiz} getUserQuizzes={getUserQuizzes} />
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                    :
+                    undefined
+            }
+
         </Container >
     )
 }

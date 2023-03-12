@@ -1,0 +1,8 @@
+.ownerAvatar {
+    margin: 0 15px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 1px black;
+}

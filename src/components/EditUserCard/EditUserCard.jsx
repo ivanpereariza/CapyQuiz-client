@@ -5,7 +5,6 @@ import usersService from "../../services/users.services"
 import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from "../../contexts/auth.context"
 import uploadServices from "../../services/upload.services"
-import authService from "../../services/auth.services"
 import FormError from "../FormError/FormError"
 
 

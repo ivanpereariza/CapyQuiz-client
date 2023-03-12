@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,7 @@ const LoginForm = () => {
         password: ''
     })
 
-    const { authenticateUser, user } = useContext(AuthContext)
+    const { authenticateUser } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
