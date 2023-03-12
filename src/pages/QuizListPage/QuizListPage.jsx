@@ -20,7 +20,9 @@ const QuizListPage = () => {
     const [showModal, setShowModal] = useState(false)
     const [showModalDetails, setShowModalDetails] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState('')
-    const [rankingValue, setRankingValue] = useState([0, 100])
+    const [ratingValue, setRatingValue] = useState([0, 5])
+    const [searchValue, setSearchValue] = useState('')
+
 
     const { user } = useContext(AuthContext)
 
@@ -41,16 +43,28 @@ const QuizListPage = () => {
     }
 
     const handleSearchBar = e => {
+        setSearchValue(e.target.value)
+
+        // handleFilters()
         const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value.toLowerCase())
             || elm.theme.toLowerCase().includes(e.target.value.toLowerCase()))
         setQuizzes(filteredQuizzes)
     }
 
     const handleRatingBar = (e, newValue) => {
-        setRankingValue(newValue)
+        setRatingValue(newValue)
+        // handleFilters()
         const filteredQuizzes = quizzesBackUp.filter(elm => getAverageRating(elm) >= e.target.value[0] && getAverageRating(elm) <= e.target.value[1])
         setQuizzes(filteredQuizzes)
     }
+
+    // const handleFilters = () => {
+    //     const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(searchValue.toLowerCase())
+    //         || elm.theme.toLowerCase().includes(searchValue.toLowerCase())).filter(elm => getAverageRating(elm) >= ratingValue[0] && getAverageRating(elm) <= ratingValue[1])
+    //     setQuizzes(filteredQuizzes)
+
+    // }
+
 
     const fireFinalActions = () => {
         setShowModal(false)
@@ -76,7 +90,7 @@ const QuizListPage = () => {
                             <h4>Filter by rating:</h4>
                             <Slider
                                 getAriaLabel={() => 'Ranking range'}
-                                value={rankingValue}
+                                value={ratingValue}
                                 onChange={handleRatingBar}
                                 valueLabelDisplay="auto"
                                 max={5}
