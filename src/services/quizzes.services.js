@@ -43,6 +43,9 @@ class QuizzesServices {
     addPointsToArr(id, points) {
         return this.api.put(`/addPoints/${id}`, { points })
     }
+    searchQuizzes(searchValue, minRatingValue, maxRatingValue) {
+        return this.api, get(`/search?search=${searchValue}&ratingMin=${minRatingValue}&ratingMax=${maxRatingValue}`)
+    }
 }
 
 const quizzesService = new QuizzesServices()
