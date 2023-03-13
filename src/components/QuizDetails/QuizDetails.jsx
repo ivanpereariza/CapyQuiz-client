@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import getEstimatedTime from '../../utils/getEstimatedTime'
 
-const QuizDetails = ({ quiz, user }) => {
+const QuizDetails = ({ quiz }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'

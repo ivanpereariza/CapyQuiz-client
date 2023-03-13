@@ -43,6 +43,10 @@ class UsersServices {
     resetUserToken(id) {
         return this.api.get(`/resetToken/${id}`)
     }
+
+    getFullUserInfo(id) {
+        return this.api.get(`/userWithQuizzes/${id}`)
+    }
 }
 
 const usersService = new UsersServices()

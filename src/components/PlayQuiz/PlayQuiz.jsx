@@ -1,12 +1,11 @@
 import { useState } from "react"
 import ShowQuestion from "../ShowQuestion/ShowQuestion"
 
-const PlayQuiz = ({ quiz, user }) => {
+const PlayQuiz = ({ quiz }) => {
 
     const { questionsArr, _id, owner } = quiz
     const [timer, setTimer] = useState(0)
     const [barTimer, setBarTimer] = useState(100)
-
 
     const showTimer = segs => {
         setTimer(segs)
@@ -26,7 +25,7 @@ const PlayQuiz = ({ quiz, user }) => {
                 </div>
             }
 
-            <ShowQuestion questionsArr={questionsArr} id={_id} user={user} owner={owner} showTimer={showTimer} />
+            <ShowQuestion questionsArr={questionsArr} id={_id} owner={owner} showTimer={showTimer} />
         </>
     )
 }

@@ -13,14 +13,12 @@ const CreateQuizPage = () => {
     return (
         <Container className="mt-4">
             <Row>
-
                 <Col md={{ offset: 2, span: 8 }}>
 
                     <h1>Create Quiz</h1>
-
                     <hr />
-
                     <CreateQuizForm fireFinalActions={fireFinalActions} />
+
                 </Col>
             </Row>
         </Container>

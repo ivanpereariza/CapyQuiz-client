@@ -16,19 +16,19 @@ import PrivateUserRoutes from "./PrivateUserRoutes"
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/signup" element={<SignupPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/quizzes" element={<QuizListPage />}></Route>
-            <Route path="/ranking" element={<RankingPage />}></Route>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/quizzes" element={<QuizListPage />} />
+            <Route path="/ranking" element={<RankingPage />} />
 
             <Route element={<PrivateUserRoutes />}>
-                <Route path="/profile/:id" element={<ProfilePage />}></Route>
-                <Route path="/quizzes/create" element={<CreateQuizPage />}></Route>
-                <Route path="/profile/edit/:id" element={<EditUserPage />}></Route>
-                <Route path="/quizzes/edit/:id" element={<EditQuizPage />}></Route>
-                <Route path="/quizzes/play/:id" element={<PlayQuizPage />}></Route>
-                <Route path="/quizzes/results/:id" element={<QuizResultPage />}></Route>
+                <Route path="/profile/:id" element={<ProfilePage />} />
+                <Route path="/quizzes/create" element={<CreateQuizPage />} />
+                <Route path="/profile/edit/:id" element={<EditUserPage />} />
+                <Route path="/quizzes/edit/:id" element={<EditQuizPage />} />
+                <Route path="/quizzes/play/:id" element={<PlayQuizPage />} />
+                <Route path="/quizzes/results/:id" element={<QuizResultPage />} />
             </Route>
 
             <Route path="*" element={<p>404</p>}></Route>

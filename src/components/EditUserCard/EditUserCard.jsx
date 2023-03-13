@@ -8,33 +8,22 @@ import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 
 
-const EditUserCard = ({ userProfile }) => {
+const EditUserCard = ({ id }) => {
 
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const theme = themeValue === 'light' ? 'dark' : 'light'
     const { user, authenticateUser } = useContext(AuthContext)
 
-
-    const { username, email, avatar, _id, role } = userProfile.data
-
-    useEffect(() => {
-        setEditUser({
-            username,
-            email,
-            avatar,
-            role
-        })
-    }, [userProfile])
-
     const [errors, setErrors] = useState([])
+    const [editUser, setEditUser] = useState()
+    useEffect(() => {
+        usersService
+            .getUserById(id)
+            .then(({ data }) => setEditUser(data))
+            .catch(err => console.log(err))
+    }, [id])
 
-    const [editUser, setEditUser] = useState({
-        username,
-        email,
-        avatar,
-        role
-    })
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -50,20 +39,20 @@ const EditUserCard = ({ userProfile }) => {
 
         uploadServices
             .uploadImage(formData)
-            .then(({ data }) => usersService.editUserById(_id, { ...editUser, avatar: data.cloudinary_url }))
+            .then(({ data }) => usersService.editUserById(id, { ...editUser, avatar: data.cloudinary_url }))
             .then(({ data }) => {
-                if (user.role !== "ADMIN" || user._id === _id) {
+                if (user.role !== "ADMIN" || user._id === id) {
                     localStorage.setItem('authToken', data.authToken)
                     authenticateUser()
-                    navigate(`/profile/${_id}`)
+                    navigate(`/profile/${id}`)
                 }
-                navigate(`/profile/${_id}`)
+                navigate(`/profile/${id}`)
             })
             .catch(err => setErrors(err.response.data.errorMessages))
     }
 
     return (
-        <Form onSubmit={handleFormSubmit} >
+        editUser && <Form onSubmit={handleFormSubmit} >
 
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Username:</Form.Label>
@@ -73,9 +62,6 @@ const EditUserCard = ({ userProfile }) => {
             <Form.Group className="mb-3" controlId="email">
                 <Form.Label>Email:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="email" value={editUser.email} onChange={handleInputChange} name="email" required />
-                <Form.Text id="passwordHelpBlock" muted>
-                    Should be a correct email.
-                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="imageData">

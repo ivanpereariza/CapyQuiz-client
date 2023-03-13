@@ -9,26 +9,22 @@ import quizzesService from '../../services/quizzes.services'
 import { Rating } from '@mui/material'
 import getAverageRating from '../../utils/getAverageRating'
 import { StarOutline } from '@mui/icons-material';
+import { AuthContext } from '../../contexts/auth.context'
 
 
-const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
+const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
 
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
+    const { user } = useContext(AuthContext)
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
     const starColor = themeValue === 'light' ? '' : 'white'
 
-    const { title, theme, description, questionsArr, owner, quizImg, _id } = quiz
+    const { title, theme, description, questionsArr, owner, quizImg, _id, ratingAvg } = quiz
 
     const time = getEstimatedTime(questionsArr)
     const [played, setPlayed] = useState(false)
-    const [rating, setRating] = useState(0)
-    const [ratingLoading, setRatingLoading] = useState(true)
 
-    useEffect(() => {
-        setRating(getAverageRating(quiz))
-        setRatingLoading(false)
-    }, [])
 
     useEffect(() => {
         checkIfPlayed()
@@ -61,9 +57,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Description:</b> {description}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Estimated Time:</b> {time}</Card.Text>
-                    {
-                        !ratingLoading && <Card.Text><Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></Card.Text>
-                    }
+                    <Card.Text><Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating-read" defaultValue={ratingAvg} precision={0.5} readOnly /></Card.Text>
                     <Row>
                         {
                             owner ?

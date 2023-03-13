@@ -46,6 +46,9 @@ class QuizzesServices {
     searchQuizzes(searchValue, minRatingValue, maxRatingValue) {
         return this.api, get(`/search?search=${searchValue}&ratingMin=${minRatingValue}&ratingMax=${maxRatingValue}`)
     }
+    getQuizOwner(id) {
+        return this.api.get(`/ownerOfQuiz/${id}`)
+    }
 }
 
 const quizzesService = new QuizzesServices()

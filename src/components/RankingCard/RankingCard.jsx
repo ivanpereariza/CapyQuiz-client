@@ -4,13 +4,20 @@ import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 import { ThemeContext } from '../../contexts/theme.context'
 
-const RankingCard = ({ user, idx }) => {
+const RankingCard = ({ avatar, points, _id, quizzes, username, idx }) => {
 
-    const { avatar, points, _id, quizzes, username } = user
 
     const { themeValue } = useContext(ThemeContext)
 
     const themeText = themeValue === 'dark' ? 'light' : 'dark'
+
+    const quizzStyles = [{
+        cardColor: 'warning',
+        cardPadding: '4',
+        width: '65px',
+        height: '65px',
+        fs: '2'
+    }]
 
     let cardColor
     let cardPadding

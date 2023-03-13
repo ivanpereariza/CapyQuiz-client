@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Container } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import PlayQuiz from "../../components/PlayQuiz/PlayQuiz"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
-import { AuthContext } from "../../contexts/auth.context"
 import quizzesService from "../../services/quizzes.services"
 import shuffleArray from "../../utils/shuffleArray"
 
@@ -11,18 +10,12 @@ const PlayQuizPage = () => {
 
     const { id } = useParams()
 
-    const { user } = useContext(AuthContext)
-
     const [quiz, setQuiz] = useState([])
     const [quizLoader, setQuizLoader] = useState(true)
-
 
     useEffect(() => {
         getQuizById()
     }, [])
-
-
-
 
     const shuffleAnswers = (data) => {
         setQuiz({
@@ -40,9 +33,7 @@ const PlayQuizPage = () => {
                 setQuizLoader(false)
             })
             .catch(err => console.log(err))
-
     }
-
 
     return (
         <Container className="mt-4">
@@ -52,7 +43,7 @@ const PlayQuizPage = () => {
                     <SpinnerLoader />
                     :
 
-                    <PlayQuiz quiz={quiz} user={user} />
+                    <PlayQuiz quiz={quiz} />
 
             }
 
