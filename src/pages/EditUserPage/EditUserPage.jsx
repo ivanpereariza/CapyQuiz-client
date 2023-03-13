@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import { Navigate, useParams } from "react-router-dom"
 import EditUserCard from "../../components/EditUserCard/EditUserCard"
