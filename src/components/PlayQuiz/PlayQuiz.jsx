@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { ProgressBar } from "react-bootstrap"
 import ShowQuestion from "../ShowQuestion/ShowQuestion"
 
 const PlayQuiz = ({ quiz }) => {
@@ -10,8 +11,9 @@ const PlayQuiz = ({ quiz }) => {
     const showTimer = segs => {
         setTimer(segs)
         const bar = (100 / 15) * (18 - segs)
-        setBarTimer(`${bar}%`)
+        setBarTimer(bar)
     }
+
 
     return (
         <>
@@ -20,9 +22,7 @@ const PlayQuiz = ({ quiz }) => {
             <br />
             {
                 timer > 3 && timer < 18 &&
-                <div className="progress" role="progressbar" aria-label="Danger example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                    <div className="progress-bar bg-danger" style={{ width: barTimer }}></div>
-                </div>
+                <ProgressBar variant='danger' animated now={barTimer} label={`${barTimer}%`} visuallyHidden />
             }
 
             <ShowQuestion questionsArr={questionsArr} id={_id} owner={owner} showTimer={showTimer} />

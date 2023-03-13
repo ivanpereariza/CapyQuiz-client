@@ -44,7 +44,7 @@ class QuizzesServices {
         return this.api.put(`/addPoints/${id}`, { points })
     }
     searchQuizzes(searchValue, minRatingValue, maxRatingValue) {
-        return this.api, get(`/search?search=${searchValue}&ratingMin=${minRatingValue}&ratingMax=${maxRatingValue}`)
+        return this.api.get(`/search?search=${searchValue}&ratingMin=${minRatingValue}&ratingMax=${maxRatingValue}`)
     }
     getQuizOwner(id) {
         return this.api.get(`/ownerOfQuiz/${id}`)
