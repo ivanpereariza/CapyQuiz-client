@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { Outlet, Navigate } from "react-router-dom"
 import SpinnerLoader from "../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../contexts/auth.context"

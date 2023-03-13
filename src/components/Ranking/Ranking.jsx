@@ -62,6 +62,7 @@ const Ranking = ({ checkIfRanking }) => {
 
                                     )
                                 }
+                                return undefined
 
                             })
                         }

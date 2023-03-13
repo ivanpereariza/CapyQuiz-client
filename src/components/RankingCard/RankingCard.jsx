@@ -58,7 +58,7 @@ const RankingCard = ({ user, idx }) => {
                         <Col xs={{ span: 4 }}>
                             <Row className='align-items-center'>
                                 <Col md={{ span: 4 }}>
-                                    <img style={{ width: width, height: height }} src={avatar} />
+                                    <img style={{ width: width, height: height }} src={avatar} alt={username} />
                                 </Col>
                                 <Col md={{ span: 8 }}   >
                                     <p className={`text-${themeText} m-auto fs-${fs}`}>{username}</p>

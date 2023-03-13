@@ -13,11 +13,7 @@ const RankingPage = () => {
     const [inRanking, setInRanking] = useState(false)
 
     const checkIfRanking = (ranking) => {
-        ranking.map(elm => {
-            if (elm.points && user?._id === elm._id) {
-                setInRanking(true)
-            }
-        })
+        ranking.map(elm => elm.points && user?._id === elm._id && setInRanking(true))
     }
     return (
         <Container className="mt-4">

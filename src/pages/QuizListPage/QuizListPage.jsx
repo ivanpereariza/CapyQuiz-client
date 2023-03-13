@@ -25,7 +25,6 @@ const QuizListPage = () => {
 
     useEffect(() => {
         loadQuizzes()
-
     }, [])
 
     useEffect(() => {
@@ -82,7 +81,7 @@ const QuizListPage = () => {
                 <hr />
                 <Row className='align-items-center'>
                     <Col md={{ span: 4 }}>
-                        <SearchBar handleSearchBar={handleSearchBar} />
+                        <SearchBar handleSearchBar={handleSearchBar} searchValue={searchValue} />
                     </Col>
                     <Col md={{ span: 3, offset: 1 }}>
                         <div>

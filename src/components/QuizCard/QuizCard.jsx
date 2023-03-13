@@ -46,7 +46,7 @@ const QuizCard = ({ quiz, openModalDetails, user, fireFinalActions }) => {
 
     const checkIfPlayed = () => {
         user?.quizzes.map(elm => {
-            elm.quiz === _id && setPlayed(true)
+            return elm.quiz === _id && setPlayed(true)
         })
     }
 

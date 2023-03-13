@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { Container, Modal } from "react-bootstrap"
+import { Modal } from "react-bootstrap"
 import { ThemeContext } from "../../contexts/theme.context"
 import quizzesService from "../../services/quizzes.services"
 import QuizDetails from "../QuizDetails/QuizDetails"
