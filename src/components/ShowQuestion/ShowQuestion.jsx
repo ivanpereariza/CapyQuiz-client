@@ -106,10 +106,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
         if (!played) {
             usersService
                 .addQuizToUserById(currentUser._id, { quiz: id, points: totalPoints })
-                .then(() => {
-                    console.log(totalPoints)
-                    return quizzesService.addPointsToArr(id, totalPoints)
-                })
+                .then(() => quizzesService.addPointsToArr(id, totalPoints))
                 .then(() => usersService.addPointsToUser(currentUser._id, totalPoints))
                 .then(() => usersService.resetUserToken(currentUser._id))
                 .then(({ data }) => {
@@ -153,7 +150,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
                     segs >= 3 && segs < 18 ?
                         <Card className={`${themeValue} card my-3`}>
                             <Card.Body >
-                                <h1 className="text-center my-3">{currentQuestion.question}</h1>
+                                <h2 className="text-center my-3">{currentQuestion.question}</h2>
                                 <hr />
                                 <Row>
                                     {

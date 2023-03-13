@@ -37,7 +37,7 @@ const EditQuizPage = () => {
         return <SpinnerLoader />
     }
 
-    if (user?._id === owner || user.role === "ADMIN" || user.role === "EDITOR") {
+    if (user?._id === owner?._id || user.role === "ADMIN" || user.role === "EDITOR") {
 
         return (
             <Container className="py-4">

@@ -16,7 +16,6 @@ const HomePage = () => {
             <Link to="/quizzes" >
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Go Quizzes!</Button>
             </Link>
-            <StarRating />
         </Container>
     )
 }

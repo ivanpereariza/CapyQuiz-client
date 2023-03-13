@@ -36,7 +36,7 @@ const QuizResultPage = () => {
     useEffect(() => {
         quiz && setAverage(getAveragePoints(quiz))
         quiz && setReadyRating(true)
-        setRating(quiz.rating?.find(rating => rating.owner === user._id).rate)
+        setRating(quiz.rating?.find(rating => rating.owner === user._id)?.rate)
     }, [quiz])
 
     useEffect(() => {

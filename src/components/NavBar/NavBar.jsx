@@ -3,7 +3,8 @@ import { Dropdown, Nav, Navbar } from 'react-bootstrap'
 import '../NavBar/NavBar.css'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
-import logo from '../../assets/img/CapyQuiz.png'
+import logoLight from '../../assets/img/capyquizlight.png'
+import logoDark from '../../assets/img/capyquizdark.png'
 import { ThemeContext } from '../../contexts/theme.context'
 
 function NavBar() {
@@ -16,7 +17,7 @@ function NavBar() {
         <Navbar collapseOnSelect expand="lg" variant={themeValue} className={`${themeValue} navbar`} >
             <Navbar.Brand >
                 <Link to='/'>
-                    <img className='navBrand' src={logo} alt="logo" />
+                    <img className='navBrand' src={themeValue === 'light' ? logoLight : logoDark} alt="logo" />
                 </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
