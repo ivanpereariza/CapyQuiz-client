@@ -8,15 +8,9 @@ import { ThemeContext } from '../../contexts/theme.context'
 
 function NavBar() {
 
-    const [profileImage, setProfileImage] = useState('');
-
     const { user, logout } = useContext(AuthContext)
     const { themeValue, switchTheme } = useContext(ThemeContext)
     const themeText = themeValue === 'light' ? '☾ Dark Mode' : '☼ Light Mode'
-
-    useEffect(() => {
-        setProfileImage(user?.avatar)
-    }, [user])
 
     return (
         <Navbar collapseOnSelect expand="lg" variant={themeValue} className={`${themeValue} navbar`} >
@@ -56,7 +50,7 @@ function NavBar() {
 
                                 <Dropdown className='mx-5' drop={'start'}>
                                     <Dropdown.Toggle as='span' align='end' variant="secondary">
-                                        <img className='navAvatar pointerCursor' src={profileImage} alt="profile" />
+                                        <img className='navAvatar pointerCursor' src={user ? user.avatar : ''} alt="profile" />
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue}  mx-3 my-3`}>
                                         <Dropdown.Item as={'span'}>

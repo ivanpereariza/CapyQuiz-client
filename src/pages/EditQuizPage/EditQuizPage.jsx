@@ -14,20 +14,20 @@ const EditQuizPage = () => {
     const { user, isLoading } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
 
+    const [owner, setOwner] = useState()
 
-    const [quiz, setQuiz] = useState({})
     const [isLoadingQuiz, setIsLoadingQuiz] = useState(true)
 
     useEffect(() => {
-        getQuiz()
+        getOwner()
     }, [id])
 
-    const getQuiz = () => {
+    const getOwner = () => {
         setIsLoadingQuiz(true)
         quizzesService
-            .getQuizById(id)
+            .getQuizOwner(id)
             .then(({ data }) => {
-                setQuiz(data)
+                setOwner(data)
                 setIsLoadingQuiz(false)
             })
             .catch(err => console.log(err))
@@ -37,7 +37,7 @@ const EditQuizPage = () => {
         return <SpinnerLoader />
     }
 
-    if (user?._id === quiz.owner?._id || user.role === "ADMIN" || user.role === "EDITOR") {
+    if (user?._id === owner || user.role === "ADMIN" || user.role === "EDITOR") {
 
         return (
             <Container>

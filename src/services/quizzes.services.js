@@ -43,6 +43,10 @@ class QuizzesServices {
     addPointsToArr(id, points) {
         return this.api.put(`/addPoints/${id}`, { points })
     }
+
+    getQuizOwner(id) {
+        return this.api.get(`/ownerOfQuiz/${id}`)
+    }
 }
 
 const quizzesService = new QuizzesServices()

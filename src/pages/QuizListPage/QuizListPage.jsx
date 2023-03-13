@@ -20,7 +20,6 @@ const QuizListPage = () => {
     const [ratingValue, setRatingValue] = useState([0, 5])
     const [searchValue, setSearchValue] = useState('')
 
-
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
@@ -98,18 +97,16 @@ const QuizListPage = () => {
                         </div>
                     </Col>
                     {
-                        user ?
-                            <Col className='d-flex' md={{ span: 2, offset: 2 }} >
-                                <NewQuizzButton setShowModal={setShowModal} />
-                            </Col>
-                            :
-                            undefined
+                        user &&
+                        <Col className='d-flex' md={{ span: 2, offset: 2 }} >
+                            <NewQuizzButton setShowModal={setShowModal} />
+                        </Col>
                     }
                 </Row>
-                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} user={user} fireFinalActions={fireFinalActions} />
+                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} fireFinalActions={fireFinalActions} />
             </Container>
 
-            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} user={user} />
+            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
 
             <NewQuizModal fireFinalActions={fireFinalActions} setShowModal={setShowModal} showModal={showModal} />
 

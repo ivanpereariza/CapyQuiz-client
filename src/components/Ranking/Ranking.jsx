@@ -26,7 +26,7 @@ const Ranking = ({ checkIfRanking }) => {
         <>
             {
                 ranking ?
-                    <div>
+                    <>
                         <Row className="text-center mb-3">
                             <Col xs={{ span: 1, offset: 1 }}>
                             </Col>
@@ -48,14 +48,12 @@ const Ranking = ({ checkIfRanking }) => {
                             ranking.map((elm, idx) => {
                                 if (elm.points) {
                                     return (
-
-
                                         <Row key={idx} className='align-items-center'>
                                             <Col xs={{ span: 1, offset: 1 }}>
                                                 <p className="m-auto text-end fs-3"> {idx + 1}</p>
                                             </Col>
                                             <Col xs={{ span: 9 }}>
-                                                <RankingCard user={elm} idx={idx} />
+                                                <RankingCard {...elm} idx={idx} />
                                             </Col>
 
                                         </Row>
@@ -66,7 +64,7 @@ const Ranking = ({ checkIfRanking }) => {
 
                             })
                         }
-                    </div>
+                    </>
                     :
                     <SpinnerLoader />
             }

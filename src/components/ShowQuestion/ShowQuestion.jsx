@@ -11,7 +11,7 @@ import correct from './../../assets/audios/correct.mp3'
 import { AuthContext } from "../../contexts/auth.context"
 
 
-const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
+const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
 
     const [i, setI] = useState(0)
     const [segs, setSegs] = useState(0)
@@ -25,13 +25,12 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
     const [currentTrack, setCurrentTrack] = useState('')
 
     const { themeValue } = useContext(ThemeContext)
-    const { authenticateUser } = useContext(AuthContext)
+    const { authenticateUser, user } = useContext(AuthContext)
 
     const navigate = useNavigate()
 
     const changeIndex = () => {
         setI(previousState => previousState + 1)
-
     }
 
     const counter = () => {
@@ -39,7 +38,6 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
     }
 
     useEffect(() => {
-        getUser()
         setInterval(() => {
             counter()
         }, 100)
@@ -48,6 +46,12 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
     useEffect(() => {
         setTotalPoints(previousState => previousState + points)
     }, [points])
+
+    useEffect(() => {
+        setCurrentUser(user)
+
+    }, [user])
+
 
     useEffect(() => {
         setIsPlaying(false)
@@ -74,13 +78,6 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
             savePointOwner()
         }
     }, [segs])
-
-    const getUser = () => {
-        usersService
-            .getUserById(user._id)
-            .then(({ data }) => setCurrentUser(data))
-            .catch(err => console.log(err))
-    }
 
     const handleAnswer = e => {
 
@@ -111,7 +108,7 @@ const ShowQuestion = ({ questionsArr, id, user, owner, showTimer }) => {
                 .addQuizToUserById(currentUser._id, { quiz: id, points: totalPoints })
                 .then(() => {
                     console.log(totalPoints)
-                    quizzesService.addPointsToArr(id, totalPoints)
+                    return quizzesService.addPointsToArr(id, totalPoints)
                 })
                 .then(() => usersService.addPointsToUser(currentUser._id, totalPoints))
                 .then(() => usersService.resetUserToken(currentUser._id))

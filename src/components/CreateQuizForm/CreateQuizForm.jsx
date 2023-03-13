@@ -54,9 +54,9 @@ const CreateQuizForm = ({ fireFinalActions }) => {
         updatedQuestionsArr[questionIndex].answersOptions[optionIndex] = value
         setQuestionsArr(updatedQuestionsArr)
     }
+
     const handleSubmit = e => {
         e.preventDefault()
-
 
         const formData = new FormData()
         formData.append('imageData', e.target.imageData.files[0])
@@ -92,7 +92,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
                 <Form.Label>Theme:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
                 <Form.Text id="passwordHelpBlock" muted>
-                    The theme should be 20 characters long as maximun.
+                    The theme should be 20 characters long as maximum.
                 </Form.Text>
             </Form.Group>
 
@@ -100,7 +100,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
                 <Form.Label>Description:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} as="textarea" rows={2} name="description" value={generalData.description} onChange={handleGeneralChange} required />
                 <Form.Text id="passwordHelpBlock" muted>
-                    The description should be 200 characters long as maximun.
+                    The description should be 200 characters long as maximum.
                 </Form.Text>
             </Form.Group>
 

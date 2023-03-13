@@ -32,7 +32,6 @@ const EditQuizForm = () => {
 
     useEffect(() => {
         getQuiz()
-
     }, [])
 
     const getQuiz = () => {
@@ -116,7 +115,7 @@ const EditQuizForm = () => {
                 <Form.Label>Theme:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="theme" value={generalData.theme} onChange={handleGeneralChange} required />
                 <Form.Text id="passwordHelpBlock" muted>
-                    The theme should be 20 characters long as maximun.
+                    The theme should be 20 characters long as maximum.
                 </Form.Text>
             </Form.Group>
 
@@ -124,7 +123,7 @@ const EditQuizForm = () => {
                 <Form.Label>Description:</Form.Label>
                 <Form.Control className={`${themeValue} secondary`} type="text" name="description" value={generalData.description} onChange={handleGeneralChange} required />
                 <Form.Text id="passwordHelpBlock" muted>
-                    The description should be 200 characters long as maximun.
+                    The description should be 200 characters long as maximum.
                 </Form.Text>
             </Form.Group>
 
