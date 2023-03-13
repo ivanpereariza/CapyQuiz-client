@@ -1,7 +1,8 @@
-import { ResponsiveBar, } from '@nivo/bar';
-import { ThemeProvider } from '@nivo/core';
-import { useContext } from 'react';
-import { ThemeContext } from '../../contexts/theme.context';
+import { ResponsiveBar, } from '@nivo/bar'
+import { ThemeProvider } from '@nivo/core'
+import { useContext } from 'react'
+import { ThemeContext } from '../../contexts/theme.context'
+
 const BarChart = ({ points, average }) => {
 
     const { themeValue } = useContext(ThemeContext)

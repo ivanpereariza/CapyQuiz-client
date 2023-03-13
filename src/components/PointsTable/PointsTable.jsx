@@ -1,6 +1,7 @@
-import { useEffect, useState, useContext } from 'react';
-import Table from 'react-bootstrap/Table';
+import { useEffect, useState, useContext } from 'react'
+import Table from 'react-bootstrap/Table'
 import { ThemeContext } from "../../contexts/theme.context"
+
 function PointsTable({ points }) {
 
     const [topPoints, setTopPoints] = useState()
