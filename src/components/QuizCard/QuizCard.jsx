@@ -46,32 +46,21 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
 
     return (
 
-        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ minHeight: '40rem' }}>
+        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ minHeight: '30rem' }}>
             <Card.Body>
                 <Link onClick={() => openModalDetails(_id)}>
                     <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className={`text-${themeColor} mb-4`} > {title}</Card.Title>
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
-                    <Card.Text className={`text-${themeColor}`}><b>Description:</b> {description}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Estimated Time:</b> {time}</Card.Text>
                     <StarRating fireFinalActions={false} readOnly={true} rating={ratingAvg} />
-                    <Row>
-                        {
-                            owner ?
-                                <Col md>
-                                    <Card.Text className={`text-${themeColor} mb-4`}><b>Author:</b> {owner?.username} <img className='ownerAvatar' src={`${owner?.avatar}`} alt={owner.username} /></Card.Text>
-                                </Col>
-                                :
-                                undefined
-                        }
-                    </Row>
                     {
                         played && <p className={`text-${themeColor} text-center fs-4`}><b>Played ✓</b></p>
                     }
                 </Link >
                 {
                     user?.role === 'ADMIN' || user?.role === 'EDITOR' ?
-                        <Row>
+                        <Row className='mt-4'>
                             <Col md={{ span: 6 }}>
                                 <Link to={`/quizzes/edit/${_id}`} className='d-grid ' >
                                     <Button type="submit" variant={`warning `}>Edit Quiz</Button>

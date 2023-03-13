@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
+import { AuthContext } from "../../contexts/auth.context"
 
 const EditQuizForm = () => {
 
@@ -14,6 +15,7 @@ const EditQuizForm = () => {
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
+    const { user } = useContext(AuthContext)
 
 
     const [errors, setErrors] = useState([])
@@ -22,13 +24,12 @@ const EditQuizForm = () => {
         title: '',
         theme: '',
         description: '',
+        questionsArr: [{
+            question: '',
+            correctAnswer: '',
+            answersOptions: ['', '', '']
+        }]
     })
-
-    const [questionsArr, setQuestionsArr] = useState([{
-        question: '',
-        correctAnswer: '',
-        answersOptions: ['', '', '']
-    },])
 
     useEffect(() => {
         getQuiz()
@@ -41,9 +42,9 @@ const EditQuizForm = () => {
                 setGeneralData({
                     title: data.title,
                     theme: data.theme,
-                    description: data.description
+                    description: data.description,
+                    questionsArr: data.questionsArr
                 })
-                setQuestionsArr(data.questionsArr)
             })
             .catch(err => console.log(err))
     }
@@ -52,42 +53,47 @@ const EditQuizForm = () => {
         const { name, value } = e.target
         setGeneralData({ ...generalData, [name]: value })
     }
+
     const handleQuestionChange = (e, index) => {
         const { name, value } = e.target
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr[index] = { ...updatedQuestionsArr[index], [name]: value }
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
+
     const handleAddQuestion = () => {
-        const newArr = [...questionsArr]
+        const newArr = [...generalData.questionsArr]
         newArr.push({ question: '', correctAnswer: '', answersOptions: ['', '', ''] })
-        setQuestionsArr(newArr)
+        setGeneralData({ ...generalData, questionsArr: newArr })
     }
+
     const handleRemoveQuestion = index => {
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr.splice(index, 1)
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
+
     const handleAnswerOptionChange = (e, questionIndex, optionIndex) => {
         const { value } = e.target
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr[questionIndex].answersOptions[optionIndex] = value
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
+
     const handleSubmit = e => {
         e.preventDefault()
 
-        if (questionsArr.length >= 5) {
+        if (generalData.questionsArr.length >= 5) {
 
             const formData = new FormData()
             formData.append('imageData', e.target.imageData.files[0])
 
             uploadServices
                 .uploadImage(formData)
-                .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, questionsArr, quizImg: data.cloudinary_url }))
+                .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, quizImg: data.cloudinary_url }))
                 .then(() => {
                     emitMessage('Quiz edited!')
-                    navigate('/quizzes')
+                    navigate(`/profile/${user?._id}`)
                 })
                 .catch(err => setErrors(err.response.data.errorMessages))
         } else setErrors(['Should have at least 5 questions'])
@@ -128,7 +134,7 @@ const EditQuizForm = () => {
             </Form.Group>
 
             {
-                questionsArr?.map((question, index) => {
+                generalData.questionsArr?.map((question, index) => {
                     return <QuestionsQuizForm key={index} index={index} question={question} handleQuestionChange={handleQuestionChange} handleAnswerOptionChange={handleAnswerOptionChange} handleRemoveQuestion={handleRemoveQuestion} />
                 })
             }

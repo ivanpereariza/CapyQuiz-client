@@ -12,7 +12,6 @@ const CreateQuizForm = ({ fireFinalActions }) => {
     const { themeValue } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
 
-
     const [errors, setErrors] = useState([])
 
     const [generalData, setGeneralData] = useState({
@@ -20,13 +19,12 @@ const CreateQuizForm = ({ fireFinalActions }) => {
         theme: '',
         description: '',
         avatar: '',
+        questionsArr: [{
+            question: '',
+            correctAnswer: '',
+            answersOptions: ['', '', '']
+        }]
     })
-
-    const [questionsArr, setQuestionsArr] = useState([{
-        question: '',
-        correctAnswer: '',
-        answersOptions: ['', '', '']
-    },])
 
     const handleGeneralChange = e => {
         const { name, value } = e.target
@@ -34,25 +32,25 @@ const CreateQuizForm = ({ fireFinalActions }) => {
     }
     const handleQuestionChange = (e, index) => {
         const { name, value } = e.target
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr[index] = { ...updatedQuestionsArr[index], [name]: value }
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
     const handleAddQuestion = () => {
-        const newArr = [...questionsArr]
+        const newArr = [...generalData.questionsArr]
         newArr.push({ question: '', correctAnswer: '', answersOptions: ['', '', ''] })
-        setQuestionsArr(newArr)
+        setGeneralData({ ...generalData, questionsArr: newArr })
     }
     const handleRemoveQuestion = index => {
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr.splice(index, 1)
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
     const handleAnswerOptionChange = (e, questionIndex, optionIndex) => {
         const { value } = e.target
-        const updatedQuestionsArr = [...questionsArr]
+        const updatedQuestionsArr = [...generalData.questionsArr]
         updatedQuestionsArr[questionIndex].answersOptions[optionIndex] = value
-        setQuestionsArr(updatedQuestionsArr)
+        setGeneralData({ ...generalData, questionsArr: updatedQuestionsArr })
     }
 
     const handleSubmit = e => {
@@ -63,7 +61,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
 
         uploadServices
             .uploadImage(formData)
-            .then(({ data }) => quizzesService.createNewQuiz({ ...generalData, questionsArr, quizImg: data.cloudinary_url }))
+            .then(({ data }) => quizzesService.createNewQuiz({ ...generalData, quizImg: data.cloudinary_url }))
             .then(() => {
                 emitMessage('Quiz created!')
                 fireFinalActions()
@@ -105,7 +103,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
             </Form.Group>
 
             {
-                questionsArr.map((question, index) => {
+                generalData.questionsArr.map((question, index) => {
                     return <QuestionsQuizForm key={index} index={index} question={question} handleQuestionChange={handleQuestionChange} handleAnswerOptionChange={handleAnswerOptionChange} handleRemoveQuestion={handleRemoveQuestion} />
                 })
             }
