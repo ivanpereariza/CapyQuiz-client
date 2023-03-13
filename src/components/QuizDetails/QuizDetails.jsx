@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import React from 'react'
+import { Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import SpinnerLoader from '../SpinnerLoader/SpinnerLoader'
 import './../QuizDetails/QuizDetails.css'
@@ -19,7 +19,7 @@ const QuizDetails = ({ quiz, user }) => {
             {
                 quiz ?
                     <div className='justify-content-center'>
-                        <img className='QuizDetailsImg d-block mx-auto' src={quiz.quizImg} alt="quiz Image" />
+                        <img className='QuizDetailsImg d-block mx-auto' src={quiz.quizImg} alt={quiz.title} />
                         <h3 className='my-4'> {quiz.title}</h3>
                         <p><b>Theme:</b> {quiz.theme}</p>
                         <p><b>Description:</b> {quiz.description}</p>
