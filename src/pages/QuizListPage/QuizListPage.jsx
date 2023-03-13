@@ -10,13 +10,10 @@ import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
 import getAverageRating from '../../utils/getAverageRating'
 
-
-
-
 const QuizListPage = () => {
 
     const [quizzes, setQuizzes] = useState('')
-    const [quizzesBackUp, setQuizzesBackUp] = useState('')
+    const [quizzesBackUp, setQuizzesBackUp] = useState()
     const [showModal, setShowModal] = useState(false)
     const [showModalDetails, setShowModalDetails] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState('')
@@ -31,6 +28,11 @@ const QuizListPage = () => {
 
     }, [])
 
+    useEffect(() => {
+        handleFilters()
+    }, [searchValue, ratingValue])
+
+
 
     const loadQuizzes = () => {
         quizzesService
@@ -44,26 +46,23 @@ const QuizListPage = () => {
 
     const handleSearchBar = e => {
         setSearchValue(e.target.value)
-
-        // handleFilters()
-        const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(e.target.value.toLowerCase())
-            || elm.theme.toLowerCase().includes(e.target.value.toLowerCase()))
-        setQuizzes(filteredQuizzes)
     }
 
     const handleRatingBar = (e, newValue) => {
         setRatingValue(newValue)
-        // handleFilters()
-        const filteredQuizzes = quizzesBackUp.filter(elm => getAverageRating(elm) >= e.target.value[0] && getAverageRating(elm) <= e.target.value[1])
-        setQuizzes(filteredQuizzes)
+
     }
 
-    // const handleFilters = () => {
-    //     const filteredQuizzes = quizzesBackUp.filter(elm => elm.title.toLowerCase().includes(searchValue.toLowerCase())
-    //         || elm.theme.toLowerCase().includes(searchValue.toLowerCase())).filter(elm => getAverageRating(elm) >= ratingValue[0] && getAverageRating(elm) <= ratingValue[1])
-    //     setQuizzes(filteredQuizzes)
-
-    // }
+    const handleFilters = () => {
+        if (quizzesBackUp) {
+            const filteredQuizzes = quizzesBackUp?.filter(elm =>
+                (elm.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+                    elm.theme.toLowerCase().includes(searchValue.toLowerCase())) &&
+                getAverageRating(elm) >= ratingValue[0] &&
+                getAverageRating(elm) <= ratingValue[1])
+            setQuizzes(filteredQuizzes)
+        }
+    }
 
 
     const fireFinalActions = () => {
