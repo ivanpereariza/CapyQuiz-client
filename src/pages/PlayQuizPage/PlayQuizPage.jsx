@@ -36,7 +36,7 @@ const PlayQuizPage = () => {
     }
 
     return (
-        <Container className="mt-4">
+        <Container className="py-4">
 
             {
                 quizLoader ?

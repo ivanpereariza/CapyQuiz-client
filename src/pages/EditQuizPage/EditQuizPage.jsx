@@ -40,7 +40,7 @@ const EditQuizPage = () => {
     if (user?._id === owner || user.role === "ADMIN" || user.role === "EDITOR") {
 
         return (
-            <Container>
+            <Container className="py-4">
                 <Row>
 
                     <Col md={{ offset: 2, span: 8 }}>

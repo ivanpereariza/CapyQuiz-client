@@ -73,7 +73,7 @@ const QuizListPage = () => {
 
     return (
         <>
-            <Container className='mt-4'>
+            <Container className='py-4'>
                 <h1>Check the quizzes created by the community!</h1>
                 <hr />
                 <Row className='align-items-center'>

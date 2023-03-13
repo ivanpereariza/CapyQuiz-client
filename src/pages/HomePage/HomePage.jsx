@@ -11,7 +11,7 @@ const HomePage = () => {
     const theme = themeValue === 'light' ? 'dark' : 'light'
 
     return (
-        <Container className={`mt-4`}>
+        <Container className="py-4">
             <h1>Welcome to CapyQuiz :3</h1>
             <Link to="/quizzes" >
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Go Quizzes!</Button>

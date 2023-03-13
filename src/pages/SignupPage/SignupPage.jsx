@@ -3,7 +3,7 @@ import SignupForm from '../../components/SignupForm/SignupForm'
 
 function SignupPage() {
     return (
-        <Container className="mt-4">
+        <Container className="py-4">
 
             <Row>
 

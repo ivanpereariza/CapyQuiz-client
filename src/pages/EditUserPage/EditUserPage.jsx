@@ -27,7 +27,7 @@ const EditUserPage = () => {
             <>
                 {
                     id ?
-                        <Container className="mt-4">
+                        <Container className="py-4">
                             <Row>
                                 <Col md={{ offset: 3, span: 6 }} >
                                     <h1>Edit Profile</h1>

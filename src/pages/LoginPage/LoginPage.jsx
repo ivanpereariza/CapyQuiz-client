@@ -3,7 +3,7 @@ import LoginForm from "../../components/LoginForm/LoginForm"
 
 const LoginPage = () => {
     return (
-        <Container className="mt-4">
+        <Container className="py-4">
 
             <Row>
 

@@ -7,7 +7,6 @@ import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from '../../contexts/auth.context'
 import { Link, useNavigate } from 'react-router-dom'
 import usersService from '../../services/users.services'
-import quizzesService from '../../services/quizzes.services'
 import QuizOwnerCard from '../../components/QuizOwnerCard/QuizOwnerCard'
 
 const ProfilePage = () => {
@@ -19,24 +18,17 @@ const ProfilePage = () => {
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
 
-    const [quizzes, setQuizzes] = useState([])
     const [userProfile, setUserProfile] = useState()
 
     useEffect(() => {
-        getUserQuizzes()
-    }, [])
-
-    useEffect(() => {
-        usersService
-            .getUserById(id)
-            .then(({ data }) => setUserProfile(data))
-            .catch(err => console.log(err))
+        getUserWithQuizzes()
     }, [id])
 
-    const getUserQuizzes = () => {
-        quizzesService
-            .getQuizByOwner(id)
-            .then(({ data }) => setQuizzes(data))
+
+    const getUserWithQuizzes = () => {
+        usersService
+            .getFullUserInfo(id)
+            .then(({ data }) => setUserProfile(data))
             .catch(err => console.log(err))
     }
 
@@ -50,7 +42,7 @@ const ProfilePage = () => {
 
     return (
         userProfile ?
-            <Container className='mt-4'>
+            <Container className='py-4'>
                 <Row className='justify-content-center'>
                     <Card className={`ProfileCard ${themeValue} card my-5 text-center`}>
                         <Card.Img variant="top" className='AvatarImg' src={userProfile.avatar} alt={userProfile.username} />
@@ -80,15 +72,15 @@ const ProfilePage = () => {
                     </Card>
                 </Row>
                 {
-                    quizzes.length ?
+                    userProfile.quizzesDone.length ?
                         <Row className='justify-content-center'>
                             <h2 className='text-center'>Quizzes by {userProfile.username}</h2>
                             <hr />
                             {
-                                quizzes.map(quiz => {
+                                userProfile?.quizzesDone.map(quiz => {
                                     return (
                                         <Col md={{ span: 4 }} key={quiz._id}>
-                                            <QuizOwnerCard quiz={quiz} getUserQuizzes={getUserQuizzes} />
+                                            <QuizOwnerCard quiz={quiz} />
                                         </Col>
                                     )
                                 })

@@ -16,7 +16,7 @@ const RankingPage = () => {
         ranking.map(elm => elm.points && user?._id === elm._id && setInRanking(true))
     }
     return (
-        <Container className="mt-4">
+        <Container className="py-4">
             <Row className="mb-4">
                 <Col md={{ offset: 2, span: 9 }}>
                     <Row className="align-items-center">

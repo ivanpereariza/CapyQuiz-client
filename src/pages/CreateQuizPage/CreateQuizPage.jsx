@@ -11,7 +11,7 @@ const CreateQuizPage = () => {
     }
 
     return (
-        <Container className="mt-4">
+        <Container className="py-4">
             <Row>
                 <Col md={{ offset: 2, span: 8 }}>
 
