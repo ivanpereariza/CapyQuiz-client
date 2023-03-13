@@ -6,10 +6,8 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import getEstimatedTime from '../../utils/getEstimatedTime'
 import quizzesService from '../../services/quizzes.services'
-import { Rating } from '@mui/material'
-import getAverageRating from '../../utils/getAverageRating'
-import { StarOutline } from '@mui/icons-material';
 import { AuthContext } from '../../contexts/auth.context'
+import StarRating from '../StarRating/StarRating'
 
 
 const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
@@ -24,7 +22,6 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
 
     const time = getEstimatedTime(questionsArr)
     const [played, setPlayed] = useState(false)
-
 
     useEffect(() => {
         checkIfPlayed()
@@ -57,7 +54,7 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Description:</b> {description}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Estimated Time:</b> {time}</Card.Text>
-                    <Card.Text><Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating-read" defaultValue={ratingAvg} precision={0.5} readOnly /></Card.Text>
+                    <StarRating fireFinalActions={false} readOnly={true} rating={ratingAvg} />
                     <Row>
                         {
                             owner ?

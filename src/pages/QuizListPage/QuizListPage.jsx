@@ -1,4 +1,3 @@
-import { Slider } from '@mui/material'
 import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
@@ -8,12 +7,12 @@ import QuizList from '../../components/QuizList/QuizList'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
-import getAverageRating from '../../utils/getAverageRating'
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const QuizListPage = () => {
 
     const [quizzes, setQuizzes] = useState('')
-    const [quizzesBackUp, setQuizzesBackUp] = useState()
     const [showModal, setShowModal] = useState(false)
     const [showModalDetails, setShowModalDetails] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState('')
@@ -27,7 +26,7 @@ const QuizListPage = () => {
     }, [])
 
     useEffect(() => {
-        handleFilters()
+        filteredQuizzes()
     }, [searchValue, ratingValue])
 
 
@@ -35,10 +34,7 @@ const QuizListPage = () => {
     const loadQuizzes = () => {
         quizzesService
             .getAllQuizzes()
-            .then(({ data }) => {
-                setQuizzes(data)
-                setQuizzesBackUp(data)
-            })
+            .then(({ data }) => setQuizzes(data))
             .catch(err => console.log(err))
     }
 
@@ -46,22 +42,15 @@ const QuizListPage = () => {
         setSearchValue(e.target.value)
     }
 
-    const handleRatingBar = (e, newValue) => {
-        setRatingValue(newValue)
-
+    const handleRatingBar = e => {
+        setRatingValue(e)
     }
-
-    const handleFilters = () => {
-        if (quizzesBackUp) {
-            const filteredQuizzes = quizzesBackUp?.filter(elm =>
-                (elm.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-                    elm.theme.toLowerCase().includes(searchValue.toLowerCase())) &&
-                getAverageRating(elm) >= ratingValue[0] &&
-                getAverageRating(elm) <= ratingValue[1])
-            setQuizzes(filteredQuizzes)
-        }
+    const filteredQuizzes = () => {
+        quizzesService
+            .searchQuizzes(searchValue, ratingValue[0], ratingValue[1])
+            .then(({ data }) => setQuizzes(data))
+            .catch(err => console.log(err))
     }
-
 
     const fireFinalActions = () => {
         setShowModal(false)
@@ -71,6 +60,15 @@ const QuizListPage = () => {
     const openModalDetails = (id) => {
         setShowModalDetails(true)
         setSelectedQuiz(id)
+    }
+
+    const marks = {
+        0: '0',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5'
     }
 
     return (
@@ -86,13 +84,13 @@ const QuizListPage = () => {
                         <div>
                             <h4>Filter by rating:</h4>
                             <Slider
-                                getAriaLabel={() => 'Ranking range'}
                                 value={ratingValue}
                                 onChange={handleRatingBar}
-                                valueLabelDisplay="auto"
-                                max={5}
+                                range
                                 min={0}
-                                color={'primary'}
+                                max={5}
+                                marks={marks}
+
                             />
                         </div>
                     </Col>

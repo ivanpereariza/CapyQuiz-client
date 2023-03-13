@@ -7,22 +7,18 @@ import getEstimatedTime from '../../utils/getEstimatedTime'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
-import getAverageRating from '../../utils/getAverageRating'
-import { Rating } from '@mui/material'
-import { StarOutline } from '@mui/icons-material'
+import StarRating from '../StarRating/StarRating'
 
 const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
 
     const { user } = useContext(AuthContext)
     const { themeValue } = useContext(ThemeContext)
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
-    const starColor = themeValue === 'light' ? '' : 'white'
 
-    const [rating, setRating] = useState(0)
     const [ratingLoading, setRatingLoading] = useState(true)
 
 
-    const { title, theme, description, questionsArr, quizImg, _id, owner } = quiz
+    const { title, theme, description, questionsArr, quizImg, _id, owner, ratingAvg } = quiz
 
     const time = getEstimatedTime(questionsArr)
     const navigate = useNavigate()
@@ -37,7 +33,6 @@ const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
             .catch(err => console.log(err))
     }
     useEffect(() => {
-        setRating(getAverageRating(quiz))
         setRatingLoading(false)
     }, [quiz])
 
@@ -50,7 +45,8 @@ const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
                 <Card.Text><b>Description:</b> {description}</Card.Text>
                 <Card.Text><b>Estimated Time:</b> {time}</Card.Text>
                 {
-                    !ratingLoading && <Card.Text><Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating-read" defaultValue={rating} precision={0.5} readOnly /></Card.Text>
+                    !ratingLoading && <StarRating fireFinalActions={false} readOnly={true} rating={ratingAvg} />
+
                 }
                 <hr />
                 <Link to={`/quizzes/play/${_id}`} className='d-grid ' >

@@ -7,12 +7,11 @@ import BarChart from "../../components/BarChart/BarChart"
 import { Card, Col, Container, Row } from "react-bootstrap"
 import { ThemeContext } from "../../contexts/theme.context"
 import PointsTable from "../../components/PointsTable/PointsTable"
-import { Rating } from "@mui/material"
 import getAverageRating from "../../utils/getAverageRating"
 import getAveragePoints from "../../utils/getAveragePoints"
 import { MessageContext } from "../../contexts/message.context"
-import { StarOutline } from "@mui/icons-material"
 import '../QuizResultPage/QuizResultPage.css'
+import StarRating from "../../components/StarRating/StarRating"
 
 const QuizResultPage = () => {
 
@@ -22,14 +21,13 @@ const QuizResultPage = () => {
     const { themeValue } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
 
-    const starColor = themeValue === 'light' ? '' : 'white'
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
 
     const [quiz, setQuiz] = useState('')
     const [points, setPoints] = useState(false)
     const [average, setAverage] = useState(0)
     const [readyRating, setReadyRating] = useState(false)
-    const [vote, setVote] = useState(0)
+    const [rating, setRating] = useState(0)
 
     useEffect(() => {
         getQuizz()
@@ -38,7 +36,7 @@ const QuizResultPage = () => {
     useEffect(() => {
         quiz && setAverage(getAveragePoints(quiz))
         quiz && setReadyRating(true)
-        setVote(quiz.rating?.find(rating => rating.owner === user._id).rate)
+        setRating(quiz.rating?.find(rating => rating.owner === user._id).rate)
     }, [quiz])
 
     useEffect(() => {
@@ -54,8 +52,7 @@ const QuizResultPage = () => {
     }
 
     const handleRatingChange = e => {
-        const { value } = e.target
-        rateQuiz(+value)
+        rateQuiz(e)
     }
 
     const rateQuiz = (rate) => {
@@ -65,7 +62,7 @@ const QuizResultPage = () => {
             quizzesService
                 .editQuizById(id, { rating: quiz.rating })
                 .then(() => {
-                    const average = getAverageRating(quiz)
+                    const average = Math.round(getAverageRating(quiz))
                     return quizzesService.editQuizById(id, { ratingAvg: +average }, { new: true })
                 })
                 .then(() => emitMessage('Rate updated'))
@@ -75,12 +72,17 @@ const QuizResultPage = () => {
             quizzesService
                 .editQuizById(id, { rating: quiz.rating })
                 .then(() => {
-                    const average = getAverageRating(quiz)
+                    const average = Math.round(getAverageRating(quiz))
                     return quizzesService.editQuizById(id, { ratingAvg: +average }, { new: true })
                 })
                 .then(() => emitMessage('Rate updated'))
                 .catch(err => console.log(err))
         }
+    }
+
+    const fireFinalActions = (ratingValue) => {
+        setRating(ratingValue)
+        handleRatingChange(ratingValue)
     }
 
     return (
@@ -102,7 +104,7 @@ const QuizResultPage = () => {
                                                     <Row>
                                                         <Col md={{ span: 6 }}>
                                                             {
-                                                                readyRating && <Rating emptyIcon={<StarOutline style={{ color: starColor }} />} name="half-rating" defaultValue={vote} precision={1} onChange={handleRatingChange} />
+                                                                readyRating && <StarRating fireFinalActions={fireFinalActions} rating={rating} readOnly={false} />
                                                             }
                                                         </Col>
                                                         <Col md={{ span: 6 }}>
