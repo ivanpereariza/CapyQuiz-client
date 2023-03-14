@@ -19,11 +19,12 @@ const LoginPage = () => {
                     <hr className={`${themeValue} hr`} />
 
                     <LoginForm />
-                    <Link to={'/signup'} >
-                        <div className="mt-3">
-                            <p style={{ textDecoration: 'underline', color: 'blue' }}>Not already signed up? go sign up!</p>
-                        </div>
-                    </Link>
+
+                    <div className="mt-3">
+                        <p >Not already signed up? <Link to={'/signup'} >
+                            <strong style={{ textDecoration: 'underline', color: 'blue' }}>Go sign up!</strong></Link></p>
+                    </div>
+
                 </Col>
             </Row>
 

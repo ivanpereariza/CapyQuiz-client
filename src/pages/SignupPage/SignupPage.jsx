@@ -19,15 +19,16 @@ function SignupPage() {
                     <hr className={`${themeValue} hr`} />
 
                     <SignupForm />
-                    <Link to={'/login'} >
-                        <div className="mt-3">
-                            <p style={{ textDecoration: 'underline', color: 'blue' }}>Already have an account? Log in</p>
-                        </div>
-                    </Link>
+
+                    <div className="mt-3">
+                        <p>Already have an account? <Link to={'/login'} >
+                            <strong style={{ textDecoration: 'underline', color: 'blue' }}>Log in</strong></Link></p>
+                    </div>
+
                 </Col>
             </Row>
 
-        </Container>
+        </Container >
     )
 }
 

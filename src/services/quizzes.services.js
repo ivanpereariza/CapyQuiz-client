@@ -56,8 +56,8 @@ class QuizzesServices {
     getComments(id) {
         return this.api.get(`/quizComments/${id}`)
     }
-    getThreeRandomQuizzes() {
-        return this.api.get('/getThreeRandomQuizzes')
+    getDailyQuiz() {
+        return this.api.get('/getDailyQuiz')
     }
 }
 

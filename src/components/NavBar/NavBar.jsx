@@ -103,7 +103,12 @@ function NavBar() {
                             :
                             <>
                                 <Link >
-                                    <Nav.Link as="span" onClick={switchTheme} className="d-flex">{themeText}</Nav.Link>
+                                    <Nav.Link as="span" onClick={switchTheme}>
+                                        <img className='navIcons me-3' src={themeValue === 'light' ?
+                                            'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794164/moon_zaai1r.png'
+                                            : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794166/sun_1_uumeli.png'}
+                                        />
+                                        {themeText}</Nav.Link>
                                 </Link>
                                 <Link to="/login">
                                     <Nav.Link as="span">Log In</Nav.Link>

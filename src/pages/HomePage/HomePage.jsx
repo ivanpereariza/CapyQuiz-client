@@ -5,13 +5,21 @@ import { Link } from "react-router-dom"
 import quizzesService from "../../services/quizzes.services"
 import './HomePage.css'
 import StarRating from "../../components/StarRating/StarRating"
+import QuizCard from "../../components/QuizCard/QuizCard"
+import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 
 const HomePage = () => {
 
+    const { themeValue } = useContext(ThemeContext)
+
     const [popularQuizzesArr, setPopularQuizzesArr] = useState()
+    const [dailyQuiz, setDailyQuiz] = useState()
+
+    const theme = themeValue === 'light' ? 'dark' : 'light'
 
     useEffect(() => {
         popularQuizzes()
+        getDailyQuiz()
     }, [])
 
     const popularQuizzes = () => {
@@ -23,8 +31,14 @@ const HomePage = () => {
             })
             .catch(err => console.log(err))
     }
-    const { themeValue } = useContext(ThemeContext)
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+
+    const getDailyQuiz = () => {
+        quizzesService
+            .getDailyQuiz()
+            .then(({ data }) => setDailyQuiz(data))
+            .catch(err => console.log(err))
+    }
+
 
     return (
         <Container fluid className="py-4">
@@ -48,9 +62,12 @@ const HomePage = () => {
                     </Row>
                 </Col>
                 <Col md={{ span: 6 }} >
-                    <div className='d-flex justify-content-center'>
-                        <img src='https://via.placeholder.com/500x500.png?text=Image+Placeholder' alt='Quiz Image' className='img-fluid rounded' />
-                    </div>
+                    {
+                        dailyQuiz ?
+                            <QuizCard quiz={dailyQuiz} />
+                            :
+                            <SpinnerLoader />
+                    }
                 </Col>
             </Row>
             <section style={{ marginTop: '150px' }}>
