@@ -52,6 +52,9 @@ class QuizzesServices {
     getComments(id) {
         return this.api.get(`/quizComments/${id}`)
     }
+    getThreeRandomQuizzes() {
+        return this.api.get('/getThreeRandomQuizzes')
+    }
 }
 
 const quizzesService = new QuizzesServices()
