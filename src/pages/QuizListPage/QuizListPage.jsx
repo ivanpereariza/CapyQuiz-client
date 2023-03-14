@@ -9,6 +9,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import quizzesService from '../../services/quizzes.services'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { ThemeContext } from '../../contexts/theme.context'
 
 const QuizListPage = () => {
 
@@ -20,6 +21,7 @@ const QuizListPage = () => {
     const [searchValue, setSearchValue] = useState('')
 
     const { user } = useContext(AuthContext)
+    const { themeValue } = useContext(ThemeContext)
 
     useEffect(() => {
         loadQuizzes()
@@ -75,34 +77,38 @@ const QuizListPage = () => {
         <>
             <Container className='py-4'>
                 <h1>Check the quizzes created by the community!</h1>
-                <hr />
+                <hr className={`${themeValue} hr`} />
                 <Row className='align-items-center'>
-                    <Col md={{ span: 4 }}>
+                    <Col md={{ span: 4 }} className='my-3'>
                         <SearchBar handleSearchBar={handleSearchBar} searchValue={searchValue} />
                     </Col>
-                    <Col md={{ span: 3, offset: 1 }}>
-                        <div>
-                            <h4>Filter by rating:</h4>
-                            <Slider
-                                value={ratingValue}
-                                onChange={handleRatingBar}
-                                range
-                                min={0}
-                                max={5}
-                                marks={marks}
+                    <Col md={{ span: 5 }} className='my-3'>
+                        <Row >
+                            <Col md={{ span: 5 }}>
+                                <h5>Filter by rating:</h5>
+                            </Col>
+                            <Col md={{ span: 7 }}>
+                                <Slider
+                                    value={ratingValue}
+                                    onChange={handleRatingBar}
+                                    range
+                                    min={0}
+                                    max={5}
+                                    marks={marks}
 
-                            />
-                        </div>
+                                />
+                            </Col>
+                        </Row>
                     </Col>
                     {
                         user &&
-                        <Col className='d-flex' md={{ span: 2, offset: 2 }} >
+                        <Col md={{ span: 2, offset: 1 }} className='my-3'>
                             <NewQuizzButton setShowModal={setShowModal} />
                         </Col>
                     }
                 </Row>
                 <QuizList quizzes={quizzes} openModalDetails={openModalDetails} fireFinalActions={fireFinalActions} />
-            </Container>
+            </Container >
 
             <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
 

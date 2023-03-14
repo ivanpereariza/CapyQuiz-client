@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-class AuthService {
+class CommentsService {
     constructor() {
         this.api = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/auth`
+            baseURL: `${process.env.REACT_APP_API_URL}/comments`
         })
 
         this.api.interceptors.request.use((config) => {
@@ -18,19 +18,12 @@ class AuthService {
         })
     }
 
-    signup(userData) {
-        return this.api.post('/signup', userData)
-    }
-
-    login(userData) {
-        return this.api.post('login', userData)
-    }
-
-    verify(token) {
-        return this.api.get('verify')
+    saveComment(owner, message, quizId) {
+        return this.api.post(`/create/${quizId}`, { comment: { owner, message } })
     }
 }
 
-const authService = new AuthService()
 
-export default authService
+const commentsService = new CommentsService()
+
+export default commentsService

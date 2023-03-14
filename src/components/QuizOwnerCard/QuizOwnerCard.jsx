@@ -48,7 +48,7 @@ const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
                     !ratingLoading && <StarRating fireFinalActions={false} readOnly={true} rating={ratingAvg} />
 
                 }
-                <hr />
+                <hr className={`${themeValue} hr`} />
                 <Link to={`/quizzes/play/${_id}`} className='d-grid ' >
                     <Button type="submit" variant={`outline-${themeColor} mb-3`}>Start Game!</Button>
                 </Link>

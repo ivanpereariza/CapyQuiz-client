@@ -6,8 +6,6 @@ import usersService from "../../services/users.services"
 import AnswerCard from "../AnswerCard/AnswerCard"
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
-import wrong from './../../assets/audios/wrong.mp3'
-import correct from './../../assets/audios/correct.mp3'
 import { AuthContext } from "../../contexts/auth.context"
 
 
@@ -63,7 +61,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
     useEffect(() => {
         showTimer(segs)
         if (!clicked && segs >= 18 && segs <= 18.1) {
-            setCurrentTrack(wrong)
+            setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/wrong_c80euq.mp3')
             setIsPlaying(true)
         }
 
@@ -85,12 +83,12 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
         const value = e.target.innerText
 
         if (value === currentQuestion.correctAnswer) {
-            setCurrentTrack(correct)
+            setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/correct_s7e21k.mp3')
             setIsPlaying(true)
             setPoints(Math.floor((18 - segs) * 10))
             setSegs(18)
         } else {
-            setCurrentTrack(wrong)
+            setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/wrong_c80euq.mp3')
             setIsPlaying(true)
             setPoints(0)
             setSegs(18)
@@ -151,7 +149,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
                         <Card className={`${themeValue} card my-3`}>
                             <Card.Body >
                                 <h2 className="text-center my-3">{currentQuestion.question}</h2>
-                                <hr />
+                                <hr className={`${themeValue} hr`} />
                                 <Row>
                                     {
                                         currentQuestion.allAnswers.map((answer, i) => {

@@ -57,7 +57,7 @@ const ProfilePage = () => {
                                         <Card.Text className='mb-4'>
                                             Role: {userProfile.role}
                                         </Card.Text>
-                                        <hr />
+                                        <hr className={`${themeValue} hr`} />
                                         <Link to={`/profile/edit/${id}`} >
                                             <Button className='mx-4' type="submit" variant='warning' >Edit User</Button>
                                         </Link>
@@ -75,7 +75,7 @@ const ProfilePage = () => {
                     userProfile.quizzesDone.length ?
                         <Row className='justify-content-center'>
                             <h2 className='text-center'>Quizzes by {userProfile.username}</h2>
-                            <hr />
+                            <hr className={`${themeValue} hr`} />
                             {
                                 userProfile?.quizzesDone.map(quiz => {
                                     return (

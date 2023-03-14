@@ -5,6 +5,7 @@ import EditQuizForm from "../../components/EditQuizForm/EditQuizForm"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
+import { ThemeContext } from "../../contexts/theme.context"
 import quizzesService from "../../services/quizzes.services"
 
 const EditQuizPage = () => {
@@ -13,6 +14,7 @@ const EditQuizPage = () => {
 
     const { user, isLoading } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
+    const { themeValue } = useContext(ThemeContext)
 
     const [owner, setOwner] = useState()
 
@@ -45,7 +47,7 @@ const EditQuizPage = () => {
 
                     <Col md={{ offset: 2, span: 8 }}>
                         <h1>Edit Quiz</h1>
-                        <hr />
+                        <hr className={`${themeValue} hr`} />
                         <EditQuizForm />
                     </Col>
                 </Row>

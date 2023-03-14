@@ -5,6 +5,7 @@ import EditUserCard from "../../components/EditUserCard/EditUserCard"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
+import { ThemeContext } from "../../contexts/theme.context"
 
 
 
@@ -14,6 +15,7 @@ const EditUserPage = () => {
 
     const { user, isLoading } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
+    const { themeValue } = useContext(ThemeContext)
 
 
 
@@ -31,7 +33,7 @@ const EditUserPage = () => {
                             <Row>
                                 <Col md={{ offset: 3, span: 6 }} >
                                     <h1>Edit Profile</h1>
-                                    <hr />
+                                    <hr className={`${themeValue} hr`} />
                                     <EditUserCard id={id} />
                                 </Col>
                             </Row>

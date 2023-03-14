@@ -1,7 +1,11 @@
+import { useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import SignupForm from '../../components/SignupForm/SignupForm'
+import { ThemeContext } from '../../contexts/theme.context'
 
 function SignupPage() {
+
+    const { themeValue } = useContext(ThemeContext)
     return (
         <Container className="py-4">
 
@@ -11,7 +15,7 @@ function SignupPage() {
 
                     <h1>Signup</h1>
 
-                    <hr />
+                    <hr className={`${themeValue} hr`} />
 
                     <SignupForm />
 

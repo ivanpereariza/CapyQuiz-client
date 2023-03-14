@@ -3,13 +3,22 @@
     margin: 0 20px;
 }
 
-.navAvatar {
+.light.navAvatar {
     margin: 0px;
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
-    border: solid 1px black;
+    border: solid 2px #8B4513;
+}
+
+.dark.navAvatar {
+    margin: 0px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 2px #D2B48C;
 }
 
 .dropdown-toggle::before {
@@ -24,4 +33,26 @@
 .dropdown-menu-light {
     --bs-dropdown-link-active-bg: #bbbbbb;
     --bs-dropdown-link-hover-bg: #d1d1d1;
+}
+
+.navIcons {
+    width: 15px;
+}
+
+.nav-link.active.lightTheme {
+    color: black;
+    border-bottom: 2px solid #8B4513;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 15%;
+    padding-bottom: 0;
+}
+
+.nav-link.active.darkTheme {
+    color: #FFF;
+    border-bottom: 2px solid #D2B48C;
+    padding: 0.5rem 1rem;
+    border-radius: 15%;
+    padding-bottom: 0;
+    font-weight: bold;
 }

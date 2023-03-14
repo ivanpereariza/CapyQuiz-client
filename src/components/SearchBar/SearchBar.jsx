@@ -9,7 +9,7 @@ const SearchBar = ({ handleSearchBar, searchValue }) => {
 
     return (
 
-        <Form className="d-flex my-5" onSubmit={(event) => event.preventDefault()}>
+        <Form className="d-flex" onSubmit={(event) => event.preventDefault()}>
             <Form.Control
                 className={`${themeValue} secondary me-2`}
                 onChange={handleSearchBar}

@@ -7,7 +7,7 @@ function PointsTable({ points }) {
     const [topPoints, setTopPoints] = useState()
 
     useEffect(() => {
-        setTopPoints(points.sort((a, b) => b - a).slice(0, 10))
+        setTopPoints(points.sort((a, b) => b - a).slice(0, 6))
     }, [points])
 
     const { themeValue } = useContext(ThemeContext)

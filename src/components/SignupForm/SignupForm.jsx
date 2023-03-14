@@ -76,7 +76,6 @@ const SignupForm = () => {
 
             <div className="d-grid">
                 <Button type="submit" variant={`outline-${theme} mt-4`}>Sign Up</Button>
-
             </div>
 
         </Form>

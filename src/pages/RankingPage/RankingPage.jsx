@@ -29,7 +29,7 @@ const RankingPage = () => {
                             }
                         </Col>
                     </Row>
-                    <hr />
+                    <hr className={`${themeValue} hr`} />
 
                 </Col>
             </Row>

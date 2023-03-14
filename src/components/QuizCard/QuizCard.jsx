@@ -16,9 +16,8 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
-    const starColor = themeValue === 'light' ? '' : 'white'
 
-    const { title, theme, description, questionsArr, owner, quizImg, _id, ratingAvg } = quiz
+    const { title, theme, questionsArr, quizImg, _id, ratingAvg } = quiz
 
     const time = getEstimatedTime(questionsArr)
     const [played, setPlayed] = useState(false)

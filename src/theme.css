@@ -23,12 +23,26 @@
 .light.navbar {
     background-color: #EFEEEE;
     color: black;
-    border-bottom: solid 1px black;
+    border-bottom: solid 2px #8B4513;
 }
 
 .dark.navbar {
     background-color: #3a3a3a;
     color: white;
+    border-bottom: solid 2px #D2B48C;
+}
+
+.light.footer {
+    background-color: #EFEEEE;
+    color: black;
+    border-top: solid 1px #8B4513;
+}
+
+.dark.footer {
+    background-color: #3a3a3a;
+    color: white;
+    border-top: solid 1px #D2B48C;
+
 }
 
 .light.modal {
@@ -44,11 +58,13 @@
 .light.card {
     background-color: #F6F6F6;
     color: black;
+    border: solid 1px #8B4513;
 }
 
 .dark.card {
     background-color: #373737;
     color: white;
+    border: solid 1px #D2B48C;
 }
 
 .light.card.played {
@@ -62,12 +78,72 @@
     color: white;
 }
 
-.light {
+.light.comment {
     background-color: #F6F6F6;
     color: black;
 }
 
-.dark {
-    background-color: #373737;
+.dark.comment {
+    background-color: #191919;
     color: white;
+}
+
+.dark.ownerAvatar {
+    margin: 0 15px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 1px #D2B48C;
+}
+
+.light.ownerAvatar {
+    margin: 0 15px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: solid 1px #8B4513;
+}
+
+.btn-outline-dark {
+    --bs-btn-color: black;
+    --bs-btn-border-color: black;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #8B4513;
+    --bs-btn-hover-border-color: #8B4513
+}
+
+.btn-outline-light {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: #D2B48C;
+    --bs-btn-hover-border-color: #D2B48C
+}
+
+.light {
+    background-color: #fff;
+    color: black;
+}
+
+.dark {
+    background-color: #191919;
+    color: white;
+}
+
+.dark.hr {
+    margin: 1rem 0;
+    color: #D2B48C;
+    border: 0;
+    border-top: 1px solid;
+    opacity: 1;
+}
+
+.light.hr {
+    margin: 1rem 0;
+    color: #8B4513;
+    border: 0;
+    border-top: 1px solid;
+    opacity: 1;
 }

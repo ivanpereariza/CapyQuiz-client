@@ -10,8 +10,8 @@ import PointsTable from "../../components/PointsTable/PointsTable"
 import getAverageRating from "../../utils/getAverageRating"
 import getAveragePoints from "../../utils/getAveragePoints"
 import { MessageContext } from "../../contexts/message.context"
-import '../QuizResultPage/QuizResultPage.css'
 import StarRating from "../../components/StarRating/StarRating"
+import CommentsForm from "../../components/CommentsForm/CommentsForm"
 
 const QuizResultPage = () => {
 
@@ -109,11 +109,12 @@ const QuizResultPage = () => {
                                                         </Col>
                                                         <Col md={{ span: 6 }}>
                                                             <Link to={`/profile/${quiz.owner._id}`}>
-                                                                <p className={`text-${themeColor}`}>{quiz.owner.username} <img className="ownerAvatar" src={quiz.owner.avatar} alt={quiz.owner.username} /></p>
+                                                                <p className={`text-${themeColor}`}>{quiz.owner.username}
+                                                                    <img className={`${themeValue} ownerAvatar `} src={quiz.owner.avatar} alt={quiz.owner.username} /></p>
                                                             </Link>
-
                                                         </Col>
                                                     </Row>
+                                                    <CommentsForm quizId={quiz._id} />
                                                 </Col>
                                             </Row>
                                         </Card.Body>

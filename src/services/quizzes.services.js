@@ -49,6 +49,9 @@ class QuizzesServices {
     getQuizOwner(id) {
         return this.api.get(`/ownerOfQuiz/${id}`)
     }
+    getComments(id) {
+        return this.api.get(`/quizComments/${id}`)
+    }
 }
 
 const quizzesService = new QuizzesServices()
