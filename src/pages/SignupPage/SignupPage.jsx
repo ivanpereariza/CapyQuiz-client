@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import SignupForm from '../../components/SignupForm/SignupForm'
 import { ThemeContext } from '../../contexts/theme.context'
 
@@ -18,7 +19,11 @@ function SignupPage() {
                     <hr className={`${themeValue} hr`} />
 
                     <SignupForm />
-
+                    <Link to={'/login'} >
+                        <div className="mt-3">
+                            <p style={{ textDecoration: 'underline', color: 'blue' }}>Already have an account? Log in</p>
+                        </div>
+                    </Link>
                 </Col>
             </Row>
 

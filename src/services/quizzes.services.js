@@ -23,6 +23,10 @@ class QuizzesServices {
         return this.api.get('/getAllQuizzes')
     }
 
+    getThreeMorePopularQuizzes() {
+        return this.api.get('/getPopularQuizzes')
+    }
+
     createNewQuiz(quizData) {
         return this.api.post('/saveQuiz', quizData)
     }

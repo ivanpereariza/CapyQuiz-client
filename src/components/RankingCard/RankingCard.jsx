@@ -43,7 +43,7 @@ const RankingCard = ({ avatar, points, _id, quizzes, username, idx }) => {
     const opacityCard = idx === 0 || idx === 1 || idx === 2 ? 'bg-opacity-75' : undefined
 
     return (
-        <Link to={`/profile/${_id}`} id={_id}>
+        <Link to={`/profile/${_id}`} id={idx}>
             <Card bg={`${idx < 4 ? quizzStyles[idx].cardColor : quizzStyles[3].cardColor} ${opacityCard}`} className={`RankingCard mb-2 py-${idx < 4 ? quizzStyles[idx].cardPadding : quizzStyles[3].cardPadding}`} style={{ backgroundColor: idx === 2 && '#cd7f32' }}>
                 <Card.Body>
                     <Row className='align-items-center text-center'>

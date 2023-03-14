@@ -1,8 +1,9 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Col, Container, Row } from "react-bootstrap"
 import Ranking from "../../components/Ranking/Ranking"
 import { AuthContext } from "../../contexts/auth.context"
 import { ThemeContext } from "../../contexts/theme.context"
+import usersService from "../../services/users.services"
 
 const RankingPage = () => {
 
@@ -10,12 +11,31 @@ const RankingPage = () => {
     const theme = themeValue === 'light' ? 'dark' : 'light'
     const { user } = useContext(AuthContext)
 
-    const [inRanking, setInRanking] = useState(false)
+    const [index, setIndex] = useState()
 
     const checkIfRanking = (ranking) => {
-        ranking.map(elm => elm.points && user?._id === elm._id && setInRanking(true))
+        ranking.map((elm, idx) => elm.points && user?._id === elm._id && setIndex(idx))
     }
+
+    const [ranking, setRanking] = useState()
+
+    useEffect(() => {
+        getRankingUsers()
+    }, [])
+
+    const getRankingUsers = () => {
+        usersService
+            .getUsersByPoints()
+            .then(({ data }) => {
+                setRanking(data)
+                checkIfRanking(data)
+            })
+            .catch(err => console.log(err))
+    }
+    console.log(user?._id)
+    console.log(ranking)
     return (
+
         <Container className="py-4">
             <Row className="mb-4">
                 <Col md={{ offset: 2, span: 9 }}>
@@ -25,7 +45,7 @@ const RankingPage = () => {
                         </Col>
                         <Col md={{ span: 3 }} >
                             {
-                                inRanking && <Button variant={`outline-${theme}`} href={`#${user?._id}`}>Check your position!</Button>
+                                (index || index === 0) && <Button variant={`outline-${theme}`} href={`#${index > 0 ? index - 1 : index}`}>Check your position!</Button>
                             }
                         </Col>
                     </Row>
@@ -33,9 +53,10 @@ const RankingPage = () => {
 
                 </Col>
             </Row>
-            <Ranking checkIfRanking={checkIfRanking} />
+            <Ranking ranking={ranking} />
         </Container>
     )
 }
+
 
 export default RankingPage

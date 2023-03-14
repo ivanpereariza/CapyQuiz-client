@@ -8,7 +8,6 @@ import { ThemeContext } from '../../contexts/theme.context'
 
 function NavBar() {
     const location = useLocation()
-    console.log(location)
 
     const { user, logout } = useContext(AuthContext)
     const { themeValue, switchTheme } = useContext(ThemeContext)

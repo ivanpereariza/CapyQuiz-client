@@ -45,9 +45,9 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
 
     return (
 
-        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ minHeight: '30rem' }}>
-            <Card.Body>
-                <Link onClick={() => openModalDetails(_id)}>
+        <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ height: '32rem' }}>
+            <Card.Body className='d-flex flex-column justify-content-between'>
+                <Link onClick={() => openModalDetails(_id)} >
                     <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
                     <Card.Title className={`text-${themeColor} mb-4`} > {title}</Card.Title>
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
@@ -57,23 +57,25 @@ const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
                         played && <p className={`text-${themeColor} text-center fs-4`}><b>Played ✓</b></p>
                     }
                 </Link >
-                {
-                    user?.role === 'ADMIN' || user?.role === 'EDITOR' ?
-                        <Row className='mt-4'>
-                            <Col md={{ span: 6 }}>
-                                <Link to={`/quizzes/edit/${_id}`} className='d-grid ' >
-                                    <Button type="submit" variant={`warning `}>Edit Quiz</Button>
-                                </Link>
-                            </Col>
-                            <Col md={{ span: 6 }}>
-                                <Link onClick={() => deleteQuiz(_id)} className='d-grid ' >
-                                    <Button type="submit" variant={`danger `}>Delete Quiz</Button>
-                                </Link>
-                            </Col>
-                        </Row>
-                        :
-                        undefined
-                }
+                <div>
+                    {
+                        user?.role === 'ADMIN' || user?.role === 'EDITOR' ?
+                            <Row >
+                                <Col md={{ span: 6 }}>
+                                    <Link to={`/quizzes/edit/${_id}`} className='d-grid ' >
+                                        <Button type="submit" variant={`warning `}>Edit Quiz</Button>
+                                    </Link>
+                                </Col>
+                                <Col md={{ span: 6 }}>
+                                    <Link onClick={() => deleteQuiz(_id)} className='d-grid ' >
+                                        <Button type="submit" variant={`danger `}>Delete Quiz</Button>
+                                    </Link>
+                                </Col>
+                            </Row>
+                            :
+                            undefined
+                    }
+                </div>
             </Card.Body>
         </Card >
 
