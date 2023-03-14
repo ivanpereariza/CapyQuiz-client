@@ -5,7 +5,10 @@ import { ThemeContext } from '../../contexts/theme.context'
 const Footer = () => {
     const { themeValue } = useContext(ThemeContext)
 
-    return <footer className={`${themeValue} footer`}>© All rigths reserved. Created by Ivan and Gonzalo</footer>
+    return (
+        <footer className={`${themeValue} footer`} style={{ letterSpacing: '2px' }}>
+            &copy; 2023 Quiz App.  All rights reserved.  Created by Ivan and Gonzalo
+        </footer>)
 }
 
 export default Footer

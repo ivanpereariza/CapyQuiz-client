@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react"
 import { Col, Row } from "react-bootstrap"
-import usersService from "../../services/users.services"
 import RankingCard from "../RankingCard/RankingCard"
 import SpinnerLoader from "../SpinnerLoader/SpinnerLoader"
 
-const Ranking = ({ checkIfRanking }) => {
+const Ranking = ({ ranking }) => {
 
-    const [ranking, setRanking] = useState()
 
-    useEffect(() => {
-        getRankingUsers()
-    }, [])
 
-    const getRankingUsers = () => {
-        usersService
-            .getUsersByPoints()
-            .then(({ data }) => {
-                setRanking(data)
-                checkIfRanking(data)
-            })
-            .catch(err => console.log(err))
-    }
 
     return (
         <>
