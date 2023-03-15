@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Container } from "react-bootstrap"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
 import PlayQuiz from "../../components/PlayQuiz/PlayQuiz"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
+import { AuthContext } from "../../contexts/auth.context"
+import { MessageContext } from "../../contexts/message.context"
 import quizzesService from "../../services/quizzes.services"
 import shuffleArray from "../../utils/shuffleArray"
 
@@ -11,10 +13,15 @@ const PlayQuizPage = () => {
     const { id } = useParams()
 
     const [quiz, setQuiz] = useState([])
+    const [dailyQuiz, setDailyQuiz] = useState('')
     const [quizLoader, setQuizLoader] = useState(true)
+
+    const { user, isLoading } = useContext(AuthContext)
+    const { emitMessage } = useContext(MessageContext)
 
     useEffect(() => {
         getQuizById()
+        getDailyQuiz()
     }, [])
 
     const shuffleAnswers = (data) => {
@@ -35,20 +42,40 @@ const PlayQuizPage = () => {
             .catch(err => console.log(err))
     }
 
-    return (
-        <Container className="py-4">
+    const getDailyQuiz = () => {
+        quizzesService
+            .getDailyQuiz()
+            .then(({ data }) => setDailyQuiz(data))
+            .catch(err => console.log(err))
+    }
 
-            {
-                quizLoader ?
-                    <SpinnerLoader />
-                    :
+    if (isLoading || quizLoader) {
+        return <SpinnerLoader />
+    }
 
-                    <PlayQuiz quiz={quiz} />
+    if (user || dailyQuiz._id === quiz._id) {
+        return (
 
-            }
 
-        </Container>
-    )
+            <Container className="py-4">
+
+                {
+                    quizLoader ?
+                        <SpinnerLoader />
+                        :
+
+                        <PlayQuiz quiz={quiz} />
+
+                }
+
+            </Container>
+        )
+
+    } else {
+        emitMessage('Must be logged in to access to this page')
+        return <Navigate to="/login" />
+    }
+
 }
 
 export default PlayQuizPage

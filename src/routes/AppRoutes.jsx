@@ -21,13 +21,13 @@ const AppRoutes = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/quizzes" element={<QuizListPage />} />
             <Route path="/ranking" element={<RankingPage />} />
+            <Route path="/quizzes/play/:id" element={<PlayQuizPage />} />
 
             <Route element={<PrivateUserRoutes />}>
                 <Route path="/profile/:id" element={<ProfilePage />} />
                 <Route path="/quizzes/create" element={<CreateQuizPage />} />
                 <Route path="/profile/edit/:id" element={<EditUserPage />} />
                 <Route path="/quizzes/edit/:id" element={<EditQuizPage />} />
-                <Route path="/quizzes/play/:id" element={<PlayQuizPage />} />
                 <Route path="/quizzes/results/:id" element={<QuizResultPage />} />
             </Route>
 
