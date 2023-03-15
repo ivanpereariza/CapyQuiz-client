@@ -6,10 +6,13 @@ import quizzesService from "../../services/quizzes.services"
 import './HomePage.css'
 import StarRating from "../../components/StarRating/StarRating"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
+import { AuthContext } from "../../contexts/auth.context"
+import Gallery from "../../components/Carousel/Carousel"
 
 const HomePage = () => {
 
     const { themeValue } = useContext(ThemeContext)
+    const { user } = useContext(AuthContext)
 
     const [popularQuizzesArr, setPopularQuizzesArr] = useState()
     const [dailyQuiz, setDailyQuiz] = useState()
@@ -94,6 +97,12 @@ const HomePage = () => {
                                                 <div className="d-flex justify-content-center">
                                                     <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
                                                 </div>
+                                                {
+                                                    user &&
+                                                    <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mt-5' >
+                                                        <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
+                                                    </Link>
+                                                }
                                             </Card>
                                         </Col>
                                     )
@@ -104,6 +113,9 @@ const HomePage = () => {
                     </Card.Body>
 
                 </Card>
+            </section>
+            <section >
+                <Gallery style={{ height: '500px' }} />
             </section>
         </Container>
     )

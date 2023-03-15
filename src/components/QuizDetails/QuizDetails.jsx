@@ -42,8 +42,6 @@ const QuizDetails = ({ quiz }) => {
                             <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
                         </Link>
 
-                        <p><b>Comments</b></p>
-                        <hr className={`${themeValue} hr`} />
                         <Comments quizId={quiz._id} />
 
 

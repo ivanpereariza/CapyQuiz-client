@@ -1,17 +1,19 @@
 import { useContext, useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
+import { MessageContext } from "../../contexts/message.context"
 import { ThemeContext } from "../../contexts/theme.context"
 import commentsService from "../../services/comments.services"
 import FormError from "../FormError/FormError"
 
 const CommentsForm = ({ quizId }) => {
 
-    const [commentData, getCommentData] = useState('')
+    const [commentData, setCommentData] = useState('')
     const [errors, setErrors] = useState([])
 
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
+    const { emitMessage } = useContext(MessageContext)
 
 
     const theme = themeValue === 'light' ? 'dark' : 'light'
@@ -19,18 +21,20 @@ const CommentsForm = ({ quizId }) => {
 
     const handleComment = e => {
         const { value } = e.target
-        getCommentData(value)
+        setCommentData(value)
     }
 
     const handleSubmit = e => {
-
-        console.log(e)
 
         e.preventDefault()
 
         commentsService
             .saveComment(user?._id, commentData, quizId)
-            .then(({ data }) => console.log(data))
+            .then(() => {
+                setCommentData('')
+                emitMessage('Thanks for your comment! Saved correctly 👍')
+
+            })
             .catch(err => setErrors(err.response.data.errorMessages))
     }
 
