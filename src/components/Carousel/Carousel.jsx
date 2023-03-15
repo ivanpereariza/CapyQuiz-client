@@ -1,34 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { Col, Row } from 'react-bootstrap';
+import { Carousel, Col, Row } from 'react-bootstrap';
 
-const handleDragStart = (e) => e.preventDefault();
 
 const Gallery = () => {
-    const [currentIndex, setCurrentIndex] = useState(0)
 
-    const items = [
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/QuizList_dglgjm.jpg" onDragStart={handleDragStart} role="presentation" />,
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/ranking_ihbaxs.jpg" onDragStart={handleDragStart} role="presentation" />,
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/playDark_azjrpi.jpg" onDragStart={handleDragStart} role="presentation" />,
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/playDark_1_spel03.jpg" onDragStart={handleDragStart} role="presentation" />,
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/results_ythnrz.jpg" onDragStart={handleDragStart} role="presentation" />,
-        <img style={{ height: '400px' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/createQuiz_q98plg.jpg" onDragStart={handleDragStart} role="presentation" />,
-    ]
+    const [index, setIndex] = useState(0);
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentIndex((currentIndex + 1) % items.length);
-        }, 2000);
-        return () => clearInterval(intervalId);
-    }, [currentIndex, items.length]);
-
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    }
 
     return (
         <Row className='mt-5'>
-            <Col lg={{ span: 4, offset: 4 }}>
-                <AliceCarousel mouseTracking items={items} infinite={true} animationDuration={10} activeIndex={currentIndex} />
+            <Col lg={{ span: 6, offset: 3 }}>
+                <Carousel activeIndex={index} onSelect={handleSelect} interval={2000}>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/QuizList_dglgjm.jpg"
+                            alt="First slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/ranking_ihbaxs.jpg"
+                            alt="Second slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/playDark_azjrpi.jpg"
+                            alt="Third slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/playDark_1_spel03.jpg"
+                            alt="Fourth slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/results_ythnrz.jpg"
+                            alt="Fifth slide"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678877914/createQuiz_q98plg.jpg"
+                            alt="Sixth slide"
+                        />
+                    </Carousel.Item>
+                </Carousel>
             </Col>
         </Row>
     );

@@ -42,7 +42,7 @@ const HomePage = () => {
 
 
     return (
-        <Container fluid className="py-4">
+        <Container fluid className="pt-4 pb-0" >
 
             <Row className="mt-5 align-items-center" >
                 <Col md={{ span: 5 }} className='mx-5 '>
@@ -114,10 +114,34 @@ const HomePage = () => {
 
                 </Card>
             </section>
+
             <section >
                 <Gallery style={{ height: '500px' }} />
             </section>
-        </Container>
+
+            <section style={{ backgroundColor: '#D2B48C', marginTop: '40px', border: 'solid 1px black', borderRadius: '8px', padding: '50px' }}>
+                <Row>
+                    <Col md={{ span: 4, offset: 1 }} >
+                        <div className='d-flex justify-content-center'>
+                            <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
+                        </div>
+                        <h2 className="text-center mt-3">Gonzalo Rincón</h2>
+                        <h5>
+
+                        </h5>
+
+                    </Col>
+                    <Col md={{ span: 4, offset: 1 }}>
+                        <div className='d-flex justify-content-center'>
+                            <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
+                        </div>
+                        <h2 className="text-center mt-3">Iván Pereiro</h2>
+                    </Col>
+                </Row>
+
+            </section>
+
+        </Container >
     )
 }
 
