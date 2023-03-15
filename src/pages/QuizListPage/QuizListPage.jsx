@@ -10,6 +10,7 @@ import quizzesService from '../../services/quizzes.services'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { ThemeContext } from '../../contexts/theme.context'
+import { SliderConstants } from '../../consts'
 
 const QuizListPage = () => {
 
@@ -64,14 +65,6 @@ const QuizListPage = () => {
         setSelectedQuiz(id)
     }
 
-    const marks = {
-        0: '0',
-        1: '1',
-        2: '2',
-        3: '3',
-        4: '4',
-        5: '5'
-    }
 
     return (
         <>
@@ -94,7 +87,7 @@ const QuizListPage = () => {
                                     range
                                     min={0}
                                     max={5}
-                                    marks={marks}
+                                    marks={SliderConstants.SLIDER_MARKS}
 
                                 />
                             </Col>

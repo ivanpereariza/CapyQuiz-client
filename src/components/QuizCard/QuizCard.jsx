@@ -13,9 +13,8 @@ import StarRating from '../StarRating/StarRating'
 const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
 
     const navigate = useNavigate()
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme: themeColor } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
-    const themeColor = themeValue === 'light' ? 'dark' : 'light'
 
     const { title, theme, questionsArr, quizImg, _id, ratingAvg } = quiz
 

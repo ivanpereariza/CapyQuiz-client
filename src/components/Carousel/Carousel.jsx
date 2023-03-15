@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
+import React, { useState } from 'react';
 import { Carousel, Col, Row } from 'react-bootstrap';
+import { CarouselConsts } from '../../consts';
 
 
 const Gallery = () => {
@@ -15,7 +14,7 @@ const Gallery = () => {
     return (
         <Row className='mt-5'>
             <Col lg={{ span: 6, offset: 3 }}>
-                <Carousel activeIndex={index} onSelect={handleSelect} interval={2000}>
+                <Carousel activeIndex={index} onSelect={handleSelect} interval={CarouselConsts.INTERVAL_TIMER}>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"

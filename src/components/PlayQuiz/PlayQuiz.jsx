@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ProgressBar } from "react-bootstrap"
+import { GameConstants } from "../../consts"
 import ShowQuestion from "../ShowQuestion/ShowQuestion"
 
 const PlayQuiz = ({ quiz }) => {
@@ -10,7 +11,7 @@ const PlayQuiz = ({ quiz }) => {
 
     const showTimer = segs => {
         setTimer(segs)
-        const bar = (100 / 15) * (18 - segs)
+        const bar = (100 / GameConstants.GAME_SHOW_ANSWERS_TIMER) * (GameConstants.GAME_QUESTION_TIMER - segs)
         setBarTimer(bar)
     }
 

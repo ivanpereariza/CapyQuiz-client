@@ -6,15 +6,15 @@ import { ThemeContext } from "../../contexts/theme.context"
 import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
+import { MessagesConstants } from "../../consts"
 
 
 const SignupForm = () => {
 
     const navigate = useNavigate()
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
 
-    const theme = themeValue === 'light' ? 'dark' : 'light'
 
     const [errors, setErrors] = useState([])
 
@@ -42,7 +42,7 @@ const SignupForm = () => {
             .uploadImage(formData)
             .then(({ data }) => authService.signup({ ...signupData, avatar: data.cloudinary_url }))
             .then(() => {
-                emitMessage('User created!')
+                emitMessage(MessagesConstants.CREATE_USER)
                 navigate('/login')
             })
             .catch(err => setErrors(err.response.data.errorMessages))

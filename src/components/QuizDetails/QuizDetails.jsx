@@ -10,8 +10,7 @@ import Comments from '../Comments/Comments'
 
 const QuizDetails = ({ quiz }) => {
 
-    const { themeValue } = useContext(ThemeContext)
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme } = useContext(ThemeContext)
 
     const time = getEstimatedTime(quiz?.questionsArr)
 

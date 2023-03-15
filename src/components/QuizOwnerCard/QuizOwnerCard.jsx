@@ -12,8 +12,7 @@ import StarRating from '../StarRating/StarRating'
 const QuizOwnerCard = ({ quiz, getUserQuizzes }) => {
 
     const { user } = useContext(AuthContext)
-    const { themeValue } = useContext(ThemeContext)
-    const themeColor = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme: themeColor } = useContext(ThemeContext)
 
     const [ratingLoading, setRatingLoading] = useState(true)
 

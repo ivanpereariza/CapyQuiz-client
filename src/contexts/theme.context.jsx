@@ -6,16 +6,21 @@ function ThemeProviderWrapper(props) {
 
 
     const [themeValue, setThemeValue] = useState('dark')
+    const [theme, setTheme] = useState('light')
 
     useEffect(() => {
-        const theme = localStorage.getItem('theme')
-        if (theme) {
-            setThemeValue(theme)
+        const themeToken = localStorage.getItem('theme')
+        if (themeToken) {
+            setThemeValue(themeToken)
+
         }
 
     }, [])
 
-    // 
+    useEffect(() => {
+        themeValue === 'light' ? setTheme('dark') : setTheme('light')
+
+    }, [themeValue])
 
     const switchTheme = () => {
         if (themeValue === 'dark') {
@@ -29,7 +34,7 @@ function ThemeProviderWrapper(props) {
     }
 
     return (
-        <ThemeContext.Provider value={{ themeValue, switchTheme }}>
+        <ThemeContext.Provider value={{ themeValue, switchTheme, theme }}>
             {props.children}
         </ThemeContext.Provider>
     )

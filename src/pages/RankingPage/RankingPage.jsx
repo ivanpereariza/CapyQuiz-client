@@ -7,8 +7,7 @@ import usersService from "../../services/users.services"
 
 const RankingPage = () => {
 
-    const { themeValue } = useContext(ThemeContext)
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
 
     const [index, setIndex] = useState()
@@ -32,8 +31,7 @@ const RankingPage = () => {
             })
             .catch(err => console.log(err))
     }
-    console.log(user?._id)
-    console.log(ranking)
+
     return (
 
         <Container className="py-4">

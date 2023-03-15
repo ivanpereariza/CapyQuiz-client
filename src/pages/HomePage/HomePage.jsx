@@ -9,15 +9,16 @@ import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 import { AuthContext } from "../../contexts/auth.context"
 import Gallery from "../../components/Carousel/Carousel"
 
+
 const HomePage = () => {
 
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
 
     const [popularQuizzesArr, setPopularQuizzesArr] = useState()
     const [dailyQuiz, setDailyQuiz] = useState()
 
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+
 
     useEffect(() => {
         popularQuizzes()
@@ -116,7 +117,7 @@ const HomePage = () => {
             </section>
 
             <section >
-                <Gallery style={{ height: '500px' }} />
+                <Gallery />
             </section>
 
             <section style={{ backgroundColor: '#D2B48C', marginTop: '40px', border: 'solid 1px black', borderRadius: '8px', padding: '50px' }}>
@@ -126,10 +127,6 @@ const HomePage = () => {
                             <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
                         </div>
                         <h2 className="text-center mt-3">Gonzalo Rincón</h2>
-                        <h5>
-
-                        </h5>
-
                     </Col>
                     <Col md={{ span: 4, offset: 1 }}>
                         <div className='d-flex justify-content-center'>
@@ -138,7 +135,9 @@ const HomePage = () => {
                         <h2 className="text-center mt-3">Iván Pereiro</h2>
                     </Col>
                 </Row>
-
+                <h5>
+                    holaaaaaaaaaaaaaaaaaaaa
+                </h5>
             </section>
 
         </Container >

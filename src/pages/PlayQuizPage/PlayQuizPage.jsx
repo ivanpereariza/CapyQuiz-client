@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap"
 import { Navigate, useParams } from "react-router-dom"
 import PlayQuiz from "../../components/PlayQuiz/PlayQuiz"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
+import { MessagesConstants } from "../../consts"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
 import quizzesService from "../../services/quizzes.services"
@@ -72,7 +73,7 @@ const PlayQuizPage = () => {
         )
 
     } else {
-        emitMessage('Must be logged in to access to this page')
+        emitMessage(MessagesConstants.MUST_LOGGED)
         return <Navigate to="/login" />
     }
 

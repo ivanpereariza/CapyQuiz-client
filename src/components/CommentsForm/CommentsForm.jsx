@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
-import { Button, Col, Container, Form, Row } from "react-bootstrap"
+import { Button, Col, Form, Row } from "react-bootstrap"
+import { MessagesConstants } from "../../consts"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
 import { ThemeContext } from "../../contexts/theme.context"
@@ -11,12 +12,11 @@ const CommentsForm = ({ quizId }) => {
     const [commentData, setCommentData] = useState('')
     const [errors, setErrors] = useState([])
 
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
 
 
-    const theme = themeValue === 'light' ? 'dark' : 'light'
 
 
     const handleComment = e => {
@@ -32,7 +32,7 @@ const CommentsForm = ({ quizId }) => {
             .saveComment(user?._id, commentData, quizId)
             .then(() => {
                 setCommentData('')
-                emitMessage('Thanks for your comment! Saved correctly 👍')
+                emitMessage(MessagesConstants.SAVE_COMMENTS)
 
             })
             .catch(err => setErrors(err.response.data.errorMessages))

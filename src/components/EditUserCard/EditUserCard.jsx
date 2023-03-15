@@ -11,8 +11,7 @@ import FormError from "../FormError/FormError"
 const EditUserCard = ({ id }) => {
 
     const navigate = useNavigate()
-    const { themeValue } = useContext(ThemeContext)
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme } = useContext(ThemeContext)
     const { user, authenticateUser } = useContext(AuthContext)
 
     const [errors, setErrors] = useState([])

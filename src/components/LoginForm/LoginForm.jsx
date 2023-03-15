@@ -6,6 +6,7 @@ import authService from "../../services/auth.services"
 import { ThemeContext } from "../../contexts/theme.context"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
+import { MessagesConstants } from "../../consts"
 
 const LoginForm = () => {
 
@@ -20,8 +21,7 @@ const LoginForm = () => {
 
     const { authenticateUser } = useContext(AuthContext)
     const { emitMessage } = useContext(MessageContext)
-    const { themeValue } = useContext(ThemeContext)
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme } = useContext(ThemeContext)
 
 
     const handleInputChange = e => {
@@ -36,7 +36,7 @@ const LoginForm = () => {
         authService
             .login(loginData)
             .then(({ data }) => {
-                emitMessage('Welcome to CapyQuiz!🎉')
+                emitMessage(MessagesConstants.WELCOME)
                 localStorage.setItem('authToken', data.authToken)
                 authenticateUser()
                 navigate('/')

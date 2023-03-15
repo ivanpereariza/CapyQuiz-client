@@ -12,16 +12,16 @@ import getAveragePoints from "../../utils/getAveragePoints"
 import { MessageContext } from "../../contexts/message.context"
 import StarRating from "../../components/StarRating/StarRating"
 import CommentsForm from "../../components/CommentsForm/CommentsForm"
+import { MessagesConstants } from "../../consts"
 
 const QuizResultPage = () => {
 
     const { id } = useParams()
 
     const { user } = useContext(AuthContext)
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme: themeColor } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
 
-    const themeColor = themeValue === 'light' ? 'dark' : 'light'
 
     const [quiz, setQuiz] = useState('')
     const [points, setPoints] = useState(false)
@@ -65,7 +65,7 @@ const QuizResultPage = () => {
                     const average = Math.round(getAverageRating(quiz))
                     return quizzesService.editQuizById(id, { ratingAvg: +average }, { new: true })
                 })
-                .then(() => emitMessage('Rate updated'))
+                .then(() => emitMessage(MessagesConstants.SAVE_RATE))
                 .catch(err => console.log(err))
         } else {
             quiz.rating.push({ owner: user._id, rate })
@@ -75,7 +75,7 @@ const QuizResultPage = () => {
                     const average = Math.round(getAverageRating(quiz))
                     return quizzesService.editQuizById(id, { ratingAvg: +average }, { new: true })
                 })
-                .then(() => emitMessage('Rate updated'))
+                .then(() => emitMessage(MessagesConstants.SAVE_RATE))
                 .catch(err => console.log(err))
         }
     }

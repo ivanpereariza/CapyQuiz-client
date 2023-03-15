@@ -1,0 +1,1 @@
+export const RATING_MAX_NUMBER = 5

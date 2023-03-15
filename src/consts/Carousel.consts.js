@@ -1,0 +1,1 @@
+export const INTERVAL_TIMER = 2000

@@ -9,9 +9,8 @@ const EditCommentForm = ({ getComments, setEditComment, id, message }) => {
     const [commentData, getCommentData] = useState(message)
     const [errors, setErrors] = useState([])
 
-    const { themeValue } = useContext(ThemeContext)
+    const { themeValue, theme } = useContext(ThemeContext)
 
-    const theme = themeValue === 'light' ? 'dark' : 'light'
 
     const handleComment = e => {
         const { value } = e.target

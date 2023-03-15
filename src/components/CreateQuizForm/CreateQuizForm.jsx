@@ -6,6 +6,7 @@ import { ThemeContext } from "../../contexts/theme.context"
 import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
+import { MessagesConstants } from "../../consts"
 
 const CreateQuizForm = ({ fireFinalActions }) => {
 
@@ -63,7 +64,7 @@ const CreateQuizForm = ({ fireFinalActions }) => {
             .uploadImage(formData)
             .then(({ data }) => quizzesService.createNewQuiz({ ...generalData, quizImg: data.cloudinary_url }))
             .then(() => {
-                emitMessage('Quiz created!')
+                emitMessage(MessagesConstants.CREATE_QUIZ)
                 fireFinalActions()
             })
             .catch(err => setErrors(err.response.data.errorMessages))
