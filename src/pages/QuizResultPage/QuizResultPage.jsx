@@ -100,7 +100,7 @@ const QuizResultPage = () => {
                                                     <BarChart className='justify-content-center' points={points} average={average} />
                                                 </Col>
                                                 <Col>
-                                                    <PointsTable points={quiz.points} />
+                                                    <PointsTable id={id} />
                                                     <Row>
                                                         <Col md={{ span: 6 }}>
                                                             {

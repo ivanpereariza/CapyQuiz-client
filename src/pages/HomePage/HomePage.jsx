@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 import quizzesService from "../../services/quizzes.services"
 import './HomePage.css'
 import StarRating from "../../components/StarRating/StarRating"
-import QuizCard from "../../components/QuizCard/QuizCard"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
 
 const HomePage = () => {
@@ -26,7 +25,6 @@ const HomePage = () => {
         quizzesService
             .getThreeMorePopularQuizzes()
             .then(({ data }) => {
-                console.log(data)
                 setPopularQuizzesArr(data)
             })
             .catch(err => console.log(err))
