@@ -63,7 +63,7 @@ function NavBar() {
                                                     <img className='navIcons me-3' src={themeValue === 'light' ?
                                                         'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794002/user_lcaahi.png'
                                                         : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794005/userdark_sam2dj.png'}
-                                                    />
+                                                        alt='profile icon' />
                                                     My Profile</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
@@ -73,7 +73,7 @@ function NavBar() {
                                                     <img className='navIcons me-3' src={themeValue === 'light' ?
                                                         'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678793758/settings_bsla16.png'
                                                         : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678793759/settingsDark_s71the.png'}
-                                                    />
+                                                        alt='edit profile icon' />
                                                     Edit Profile</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
@@ -83,7 +83,7 @@ function NavBar() {
                                                     <img className='navIcons me-3' src={themeValue === 'light' ?
                                                         'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794164/moon_zaai1r.png'
                                                         : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794166/sun_1_uumeli.png'}
-                                                    />
+                                                        alt='theme icon' />
                                                     {themeText}</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
@@ -93,6 +93,7 @@ function NavBar() {
                                                     <img className='navIcons me-3' src={themeValue === 'light' ?
                                                         'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678793753/exit_uzwdji.png'
                                                         : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678793755/exitwhite_a4mp3h.png'}
+                                                        alt='logout icon'
                                                     />Log Out</Nav.Link>
                                             </Link>
                                         </Dropdown.Item>
@@ -107,7 +108,7 @@ function NavBar() {
                                         <img className='navIcons me-3' src={themeValue === 'light' ?
                                             'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794164/moon_zaai1r.png'
                                             : 'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678794166/sun_1_uumeli.png'}
-                                        />
+                                            alt='theme icon' />
                                         {themeText}</Nav.Link>
                                 </Link>
                                 <Link to="/login">
