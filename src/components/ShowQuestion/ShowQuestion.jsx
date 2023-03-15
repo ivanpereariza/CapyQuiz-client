@@ -71,9 +71,12 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
             setPoints(0)
             setClicked(false)
         }
-        if (i === (questionsArr.length - 1) && segs >= 21) {
+        if (i === (questionsArr.length - 1) && segs >= 21 && currentUser) {
             saveQuizOnUser()
             savePointOwner()
+        }
+        if (i === (questionsArr.length - 1) && segs >= 21 && !currentUser) {
+            navigate('/signup')
         }
     }, [segs])
 

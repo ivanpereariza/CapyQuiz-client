@@ -61,10 +61,21 @@ const HomePage = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col md={{ span: 6 }} >
+                <Col md={{ span: 4, offset: 1 }} >
                     {
                         dailyQuiz ?
-                            <QuizCard quiz={dailyQuiz} />
+                            <>
+                                <h1 className="px-5 pt-5 text-center fs-2 mx-4">Quiz of the day, try it without log in!</h1>
+
+                                <Card className={`${themeValue} card m-3 p-3`}>
+
+                                    <CardImg className="QuizImg" src={dailyQuiz.quizImg} alt={dailyQuiz.title}></CardImg>
+                                    <Card.Title className="px-5 pt-5">{dailyQuiz.title}</Card.Title>
+                                    <Link to={`/quizzes/play/${dailyQuiz._id}`} className='d-grid mt-5' >
+                                        <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
+                                    </Link>
+                                </Card>
+                            </>
                             :
                             <SpinnerLoader />
                     }
