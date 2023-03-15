@@ -1,0 +1,10 @@
+.CommentButtons {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.CommentButtons img {
+    width: 20px;
+    height: 20px;
+}

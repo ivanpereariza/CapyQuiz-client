@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react'
 import Table from 'react-bootstrap/Table'
 import { ThemeContext } from "../../contexts/theme.context"
+import quizzesService from '../../services/quizzes.services'
 
 function PointsTable({ id }) {
 

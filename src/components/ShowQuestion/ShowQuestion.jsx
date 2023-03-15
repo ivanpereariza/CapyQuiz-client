@@ -7,6 +7,7 @@ import AnswerCard from "../AnswerCard/AnswerCard"
 import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from "../../contexts/auth.context"
+import { MessageContext } from "../../contexts/message.context"
 
 
 const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
@@ -24,6 +25,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
 
     const { themeValue } = useContext(ThemeContext)
     const { authenticateUser, user } = useContext(AuthContext)
+    const { emitMessage } = useContext(MessageContext)
 
     const navigate = useNavigate()
 
@@ -77,6 +79,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
         }
         if (i === (questionsArr.length - 1) && segs >= 21 && !currentUser) {
             navigate('/signup')
+            emitMessage('Singup for more CapyQuiz! 😄')
         }
     }, [segs])
 

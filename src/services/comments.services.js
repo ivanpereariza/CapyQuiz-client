@@ -21,6 +21,12 @@ class CommentsService {
     saveComment(owner, message, quizId) {
         return this.api.post(`/create/${quizId}`, { comment: { owner, message } })
     }
+    editComment(id, message) {
+        return this.api.put(`/edit/${id}`, message)
+    }
+    deleteComment(id) {
+        return this.api.delete(`/delete/${id}`)
+    }
 }
 
 
