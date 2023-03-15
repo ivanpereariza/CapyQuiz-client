@@ -2,13 +2,26 @@ import { useEffect, useState, useContext } from 'react'
 import Table from 'react-bootstrap/Table'
 import { ThemeContext } from "../../contexts/theme.context"
 
-function PointsTable({ points }) {
+function PointsTable({ id }) {
 
     const [topPoints, setTopPoints] = useState()
+    const [quiz, setQuiz] = useState('')
+
 
     useEffect(() => {
-        setTopPoints(points.sort((a, b) => b - a).slice(0, 6))
-    }, [points])
+        getQuizz()
+    }, [id])
+
+    useEffect(() => {
+        setTopPoints(quiz.points.sort((a, b) => b - a).slice(0, 6))
+    }, [quiz])
+
+    const getQuizz = () => {
+        quizzesService
+            .getQuizById(id)
+            .then(({ data }) => setQuiz(data))
+            .catch(err => console.log(err))
+    }
 
     const { themeValue } = useContext(ThemeContext)
 
