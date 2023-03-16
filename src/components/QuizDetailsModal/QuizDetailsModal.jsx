@@ -17,6 +17,10 @@ const QuizDetailsModal = ({ setShowModalDetails, showModalDetails, selectedQuiz 
 
     useEffect(() => {
         getQuiz()
+
+        return () => {
+            setQuiz()
+        }
     }, [showModalDetails])
 
     const getQuiz = () => {

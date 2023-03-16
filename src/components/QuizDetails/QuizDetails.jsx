@@ -7,10 +7,13 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import getEstimatedTime from '../../utils/getEstimatedTime'
 import Comments from '../Comments/Comments'
+import { ModalQuizContext } from '../../contexts/modalQuiz.context'
 
 const QuizDetails = ({ quiz }) => {
 
     const { themeValue } = useContext(ThemeContext)
+    const { setShowModalDetails } = useContext(ModalQuizContext)
+
     const theme = themeValue === 'light' ? 'dark' : 'light'
 
     const time = getEstimatedTime(quiz?.questionsArr)
@@ -39,7 +42,7 @@ const QuizDetails = ({ quiz }) => {
                         }
 
                         <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mb-5' >
-                            <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
+                            <Button type="submit" onClick={() => setShowModalDetails(false)} variant={`outline-${theme} mt-4`}>Start Game!</Button>
                         </Link>
 
                         <Comments quizId={quiz._id} />

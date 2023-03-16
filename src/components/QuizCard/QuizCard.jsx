@@ -8,13 +8,16 @@ import getEstimatedTime from '../../utils/getEstimatedTime'
 import quizzesService from '../../services/quizzes.services'
 import { AuthContext } from '../../contexts/auth.context'
 import StarRating from '../StarRating/StarRating'
+import { ModalQuizContext } from '../../contexts/modalQuiz.context'
 
 
-const QuizCard = ({ quiz, openModalDetails, fireFinalActions }) => {
+const QuizCard = ({ quiz, fireFinalActions }) => {
 
     const navigate = useNavigate()
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
+    const { openModalDetails } = useContext(ModalQuizContext)
+
     const themeColor = themeValue === 'light' ? 'dark' : 'light'
 
     const { title, theme, questionsArr, quizImg, _id, ratingAvg } = quiz

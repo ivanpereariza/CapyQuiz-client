@@ -1,18 +1,63 @@
-import { useContext } from 'react'
-import { Dropdown, Nav, Navbar } from 'react-bootstrap'
+import { useContext, useEffect, useState } from 'react'
+import { Badge, Dropdown, Nav, Navbar } from 'react-bootstrap'
 import '../NavBar/NavBar.css'
 import { Link, useLocation } from 'react-router-dom'
 import { AuthContext } from '../../contexts/auth.context'
 import { ThemeContext } from '../../contexts/theme.context'
-
+import socket from '../../services/socket.services'
+import notificationService from '../../services/notifications.services'
+import { ModalQuizContext } from '../../contexts/modalQuiz.context'
 
 function NavBar() {
+
     const location = useLocation()
+
+    const [notifications, setNotifications] = useState([])
+
 
     const { user, logout } = useContext(AuthContext)
     const { themeValue, switchTheme } = useContext(ThemeContext)
+    const { openModalDetails } = useContext(ModalQuizContext)
+
     const themeText = themeValue === 'light' ? 'Dark Mode' : 'Light Mode'
     const linkTheme = themeValue === 'light' ? 'lightTheme' : 'darkTheme'
+
+
+    useEffect(() => {
+        socket.on('connect', () => {
+            socket.emit('clientConnected')
+        })
+
+        socket.on("getNotification", (data) => {
+            if (user?._id === data.ownerId)
+                setNotifications((prev) => [...prev, data])
+        })
+    }, [socket, user])
+
+    useEffect(() => {
+        getNotifications()
+    }, [user])
+
+    const getNotifications = () => {
+        if (user) {
+            notificationService
+                .getNotificationsById(user?._id)
+                .then(({ data }) => setNotifications(data))
+                .catch(err => console.log(err))
+        }
+    }
+
+    const deleteNotification = (id) => {
+        notificationService
+            .deleteNotification(id)
+            .then(() => getNotifications())
+            .catch(err => console.log(err))
+    }
+
+    const handleNotification = (elm) => {
+        openModalDetails(elm.quiz._id)
+        deleteNotification(elm._id)
+    }
 
     return (
         <Navbar sticky="top" collapseOnSelect expand="lg" variant={themeValue} className={`${themeValue} navbar`} >
@@ -51,6 +96,27 @@ function NavBar() {
                         user
                             ?
                             <>
+
+                                {
+                                    notifications.length > 0 &&
+                                    <Dropdown className='align-items-center d-flex pointerCursor' drop={'start'}>
+                                        <Dropdown.Toggle as='span' align='end' variant={`${themeValue}`} id="dropdown-basic">
+                                            <img className='notiIcon' src={themeValue === 'light' ?
+                                                'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678964675/bell_2_fv0pon.png'
+                                                :
+                                                'https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678964740/bell_2_dark_apmevk.png'
+                                            } alt="" /> <Badge bg='danger'>{notifications.length}</Badge>
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu align='start' variant={`${themeValue}`} className={`${themeValue} m-3`}>
+                                            {notifications.map(elm => (
+                                                <Dropdown.Item onClick={() => handleNotification(elm)} as={'span'} key={elm._id}>
+                                                    <p className='my-2'>You have a new comment on {elm.quiz.theme} quiz</p>
+                                                </Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                }
 
                                 <Dropdown className='mx-5' drop={'start'}>
                                     <Dropdown.Toggle as='span' align='end' variant="secondary">

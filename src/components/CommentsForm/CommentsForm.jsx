@@ -1,15 +1,19 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Col, Container, Form, Row } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
 import { ThemeContext } from "../../contexts/theme.context"
 import commentsService from "../../services/comments.services"
+import notificationService from "../../services/notifications.services"
+import quizzesService from "../../services/quizzes.services"
+import socket from "../../services/socket.services"
 import FormError from "../FormError/FormError"
 
 const CommentsForm = ({ quizId }) => {
 
     const [commentData, setCommentData] = useState('')
     const [errors, setErrors] = useState([])
+    const [quiz, setQuiz] = useState(null)
 
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
@@ -18,6 +22,18 @@ const CommentsForm = ({ quizId }) => {
 
     const theme = themeValue === 'light' ? 'dark' : 'light'
 
+
+    useEffect(() => {
+        getQuiz()
+    }, [quizId])
+
+
+    const getQuiz = () => {
+        quizzesService
+            .getQuizById(quizId)
+            .then(({ data }) => setQuiz(data))
+            .catch(err => console.log(err))
+    }
 
     const handleComment = e => {
         const { value } = e.target
@@ -33,7 +49,16 @@ const CommentsForm = ({ quizId }) => {
             .then(() => {
                 setCommentData('')
                 emitMessage('Thanks for your comment! Saved correctly 👍')
-
+                return notificationService.createNotification(quizId, quiz.owner._id)
+            })
+            .then(({ data }) => {
+                socket.emit("sendNotification", {
+                    _id: data._id,
+                    quiz: {
+                        theme: quiz.theme
+                    },
+                    ownerId: quiz.owner._id
+                })
             })
             .catch(err => setErrors(err.response.data.errorMessages))
     }
@@ -48,6 +73,7 @@ const CommentsForm = ({ quizId }) => {
                 </Form.Group>
 
                 {errors.length > 0 && <FormError>{errors.map((elm, idx) => <p key={idx}>{elm}</p>)}</FormError>}
+
                 <Row>
                     <Col className="d-grid" >
                         <Button type="submit" variant={`outline-${theme} mt-1`}>Comment</Button>

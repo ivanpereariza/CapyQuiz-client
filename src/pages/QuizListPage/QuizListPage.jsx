@@ -10,13 +10,12 @@ import quizzesService from '../../services/quizzes.services'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { ThemeContext } from '../../contexts/theme.context'
+import { ModalQuizContext } from '../../contexts/modalQuiz.context'
 
 const QuizListPage = () => {
 
     const [quizzes, setQuizzes] = useState('')
     const [showModal, setShowModal] = useState(false)
-    const [showModalDetails, setShowModalDetails] = useState(false)
-    const [selectedQuiz, setSelectedQuiz] = useState('')
     const [ratingValue, setRatingValue] = useState([0, 5])
     const [searchValue, setSearchValue] = useState('')
 
@@ -57,11 +56,6 @@ const QuizListPage = () => {
     const fireFinalActions = () => {
         setShowModal(false)
         loadQuizzes()
-    }
-
-    const openModalDetails = (id) => {
-        setShowModalDetails(true)
-        setSelectedQuiz(id)
     }
 
     const marks = {
@@ -107,10 +101,8 @@ const QuizListPage = () => {
                         </Col>
                     }
                 </Row>
-                <QuizList quizzes={quizzes} openModalDetails={openModalDetails} fireFinalActions={fireFinalActions} />
+                <QuizList quizzes={quizzes} fireFinalActions={fireFinalActions} />
             </Container >
-
-            <QuizDetailsModal selectedQuiz={selectedQuiz} showModalDetails={showModalDetails} setShowModalDetails={setShowModalDetails} />
 
             <NewQuizModal fireFinalActions={fireFinalActions} setShowModal={setShowModal} showModal={showModal} />
 

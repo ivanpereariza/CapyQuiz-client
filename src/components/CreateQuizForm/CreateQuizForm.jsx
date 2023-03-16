@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import quizzesService from "../../services/quizzes.services"
 import QuestionsQuizForm from "../QuestionsQuizForm/QuestionsQuizForm"
@@ -6,6 +6,7 @@ import { ThemeContext } from "../../contexts/theme.context"
 import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
+import { AuthContext } from "../../contexts/auth.context"
 
 const CreateQuizForm = ({ fireFinalActions }) => {
 
