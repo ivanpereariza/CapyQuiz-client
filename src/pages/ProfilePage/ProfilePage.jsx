@@ -8,6 +8,7 @@ import { AuthContext } from '../../contexts/auth.context'
 import { Link, useNavigate } from 'react-router-dom'
 import usersService from '../../services/users.services'
 import QuizOwnerCard from '../../components/QuizOwnerCard/QuizOwnerCard'
+import QuizCard from "../../components/QuizCard/QuizCard"
 
 const ProfilePage = () => {
 
@@ -37,6 +38,10 @@ const ProfilePage = () => {
             .deleteUserById(id)
             .then(() => navigate('/'))
             .catch(err => console.log(err))
+    }
+
+    const fireFinalActions = () => {
+        getUserWithQuizzes()
     }
 
 
@@ -83,7 +88,7 @@ const ProfilePage = () => {
                                         userProfile?.quizzesDone.map(quiz => {
                                             return (
                                                 <Col xl={{ span: 6 }} key={quiz._id}>
-                                                    <QuizOwnerCard {...quiz} />
+                                                    <QuizCard quiz={quiz} fireFinalActions={fireFinalActions} />
                                                 </Col>
                                             )
                                         })

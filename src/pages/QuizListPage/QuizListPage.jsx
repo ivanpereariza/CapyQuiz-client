@@ -57,7 +57,6 @@ const QuizListPage = () => {
         loadQuizzes()
     }
 
-
     return (
         <>
             <Container className='py-4'>

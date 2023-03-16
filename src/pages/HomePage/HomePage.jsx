@@ -128,11 +128,11 @@ const HomePage = () => {
                 <Row >
                     <Col md={{ span: 3, offset: 1 }} >
                         <div className='d-flex justify-content-center'>
-                            <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
+                            <img style={{ width: '400px', objectFit: 'cover', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678979767/IMG_3467_b8kf7u.jpg" alt="Gonzalo Rincón" />
                         </div>
-                        <h2 className="text-center mt-3 text-dark">Ivan Pereiro <br /> & <br />Gonzalo Rincón</h2>
                     </Col>
                     <Col md={{ span: 7, offset: 1 }}>
+                        <h2 className="text-center mt-3 text-dark">Ivan Pereiro & Gonzalo Rincón</h2>
                         <h4 className=" text-dark" style={{ padding: '40px', margin: '0px 60px' }}>
                             We are two guys who have recently completed a web developer Bootcamp in Madrid, and this is our final project. We are excited to share our journey with you and tell you a little bit more about ourselves.
                             <br />
