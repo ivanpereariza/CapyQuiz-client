@@ -45,7 +45,7 @@ const HomePage = () => {
     return (
         <Container fluid className="pt-4 pb-0" >
 
-            <Row className="mt-5  align-items-center" >
+            <Row className="mt-5  align-items-center justify-content-evenly" >
                 <Col xl={{ span: 5 }} className='mb-4'>
                     <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz :3</b></h1>
                     <hr className={`${themeValue} hr`} />

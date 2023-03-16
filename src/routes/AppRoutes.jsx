@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom"
+import Error404 from "../components/Error404/Error404"
 import CreateQuizPage from "../pages/CreateQuizPage/CreateQuizPage"
 import EditQuizPage from "../pages/EditQuizPage/EditQuizPage"
 import EditUserPage from "../pages/EditUserPage/EditUserPage"
@@ -31,7 +32,7 @@ const AppRoutes = () => {
                 <Route path="/quizzes/results/:id" element={<QuizResultPage />} />
             </Route>
 
-            <Route path="*" element={<p>404</p>}></Route>
+            <Route path="*" element={<Error404 />}></Route>
         </Routes>
     )
 }

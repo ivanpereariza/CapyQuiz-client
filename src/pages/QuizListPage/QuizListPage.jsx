@@ -57,11 +57,6 @@ const QuizListPage = () => {
         loadQuizzes()
     }
 
-    const openModalDetails = (id) => {
-        setShowModalDetails(true)
-        setSelectedQuiz(id)
-    }
-
 
     return (
         <>

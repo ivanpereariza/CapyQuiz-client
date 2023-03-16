@@ -55,6 +55,7 @@ const CommentsForm = ({ quizId }) => {
                 socket.emit("sendNotification", {
                     _id: data._id,
                     quiz: {
+                        _id: quiz._id,
                         theme: quiz.theme
                     },
                     ownerId: quiz.owner._id
