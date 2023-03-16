@@ -45,29 +45,29 @@ const HomePage = () => {
     return (
         <Container fluid className="pt-4 pb-0" >
 
-            <Row className="mt-5 align-items-center" >
-                <Col md={{ span: 5 }} className='mx-5 '>
-                    <h1 style={{ fontSize: '4rem' }}>Welcome to CapyQuiz :3</h1>
+            <Row className="mt-5  align-items-center" >
+                <Col xl={{ span: 5 }} className='mb-4'>
+                    <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz :3</b></h1>
                     <hr className={`${themeValue} hr`} />
-                    <h2 style={{ fontSize: '3rem' }}>Welcome to our quiz app! Test your knowledge with our fun and engaging quizzes on various topics. Sign up to track your progress and earn badges. Take a quiz now and challenge yourself!</h2>
+                    <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics. Take a quiz now and challenge yourself!</h2>
                     <Row>
                         <Col md={{ span: 6 }} >
                             <Link to={'/signup'} className="d-grid">
-                                <Button variant={`outline-${theme} mt-4`}>Sign Up for Free!</Button>
+                                <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Sign Up for Free!</Button>
                             </Link>
                         </Col>
                         <Col md={{ span: 6 }} >
                             <Link to={'/login'} className="d-grid">
-                                <Button variant={`outline-${theme} mt-4`}>Log In</Button>
+                                <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Log In</Button>
                             </Link>
                         </Col>
                     </Row>
                 </Col>
-                <Col md={{ span: 4, offset: 1 }} >
+                <Col xl={{ span: 4, offset: 1 }} >
                     {
                         dailyQuiz ?
-                            <>
-                                <h1 className="px-5 pt-5 text-center fs-2 mx-4">Quiz of the day, try it without log in!</h1>
+                            <Card className={`${themeValue} card `} style={{ padding: '0px 15px 15px 15px ' }}>
+                                <h1 className="px-5 pt-4 text-center fs-2 mx-4">Quiz of the day <br /> Try it without log in!</h1>
 
                                 <Card className={`${themeValue} card m-3 p-3`}>
 
@@ -77,7 +77,7 @@ const HomePage = () => {
                                         <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
                                     </Link>
                                 </Card>
-                            </>
+                            </Card>
                             :
                             <SpinnerLoader />
                     }
@@ -86,12 +86,13 @@ const HomePage = () => {
             <section style={{ marginTop: '150px' }}>
                 <Card className={`${themeValue} card mt-5 p-5`}>
                     <Card.Body>
-                        <h2 >Most popular quizzes from CapyQuiz !</h2>
+                        <h2 className=" mb-4">Most popular quizzes from CapyQuiz !</h2>
+                        <hr className={`${themeValue} hr`} />
                         <Row>
                             {
                                 popularQuizzesArr && popularQuizzesArr.map(quiz => {
                                     return (
-                                        <Col key={quiz._id} md={{ span: 4 }} className='mt-4'>
+                                        <Col key={quiz._id} xl={{ span: 4 }} className='mt-4'>
                                             <Card className={`${themeValue} card m-3 p-3`}>
                                                 <CardImg className="QuizImg" src={quiz.quizImg} alt={quiz.title}></CardImg>
                                                 <Card.Title className="px-5 pt-5">{quiz.title}</Card.Title>
@@ -117,27 +118,31 @@ const HomePage = () => {
             </section>
 
             <section >
+                <h2 className="ms-5 my-5">Gallery</h2>
                 <Gallery />
             </section>
 
             <section style={{ backgroundColor: '#D2B48C', marginTop: '40px', border: 'solid 1px black', borderRadius: '8px', padding: '50px' }}>
-                <Row>
-                    <Col md={{ span: 4, offset: 1 }} >
+                <h2 className="mb-5 text-dark">About us</h2>
+                <hr className="text-dark" />
+                <Row >
+                    <Col md={{ span: 3, offset: 1 }} >
                         <div className='d-flex justify-content-center'>
                             <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
                         </div>
-                        <h2 className="text-center mt-3">Gonzalo Rincón</h2>
+                        <h2 className="text-center mt-3 text-dark">Ivan Pereiro <br /> & <br />Gonzalo Rincón</h2>
                     </Col>
-                    <Col md={{ span: 4, offset: 1 }}>
-                        <div className='d-flex justify-content-center'>
-                            <img style={{ width: '230px', objectFit: 'cover', borderRadius: '50%', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678882595/aaa_ljfa3z.jpg" alt="Gonzalo Rincón" />
-                        </div>
-                        <h2 className="text-center mt-3">Iván Pereiro</h2>
+                    <Col md={{ span: 7, offset: 1 }}>
+                        <h4 className=" text-dark" style={{ padding: '40px', margin: '0px 60px' }}>
+                            We are two guys who have recently completed a web developer Bootcamp in Madrid, and this is our final project. We are excited to share our journey with you and tell you a little bit more about ourselves.
+                            <br />
+                            Working together on this project has been a great experience. We have learned to work collaboratively and communicate effectively. Our goal was to create an engaging quiz platform that allows users to challenge themselves while having fun. We wanted to create a project that showcases our skills and reflects our passion for web development.
+                            <br />
+                            During the development process, we encountered various challenges, but we were able to overcome them by working together and sharing our knowledge. We are proud of what we have achieved, and we are excited to see how our project will be received by the public.
+                        </h4>
                     </Col>
                 </Row>
-                <h5>
-                    holaaaaaaaaaaaaaaaaaaaa
-                </h5>
+
             </section>
 
         </Container >

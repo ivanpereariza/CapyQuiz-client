@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { Button, Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import { ThemeContext } from "../../contexts/theme.context"
 import commentsService from "../../services/comments.services"
@@ -38,10 +39,10 @@ const Comments = ({ quizId }) => {
         setMessageData({ id, message })
         setEditComment(true)
     }
+    console.log(user.role)
 
     return (
         <>
-
             {
                 editComment ?
                     <EditCommentForm getComments={getComments} setEditComment={setEditComment} {...messageData} />
@@ -63,21 +64,23 @@ const Comments = ({ quizId }) => {
                                                             {elm.owner.username}
                                                         </Tooltip>}
                                                     >
-                                                        <img className={`${themeValue} ownerAvatar`} src={elm.owner.avatar} alt="" />
+                                                        <Link to={`/profile/${elm.owner._id}`}>
+                                                            <img className={`${themeValue} ownerAvatar`} src={elm.owner.avatar} alt="avatar" />
+                                                        </Link>
                                                     </OverlayTrigger>
                                                 </Col>
                                                 <Col lg={{ span: 8 }} className='my-1'>
                                                     {elm.message}
                                                 </Col>
                                                 {
-                                                    (user?._id === elm.owner._id || user?.role === 'ADMIN') &&
+                                                    (user?._id === elm.owner._id || user?.role === 'ADMIN' || user?.role === 'EDITOR') &&
                                                     <Col className="my-1">
                                                         <Row>
                                                             <Col xs={{ span: 2 }} lg={{ span: 6 }}>
                                                                 <Button onClick={() => editCommentInput(elm._id, elm.message)} className='CommentButtons d-flex justify-content-center' variant="warning">
                                                                     <div>
                                                                         <img src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678873300/editwhite_ctrekv.png"
-                                                                            className="mx-auto" />
+                                                                            className="mx-auto" alt="edit" />
                                                                     </div>
                                                                 </Button>
                                                             </Col>
@@ -85,7 +88,7 @@ const Comments = ({ quizId }) => {
                                                                 <Button onClick={() => deleteComment(elm._id)} className='CommentButtons d-flex justify-content-center' variant="danger">
                                                                     <div>
                                                                         <img src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678874366/xwhite2_l8yqvt.png"
-                                                                            className="mx-auto" />
+                                                                            className="mx-auto" alt="delete" />
                                                                     </div>
                                                                 </Button>
                                                             </Col>

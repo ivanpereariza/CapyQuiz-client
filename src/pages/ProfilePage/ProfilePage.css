@@ -7,3 +7,20 @@
 .ProfileCard {
     width: 60%;
 }
+
+@media (max-width: 870px) {
+    .imageSmall {
+        display: inline;
+    }
+
+    .cardColumnFixed {
+        display: none;
+    }
+
+}
+
+@media (min-width: 870px) {
+    .imageSmall {
+        display: none;
+    }
+}
