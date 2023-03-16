@@ -39,7 +39,6 @@ const Comments = ({ quizId }) => {
         setMessageData({ id, message })
         setEditComment(true)
     }
-    console.log(user.role)
 
 
     return (

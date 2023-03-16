@@ -31,7 +31,7 @@ const QuizDetails = ({ quiz }) => {
                             quiz.owner ?
                                 <div className='d-flex justify-content-start'>
                                     <p className='pt-2'><b>Author:</b> {quiz.owner.username}</p>
-                                    <Link to={`/profile/${quiz.owner._id}`} className='d-grid mb-5' >
+                                    <Link to={`/profile/${quiz.owner._id}`} className='d-grid mb-5' onClick={() => setShowModalDetails(false)} >
                                         <img className={`${themeValue} ownerAvatar `} src={`${quiz.owner.avatar}`} alt={quiz.owner.username} />
                                     </Link>
                                 </div>
