@@ -11,6 +11,7 @@ function ModalQuizProviderWrapper(props) {
     const openModalDetails = (id) => {
         setShowModalDetails(true)
         setSelectedQuiz(id)
+        console.log(id)
     }
 
 
