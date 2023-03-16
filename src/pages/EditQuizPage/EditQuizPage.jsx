@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import { Navigate, useParams } from "react-router-dom"
 import EditQuizForm from "../../components/EditQuizForm/EditQuizForm"
 import SpinnerLoader from "../../components/SpinnerLoader/SpinnerLoader"
+import { MessagesConstants } from "../../consts"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
 import { ThemeContext } from "../../contexts/theme.context"
@@ -54,7 +55,7 @@ const EditQuizPage = () => {
             </Container>
         )
     } else {
-        emitMessage('Forbidden access to this page ⛔')
+        emitMessage(MessagesConstants.FORBIDDEN_ACCESS)
         return <Navigate to="/quizzes" />
     }
 

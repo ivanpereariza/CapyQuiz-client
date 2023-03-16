@@ -11,10 +11,8 @@ import { ModalQuizContext } from '../../contexts/modalQuiz.context'
 
 const QuizDetails = ({ quiz }) => {
 
-    const { themeValue } = useContext(ThemeContext)
     const { setShowModalDetails } = useContext(ModalQuizContext)
-
-    const theme = themeValue === 'light' ? 'dark' : 'light'
+    const { themeValue, theme } = useContext(ThemeContext)
 
     const time = getEstimatedTime(quiz?.questionsArr)
 

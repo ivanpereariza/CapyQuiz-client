@@ -8,6 +8,7 @@ import { useContext } from "react"
 import { ThemeContext } from "../../contexts/theme.context"
 import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
+import { MessagesConstants, GameConstants } from "../../consts"
 
 
 const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
@@ -34,13 +35,13 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
     }
 
     const counter = () => {
-        setSegs(previousState => previousState + 0.1)
+        setSegs(previousState => previousState + GameConstants.GAME_INTERVAL_ON_SEGS)
     }
 
     useEffect(() => {
         setInterval(() => {
             counter()
-        }, 100)
+        }, GameConstants.GAME_INTERVAL)
     }, [])
 
     useEffect(() => {
@@ -62,24 +63,24 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
 
     useEffect(() => {
         showTimer(segs)
-        if (!clicked && segs >= 18 && segs <= 18.1) {
+        if (!clicked && segs >= GameConstants.GAME_QUESTION_TIMER && segs <= GameConstants.GAME_TOTAL_TIMER_PLUS_INTERVAL_SEGS) {
             setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/wrong_c80euq.mp3')
             setIsPlaying(true)
         }
 
-        if (segs > 21) {
+        if (segs > GameConstants.GAME_TOTAL_TIMER) {
             changeIndex()
             setSegs(0)
             setPoints(0)
             setClicked(false)
         }
-        if (i === (questionsArr.length - 1) && segs >= 21 && currentUser) {
+        if (i === (questionsArr.length - 1) && segs >= GameConstants.GAME_TOTAL_TIMER && currentUser) {
             saveQuizOnUser()
             savePointOwner()
         }
-        if (i === (questionsArr.length - 1) && segs >= 21 && !currentUser) {
+        if (i === (questionsArr.length - 1) && segs >= GameConstants.GAME_TOTAL_TIMER && !currentUser) {
             navigate('/signup')
-            emitMessage('Singup for more CapyQuiz! 😄')
+            emitMessage(MessagesConstants.INVITE_TO_SIGNUP)
         }
     }, [segs])
 
@@ -91,13 +92,13 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
         if (value === currentQuestion.correctAnswer) {
             setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/correct_s7e21k.mp3')
             setIsPlaying(true)
-            setPoints(Math.floor((18 - segs) * 10))
-            setSegs(18)
+            setPoints(Math.floor(((GameConstants.GAME_QUESTION_TIMER) - segs) * GameConstants.POINTS_PER_SECOND))
+            setSegs(GameConstants.GAME_QUESTION_TIMER)
         } else {
             setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/wrong_c80euq.mp3')
             setIsPlaying(true)
             setPoints(0)
-            setSegs(18)
+            setSegs(GameConstants.GAME_QUESTION_TIMER)
         }
     }
 
@@ -137,7 +138,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
         <div>
             <audio id="audio-player" src={currentTrack} controls={false} autoPlay={isPlaying} loop={false} />
             {
-                segs >= 0 && segs < 3 ?
+                segs >= 0 && segs < GameConstants.GAME_SHOW_QUESTION_TIMER ?
                     <>
                         <h1 className="text-center my-4">{currentQuestion.question} </h1>
                         <Row >
@@ -151,7 +152,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
                         </Row>
                     </>
                     :
-                    segs >= 3 && segs < 18 ?
+                    segs >= GameConstants.GAME_SHOW_QUESTION_TIMER && segs < GameConstants.GAME_QUESTION_TIMER ?
                         <Card className={`${themeValue} card my-3`}>
                             <Card.Body >
                                 <h2 className="text-center my-3">{currentQuestion.question}</h2>

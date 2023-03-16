@@ -8,6 +8,7 @@ import uploadServices from "../../services/upload.services"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../contexts/message.context"
 import { AuthContext } from "../../contexts/auth.context"
+import { MessagesConstants } from "../../consts"
 
 const EditQuizForm = () => {
 
@@ -92,7 +93,7 @@ const EditQuizForm = () => {
                 .uploadImage(formData)
                 .then(({ data }) => quizzesService.editQuizById(id, { ...generalData, quizImg: data.cloudinary_url }))
                 .then(() => {
-                    emitMessage('Quiz edited!')
+                    emitMessage(MessagesConstants.EDIT_QUIZ)
                     navigate(`/profile/${user?._id}`)
                 })
                 .catch(err => setErrors(err.response.data.errorMessages))

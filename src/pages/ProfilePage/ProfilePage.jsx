@@ -43,8 +43,8 @@ const ProfilePage = () => {
     return (
         userProfile ?
             <Container>
-                <Row className='justify-content-center py-4'>
-                    <Col md={{ span: 5 }} style={{ position: 'fixed', top: 200, left: 170 }}>
+                <Row className='justify-content-center  py-4 profileContainer'>
+                    <Col md={{ span: 5 }} style={{ position: 'fixed', top: 200, left: 170 }} className='cardColumnFixed'>
                         <Card className={`ProfileCard ${themeValue} card my-5 text-center`}  >
                             <Card.Img variant="top" className='AvatarImg' src={userProfile.avatar} alt={userProfile.username} />
                             <Card.Body>
@@ -76,13 +76,14 @@ const ProfilePage = () => {
                         {
                             userProfile.quizzesDone.length ?
                                 <Row className='justify-content-center'>
-                                    <h2 className='text-center'>Quizzes by {userProfile.username}</h2>
+                                    <h2 className='text-center'>Quizzes by {userProfile.username} <img className={`${themeValue} ownerAvatar imageSmall`} src={userProfile.avatar} alt="avatar" /><p className="imageSmall">{userProfile.points}</p></h2>
+
                                     <hr className={`${themeValue} hr`} />
                                     {
                                         userProfile?.quizzesDone.map(quiz => {
                                             return (
-                                                <Col md={{ span: 6 }} key={quiz._id}>
-                                                    <QuizOwnerCard quiz={quiz} />
+                                                <Col xl={{ span: 6 }} key={quiz._id}>
+                                                    <QuizOwnerCard {...quiz} />
                                                 </Col>
                                             )
                                         })

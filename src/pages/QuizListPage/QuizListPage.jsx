@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import NewQuizModal from '../../components/NewQuizModal/NewQuizModal'
 import NewQuizzButton from '../../components/NewQuizzButton/NewQuizzButton'
-import QuizDetailsModal from '../../components/QuizDetailsModal/QuizDetailsModal'
 import QuizList from '../../components/QuizList/QuizList'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { AuthContext } from '../../contexts/auth.context'
@@ -10,7 +9,7 @@ import quizzesService from '../../services/quizzes.services'
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { ThemeContext } from '../../contexts/theme.context'
-import { ModalQuizContext } from '../../contexts/modalQuiz.context'
+import { SliderConstants } from '../../consts'
 
 const QuizListPage = () => {
 
@@ -58,14 +57,11 @@ const QuizListPage = () => {
         loadQuizzes()
     }
 
-    const marks = {
-        0: '0',
-        1: '1',
-        2: '2',
-        3: '3',
-        4: '4',
-        5: '5'
+    const openModalDetails = (id) => {
+        setShowModalDetails(true)
+        setSelectedQuiz(id)
     }
+
 
     return (
         <>
@@ -88,7 +84,7 @@ const QuizListPage = () => {
                                     range
                                     min={0}
                                     max={5}
-                                    marks={marks}
+                                    marks={SliderConstants.SLIDER_MARKS}
 
                                 />
                             </Col>

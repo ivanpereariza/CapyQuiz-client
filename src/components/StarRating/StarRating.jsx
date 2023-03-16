@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { FaStar } from "react-icons/fa"
+import { Rating } from "../../consts";
 
 const StarRating = ({ rating, fireFinalActions, readOnly }) => {
 
@@ -7,7 +8,7 @@ const StarRating = ({ rating, fireFinalActions, readOnly }) => {
 
     return (
         <div>
-            {[...Array(5)].map((star, i) => {
+            {[...Array(Rating.RATING_MAX_NUMBER)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
                     <label key={i}>
