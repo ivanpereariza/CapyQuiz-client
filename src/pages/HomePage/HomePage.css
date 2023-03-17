@@ -1,6 +1,5 @@
 .QuizImg {
     height: 150px;
-    width: auto;
     object-fit: contain;
     max-width: 300px;
     display: block;
