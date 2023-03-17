@@ -128,12 +128,12 @@ const HomePage = () => {
                 <Row >
                     <Col md={{ span: 3, offset: 1 }} >
                         <div className='d-flex justify-content-center'>
-                            <img style={{ width: '400px', objectFit: 'cover', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678979767/IMG_3467_b8kf7u.jpg" alt="Gonzalo Rincón" />
+                            <img style={{ height: '400px', objectFit: 'contain', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678979767/IMG_3467_b8kf7u.jpg" alt="Gonzalo Rincón" />
                         </div>
                     </Col>
                     <Col md={{ span: 7, offset: 1 }}>
                         <h2 className="text-center mt-3 text-dark">Ivan Pereiro & Gonzalo Rincón</h2>
-                        <h4 className=" text-dark" style={{ padding: '40px', margin: '0px 60px' }}>
+                        <h4 className=" text-dark" style={{ paddingTop: '40px' }}>
                             We are two guys who have recently completed a web developer Bootcamp in Madrid, and this is our final project. We are excited to share our journey with you and tell you a little bit more about ourselves.
                             <br />
                             Working together on this project has been a great experience. We have learned to work collaboratively and communicate effectively. Our goal was to create an engaging quiz platform that allows users to challenge themselves while having fun. We wanted to create a project that showcases our skills and reflects our passion for web development.
