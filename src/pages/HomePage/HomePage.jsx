@@ -95,7 +95,7 @@ const HomePage = () => {
                                         <Col key={quiz._id} xl={{ span: 4 }} className='mt-4'>
                                             <Card className={`${themeValue} card my-3 p-3`}>
                                                 <CardImg className="QuizImg" src={quiz.quizImg} alt={quiz.title}></CardImg>
-                                                <Card.Title className="px-5 pt-5">{quiz.title}</Card.Title>
+                                                <Card.Title className="pt-5">{quiz.title}</Card.Title>
                                                 <div className="d-flex justify-content-center">
                                                     <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
                                                 </div>
