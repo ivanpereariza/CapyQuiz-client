@@ -8,7 +8,7 @@ const AnswerCard = ({ answer, handleAnswer, index }) => {
     return (
         <Col xl={{ span: 6 }} className='justify-content-center'>
             <Card className='mx-auto my-3 pointerCursor justify-content-center border-dark'
-                style={{ width: '25rem', height: '12rem', backgroundColor: color[index] }} onClick={handleAnswer}>
+                style={{ width: '20rem', height: '12rem', backgroundColor: color[index] }} onClick={handleAnswer}>
                 <Card.Body className='d-flex align-items-center justify-content-center'>
                     <Card.Title className='text-dark text-center fs-1'>{answer} </Card.Title>
                 </Card.Body>
