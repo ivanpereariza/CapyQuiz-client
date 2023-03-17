@@ -70,8 +70,9 @@ const HomePage = () => {
                                 <h1 className="px-5 pt-4 text-center fs-2 mx-4">Quiz of the day <br /> Try it without log in!</h1>
 
                                 <Card className={`${themeValue} card m-3 p-3`}>
-
-                                    <CardImg className="QuizImg" src={dailyQuiz.quizImg} alt={dailyQuiz.title}></CardImg>
+                                    <div className="d-flex justify-content-center">
+                                        <img className="QuizImg" src={dailyQuiz.quizImg} alt={dailyQuiz.title} />
+                                    </div>
                                     <Card.Title className="px-5 pt-5">{dailyQuiz.title}</Card.Title>
                                     <Link to={`/quizzes/play/${dailyQuiz._id}`} className='d-grid mt-5' >
                                         <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
@@ -94,7 +95,9 @@ const HomePage = () => {
                                     return (
                                         <Col key={quiz._id} xl={{ span: 4 }} className='mt-4'>
                                             <Card className={`${themeValue} card my-3 p-3`}>
-                                                <CardImg className="QuizImg" src={quiz.quizImg} alt={quiz.title}></CardImg>
+                                                <div className="d-flex justify-content-center">
+                                                    <img className="QuizImg" src={quiz.quizImg} alt={quiz.title} />
+                                                </div>
                                                 <Card.Title className="pt-5">{quiz.title}</Card.Title>
                                                 <div className="d-flex justify-content-center">
                                                     <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
