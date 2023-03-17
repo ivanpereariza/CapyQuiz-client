@@ -49,7 +49,9 @@ const QuizCard = ({ quiz, fireFinalActions }) => {
         <Card className={`${themeValue} card ${played && 'played'} my-3`} style={{ height: '32rem' }}>
             <Card.Body className='d-flex flex-column justify-content-between'>
                 <Link onClick={() => openModalDetails(_id)} >
-                    <Card.Img className='mb-3 QuizImg' variant='top' src={quizImg} alt="Quiz Img" />
+                    <div className='d-flex justify-content-center'>
+                        <img className='mb-3 QuizImg' src={quizImg} alt="Quiz Img" />
+                    </div>
                     <Card.Title className={`text-${themeColor} mb-4`} > {title}</Card.Title>
                     <Card.Text className={`text-${themeColor}`}><b>Theme:</b> {theme}</Card.Text>
                     <Card.Text className={`text-${themeColor}`}><b>Estimated Time:</b> {time}</Card.Text>
