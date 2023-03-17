@@ -20,6 +20,12 @@ function App() {
 
   useEffect(() => {
     socket.on('connect', () => {
+      const transport = socket.io.engine.transport.polling
+
+      socket.io.engine.on("upgrade", () => {
+        const upgradedTransport = socket.io.engine.transport.websocket
+      });
+
       console.log('Socket connected')
     })
 
