@@ -18,7 +18,7 @@ const QuizCard = ({ quiz, fireFinalActions }) => {
     const { user } = useContext(AuthContext)
     const { openModalDetails } = useContext(ModalQuizContext)
 
-    const { title, theme, questionsArr, quizImg, _id, ratingAvg } = quiz
+    const { title, theme, questionsArr, quizImg, _id, ratingAvg, owner } = quiz
 
     const time = getEstimatedTime(questionsArr)
     const [played, setPlayed] = useState(false)
@@ -60,7 +60,7 @@ const QuizCard = ({ quiz, fireFinalActions }) => {
                 </Link >
                 <div>
                     {
-                        user?.role === 'ADMIN' || user?.role === 'EDITOR' ?
+                        user?.role === 'ADMIN' || user?.role === 'EDITOR' || user?._id === owner ?
                             <Row >
                                 <Col md={{ span: 6 }}>
                                     <Link to={`/quizzes/edit/${_id}`} className='d-grid ' >
