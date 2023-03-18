@@ -87,7 +87,7 @@ const ShowQuestion = ({ questionsArr, id, owner, showTimer }) => {
     const handleAnswer = e => {
 
         setClicked(true)
-        const value = e.target.innerText
+        const value = e.currentTarget.getAttribute("value")
 
         if (value === currentQuestion.correctAnswer) {
             setCurrentTrack('https://res.cloudinary.com/dkfzj9tmk/video/upload/v1678794420/correct_s7e21k.mp3')
