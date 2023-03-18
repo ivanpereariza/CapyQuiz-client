@@ -47,7 +47,7 @@ const HomePage = () => {
 
             <Row className="mt-5  align-items-center justify-content-evenly" >
                 <Col xl={{ span: 5 }} className='mb-4'>
-                    <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz :3</b></h1>
+                    <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz 😄</b></h1>
                     <hr className={`${themeValue} hr`} />
                     <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics. Take a quiz now and challenge yourself!</h2>
                     <Row>
@@ -70,8 +70,9 @@ const HomePage = () => {
                                 <h1 className="px-5 pt-4 text-center fs-2 mx-4">Quiz of the day <br /> Try it without log in!</h1>
 
                                 <Card className={`${themeValue} card m-3 p-3`}>
-
-                                    <CardImg className="QuizImg" src={dailyQuiz.quizImg} alt={dailyQuiz.title}></CardImg>
+                                    <div className="d-flex justify-content-center">
+                                        <img className="QuizImg" src={dailyQuiz.quizImg} alt={dailyQuiz.title} />
+                                    </div>
                                     <Card.Title className="px-5 pt-5">{dailyQuiz.title}</Card.Title>
                                     <Link to={`/quizzes/play/${dailyQuiz._id}`} className='d-grid mt-5' >
                                         <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
@@ -88,14 +89,16 @@ const HomePage = () => {
                     <Card.Body>
                         <h2 className=" mb-4">Most popular quizzes from CapyQuiz !</h2>
                         <hr className={`${themeValue} hr`} />
-                        <Row>
+                        <Row className="justify-content-between">
                             {
                                 popularQuizzesArr && popularQuizzesArr.map(quiz => {
                                     return (
                                         <Col key={quiz._id} xl={{ span: 4 }} className='mt-4'>
-                                            <Card className={`${themeValue} card m-3 p-3`}>
-                                                <CardImg className="QuizImg" src={quiz.quizImg} alt={quiz.title}></CardImg>
-                                                <Card.Title className="px-5 pt-5">{quiz.title}</Card.Title>
+                                            <Card className={`${themeValue} card my-3 p-3`}>
+                                                <div className="d-flex justify-content-center">
+                                                    <img className="QuizImg" src={quiz.quizImg} alt={quiz.title} />
+                                                </div>
+                                                <Card.Title className="pt-5">{quiz.title}</Card.Title>
                                                 <div className="d-flex justify-content-center">
                                                     <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
                                                 </div>
@@ -128,12 +131,12 @@ const HomePage = () => {
                 <Row >
                     <Col md={{ span: 3, offset: 1 }} >
                         <div className='d-flex justify-content-center'>
-                            <img style={{ width: '400px', objectFit: 'cover', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678979767/IMG_3467_b8kf7u.jpg" alt="Gonzalo Rincón" />
+                            <img style={{ height: '400px', objectFit: 'contain', border: 'solid 1px black' }} src="https://res.cloudinary.com/dkfzj9tmk/image/upload/v1678979767/IMG_3467_b8kf7u.jpg" alt="Gonzalo Rincón" />
                         </div>
                     </Col>
                     <Col md={{ span: 7, offset: 1 }}>
                         <h2 className="text-center mt-3 text-dark">Ivan Pereiro & Gonzalo Rincón</h2>
-                        <h4 className=" text-dark" style={{ padding: '40px', margin: '0px 60px' }}>
+                        <h4 className=" text-dark" style={{ paddingTop: '40px' }}>
                             We are two guys who have recently completed a web developer Bootcamp in Madrid, and this is our final project. We are excited to share our journey with you and tell you a little bit more about ourselves.
                             <br />
                             Working together on this project has been a great experience. We have learned to work collaboratively and communicate effectively. Our goal was to create an engaging quiz platform that allows users to challenge themselves while having fun. We wanted to create a project that showcases our skills and reflects our passion for web development.

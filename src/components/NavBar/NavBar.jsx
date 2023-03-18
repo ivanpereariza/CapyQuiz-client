@@ -55,8 +55,6 @@ function NavBar() {
     }
 
     const handleNotification = (elm) => {
-
-        console.log(elm.quiz._id)
         openModalDetails(elm.quiz._id)
         deleteNotification(elm._id)
     }
