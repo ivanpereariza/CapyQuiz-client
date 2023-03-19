@@ -1,3 +1,7 @@
+Backend repository: https://github.com/ivanpereariza/server
+
+Deployed project: https://capyquiz.vercel.app/
+
 # Client routes
 
 ## Index
@@ -23,7 +27,6 @@ base URL `/quizzes`
 | URL            | Description       | Protected |
 | -------------- | ----------------- | --------- |
 | `/`            | Quizzes list page |           |
-| `/details/:id` | Quiz details page |           |
 | `/edit/:id`    | Quiz edit page    | ✅       |
 | `/play/:id`    | Quiz play page    | ✅       |
 | `/create`      | Create new Quiz   | ✅       |
