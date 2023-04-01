@@ -51,7 +51,7 @@ const HomePage = () => {
                     <hr className={`${themeValue} hr`} />
                     <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics. Take a quiz now and challenge yourself!</h2>
                     {
-                        user &&
+                        !user &&
                         <Row>
                             <Col md={{ span: 6 }} >
                                 <Link to={'/signup'} className="d-grid">
