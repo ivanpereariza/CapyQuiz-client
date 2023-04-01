@@ -7,6 +7,7 @@ import commentsService from "../../services/comments.services"
 import quizzesService from "../../services/quizzes.services"
 import EditCommentForm from "../EditCommentForm/EditCommentForm.jsx"
 import './Comments.css'
+import { ModalQuizContext } from "../../contexts/modalQuiz.context"
 
 const Comments = ({ quizId }) => {
 
@@ -14,6 +15,7 @@ const Comments = ({ quizId }) => {
     const [editComment, setEditComment] = useState(false)
     const [messageData, setMessageData] = useState()
 
+    const { setShowModalDetails } = useContext(ModalQuizContext)
     const { themeValue } = useContext(ThemeContext)
     const { user } = useContext(AuthContext)
 
@@ -65,7 +67,7 @@ const Comments = ({ quizId }) => {
                                                         </Tooltip>}
                                                     >
                                                         <Link to={`/profile/${elm.owner._id}`}>
-                                                            <img className={`${themeValue} ownerAvatar`} src={elm.owner.avatar} alt="avatar" />
+                                                            <img onClick={() => setShowModalDetails(false)} className={`${themeValue} ownerAvatar`} src={elm.owner.avatar} alt="avatar" />
                                                         </Link>
                                                     </OverlayTrigger>
                                                 </Col>
