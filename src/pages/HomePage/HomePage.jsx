@@ -49,7 +49,8 @@ const HomePage = () => {
                 <Col xl={{ span: 5 }} className='mb-4'>
                     <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz 😄</b></h1>
                     <hr className={`${themeValue} hr`} />
-                    <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics. Take a quiz now and challenge yourself!</h2>
+                    <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics.</h2>
+                    <h2 style={{ fontSize: '2.5rem' }}> Take a quiz now and challenge yourself!</h2>
                     {
                         !user &&
                         <Row>
