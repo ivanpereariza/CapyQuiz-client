@@ -50,18 +50,21 @@ const HomePage = () => {
                     <h1 style={{ fontSize: '4rem' }}><b> Welcome to CapyQuiz 😄</b></h1>
                     <hr className={`${themeValue} hr`} />
                     <h2 style={{ fontSize: '2.5rem' }}>Test your knowledge with our fun and engaging quizzes on various topics. Take a quiz now and challenge yourself!</h2>
-                    <Row>
-                        <Col md={{ span: 6 }} >
-                            <Link to={'/signup'} className="d-grid">
-                                <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Sign Up for Free!</Button>
-                            </Link>
-                        </Col>
-                        <Col md={{ span: 6 }} >
-                            <Link to={'/login'} className="d-grid">
-                                <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Log In</Button>
-                            </Link>
-                        </Col>
-                    </Row>
+                    {
+                        user &&
+                        <Row>
+                            <Col md={{ span: 6 }} >
+                                <Link to={'/signup'} className="d-grid">
+                                    <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Sign Up for Free!</Button>
+                                </Link>
+                            </Col>
+                            <Col md={{ span: 6 }} >
+                                <Link to={'/login'} className="d-grid">
+                                    <Button variant={`outline-${theme} mt-4 mx-3`} style={{ padding: '10px 0px' }}>Log In</Button>
+                                </Link>
+                            </Col>
+                        </Row>
+                    }
                 </Col>
                 <Col xl={{ span: 4, offset: 1 }} >
                     {
