@@ -23,16 +23,16 @@ function NavBar() {
     const linkTheme = themeValue === 'light' ? 'lightTheme' : 'darkTheme'
 
 
-    useEffect(() => {
-        socket.on('connect', () => {
-            socket.emit('clientConnected')
-        })
+    // useEffect(() => {
+    //     socket.on('connect', () => {
+    //         socket.emit('clientConnected')
+    //     })
 
-        socket.on("getNotification", (data) => {
-            if (user?._id === data.ownerId)
-                setNotifications((prev) => [...prev, data])
-        })
-    }, [socket, user])
+    //     socket.on("getNotification", (data) => {
+    //         if (user?._id === data.ownerId)
+    //             setNotifications((prev) => [...prev, data])
+    //     })
+    // }, [socket, user])
 
     useEffect(() => {
         getNotifications()

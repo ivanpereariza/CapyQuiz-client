@@ -51,16 +51,16 @@ const CommentsForm = ({ quizId }) => {
                 emitMessage(MessagesConstants.SAVE_COMMENTS)
                 return notificationService.createNotification(quizId, quiz.owner._id)
             })
-            .then(({ data }) => {
-                socket.emit("sendNotification", {
-                    _id: data._id,
-                    quiz: {
-                        _id: quiz._id,
-                        theme: quiz.theme
-                    },
-                    ownerId: quiz.owner._id
-                })
-            })
+            // .then(({ data }) => {
+            //     socket.emit("sendNotification", {
+            //         _id: data._id,
+            //         quiz: {
+            //             _id: quiz._id,
+            //             theme: quiz.theme
+            //         },
+            //         ownerId: quiz.owner._id
+            //     })
+            // })
             .catch(err => setErrors(err.response.data.errorMessages))
     }
 

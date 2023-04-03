@@ -7,36 +7,36 @@ import AppRoutes from './routes/AppRoutes'
 import { useContext, useEffect, useRef } from 'react'
 import { ThemeContext } from './contexts/theme.context'
 import PopupMessage from './components/PopupMessage/PopupMessage'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import { ModalQuizContext } from './contexts/modalQuiz.context'
 import QuizDetailsModal from './components/QuizDetailsModal/QuizDetailsModal'
-import { AuthContext } from './contexts/auth.context'
+// import { AuthContext } from './contexts/auth.context'
 
 
 function App() {
 
   const { themeValue } = useContext(ThemeContext)
   const { setShowModalDetails, showModalDetails, selectedQuiz } = useContext(ModalQuizContext)
-  const { user } = useContext(AuthContext)
+  // const { user } = useContext(AuthContext)
 
-  const socket = useRef(null)
+  // const socket = useRef(null)
 
-  useEffect(() => {
-    if (user) {
-      socket.current = io.connect('https://capyquiz.vercel.app', { transports: ['websocket'], })
+  // useEffect(() => {
+  //   if (user) {
+  //     socket.current = io.connect('https://capyquiz.vercel.app', { transports: ['websocket'], })
 
-      socket.current.on('connect', () => {
-        console.log('Socket connected')
-      })
+  //     socket.current.on('connect', () => {
+  //       console.log('Socket connected')
+  //     })
 
-    }
+  //   }
 
-    return () => {
-      if (socket.current) {
-        socket.current.disconect()
-      }
-    }
-  }, [user])
+  //   return () => {
+  //     if (socket.current) {
+  //       socket.current.disconect()
+  //     }
+  //   }
+  // }, [user])
 
   return (
     <>
