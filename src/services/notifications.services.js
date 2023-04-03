@@ -31,6 +31,6 @@ class NotificationService {
 
 }
 
-const notificationService = new NotificationService
+const notificationService = new NotificationService()
 
 export default notificationService
