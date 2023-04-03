@@ -4,10 +4,9 @@ import './theme.css'
 import Footer from './components/Footer/Footer'
 import NavBar from './components/NavBar/NavBar'
 import AppRoutes from './routes/AppRoutes'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { ThemeContext } from './contexts/theme.context'
 import PopupMessage from './components/PopupMessage/PopupMessage'
-import socket from './services/socket.services'
 import io from 'socket.io-client'
 import { ModalQuizContext } from './contexts/modalQuiz.context'
 import QuizDetailsModal from './components/QuizDetailsModal/QuizDetailsModal'
@@ -20,9 +19,11 @@ function App() {
   const { setShowModalDetails, showModalDetails, selectedQuiz } = useContext(ModalQuizContext)
   const { user } = useContext(AuthContext)
 
+  const socket = useRef(null)
+
   useEffect(() => {
     if (user) {
-      socket.current = io.connect('https://capyquiz.vercel.app', { transports: ['websocket'] })
+      socket.current = io.connect('https://capyquiz.vercel.app', { transports: ['websocket'], })
 
       socket.current.on('connect', () => {
         console.log('Socket connected')
