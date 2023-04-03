@@ -98,19 +98,21 @@ const HomePage = () => {
                                     return (
                                         <Col key={quiz._id} xl={{ span: 4 }} className='mt-4'>
                                             <Card className={`${themeValue} card my-3 p-3`}>
-                                                <div className="d-flex justify-content-center">
-                                                    <img className="QuizImg" src={quiz.quizImg} alt={quiz.title} />
-                                                </div>
-                                                <Card.Title className="pt-5">{quiz.title}</Card.Title>
-                                                <div className="d-flex justify-content-center">
-                                                    <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
-                                                </div>
-                                                {
-                                                    user &&
-                                                    <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mt-5' >
-                                                        <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
-                                                    </Link>
-                                                }
+                                                <Card.Body className='d-flex flex-column justify-content-between'>
+                                                    <div className="d-flex justify-content-center">
+                                                        <img className="QuizImg" src={quiz.quizImg} alt={quiz.title} />
+                                                    </div>
+                                                    <Card.Title className="pt-5">{quiz.title}</Card.Title>
+                                                    <div className="d-flex justify-content-center">
+                                                        <StarRating fireFinalActions={false} readOnly={true} rating={quiz.ratingAvg} />
+                                                    </div>
+                                                    {
+                                                        user &&
+                                                        <Link to={`/quizzes/play/${quiz._id}`} className='d-grid mt-5' >
+                                                            <Button type="submit" variant={`outline-${theme} mt-4`}>Start Game!</Button>
+                                                        </Link>
+                                                    }
+                                                </Card.Body>
                                             </Card>
                                         </Col>
                                     )
